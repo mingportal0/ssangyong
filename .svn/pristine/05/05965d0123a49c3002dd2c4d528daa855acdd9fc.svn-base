@@ -1,0 +1,195 @@
+<%@page import="com.zim.member.MemberVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	MemberVO user = (MemberVO)session.getAttribute("user");
+	request.setAttribute("user", user);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+
+</style>
+<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->    
+<link rel="stylesheet" href="/ZIMZALABIM/js/jquery-ui.css" >
+<link rel="shortcut icon" href="/ZIMZALABIM/image/favicon.ico">
+<!-- 부트스트랩 -->
+<link href="/ZIMZALABIM/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="/ZIMZALABIM/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<title>ZIMZALABIM</title>
+<script src="/ZIMZALABIM/js/jquery-1.12.4.js"></script>
+<script src="/ZIMZALABIM/js/jquery-ui.js"></script>
+<script src="/ZIMZALABIM/js/popper.min.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+<script src="/ZIMZALABIM/js/bootstrap.min.js"></script>	
+<script src="/ZIMZALABIM/js/plugins.js"></script>
+<!-- jquery valdation -->
+<script src="/ZIMZALABIM/js/jquery.validate.js"></script>
+<script src="/ZIMZALABIM/js/messages_ko.js"></script>
+<script src="/ZIMZALABIM/js/additional-methods.js"></script>
+<!-- //jquery valdation -->
+<!-- Core Style CSS -->
+<link rel="stylesheet" href="/ZIMZALABIM/css/core-style.css">
+<link rel="stylesheet" href="/ZIMZALABIM/css/style.css">
+</head>
+<body>
+    <div id="frame" class="row">	
+    	<div class="row">
+    		<div class="col-md-8 col-md-offset-2">
+    			<div class="row" style="text-align: right;">
+    				<c:choose>
+						<c:when test="${empty user}">
+							<div class="col-md-3 col-md-offset-9 mt-9">
+							</div>
+	                	</c:when>
+	                	<c:otherwise>
+	                		<div class="col-md-3 col-md-offset-9 mt-9">
+								<a href="">${user.userId }님 포인트 : </a>								
+							</div>
+	                	</c:otherwise>
+	                </c:choose>
+				</div>
+    		</div>
+    	</div>	
+		<div class="main-content-wrapper d-flex clearfix">
+			<div class="col-md-8">
+				<form name="loginFrm" id="loginFrm" action="/ZIMZALABIM/member/member.do" method="post">
+					<input type="hidden" name="login_div" id="login_div"  />
+					<div class="col-md-3">
+						<!-- Mobile Nav (max width 767px)-->
+				        <div class="mobile-nav">
+				            <!-- Navbar Brand -->
+				            <div class="amado-navbar-brand">
+				                <a href="/ZIMZALABIM/mainpage/mainpage_view.jsp"><h1>ZIMZALABIM</h1></a>
+				            </div>
+				            <!-- Navbar Toggler -->
+				            <div class="amado-navbar-toggler">
+				                <span></span><span></span><span></span>
+				            </div>
+				        </div>
+				
+				        <!-- Header Area Start -->
+				        <header class="header-area clearfix">
+				            <!-- Logo -->
+				            <div class="logo">
+				                <a href="/ZIMZALABIM/mainpage/mainpage_view.jsp"><h1>ZIMZALABIM</h1></a>
+				            </div>
+				            <!-- Amado Nav -->
+				            <nav class="amado-nav">
+				                <ul>
+				                    <li class="active"><a href="/ZIMZALABIM/mainpage/mainpage_view.jsp">Home</a></li>
+									<li class="dropdown">
+									    <a id="shop" data-target="#" href="/ZIMZALABIM/listall/listall.do?work_div=do_totalCategory_select"" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+									    	SHOP <span class="caret"></span>
+									    </a>
+									    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/listall/listall.do?work_div=do_totalCategory_select">전체</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/list/list.do?work_div=do_best_select&category=10">의류</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/list/list.do?work_div=do_best_select&category=20">식품</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/list/list.do?work_div=do_best_select&category=30">문화</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/list/list.do?work_div=do_best_select&category=40">전자</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/list/list.do?work_div=do_best_select&category=50">미용</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/list/list.do?work_div=do_best_select&category=60">장난</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/list/list.do?work_div=do_best_select&category=70">잡화</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/list/list.do?work_div=do_best_select&category=80">기타</a></li>
+									    </ul>
+									</li>
+									<li class="dropdown">
+									    <a id="mypage" data-target="#" href="" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+									    	MY PAGE <span class="caret"></span>
+									    </a>
+									    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/join/join.do?work_div=do_retrieve">JOINGING</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/host/host.do?work_div=do_retrieve">HOSTING</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/member/edit/edit_view.jsp">EDIT PROFILE</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="/ZIMZALABIM/member/quit/quit_view.jsp">QUIT</a></li>
+									    </ul>
+									</li>
+								</ul>
+				            </nav>
+				            <!-- Button Group -->
+				            <div class="amado-btn-group mt-30 mb-30">
+				            	<c:choose>
+									<c:when test="${empty user}">
+				                		<a href="javascript:goLogin('/ZIMZALABIM/member/login/login_view.jsp','Login','370','500','no');" class="btn amado-btn mb-15">Login</a>
+				                	</c:when>
+				                	<c:otherwise>
+				                		<a href="javascript:do_logout();" class="btn amado-btn mb-15 active">Logout</a>
+				                	</c:otherwise>
+				                </c:choose>
+				                <a href="http://211.238.142.137:8080/ZIMZALABIM/product/writing_view.jsp" class="btn amado-btn mb-15">Writing</a>
+				            </div>
+				            <!-- Cart Menu -->
+				            <div class="cart-fav-search mb-100">
+				                <a href="/ZIMZALABIM/wishlist/wishlist.do?work_div=do_retrieve" class="fav-nav"><img src="/ZIMZALABIM/img/core-img/favorites.png" alt=""> Favourite</a>
+				                <a href="" class="search-nav"><img src="/ZIMZALABIM/img/core-img/search.png" alt=""> Search</a>
+				            </div>
+				            <!-- Social Button -->
+				            <div class="social-info d-flex justify-content-between">
+				                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+				                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+				                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+				                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+				            </div>
+				        </header>
+					</div>
+				</form>	
+				<div class="col-md-8 col-md-offset-1">
+			    	<decorator:body />
+				</div>
+			</div>	
+		</div>
+		<!-- ##### Footer Area Start ##### -->
+	    <footer class="footer_area clearfix">
+	        <div class="container">
+	            <div class="row align-items-center">
+	                <!-- Single Widget Area -->
+	                <div class="col-12 col-lg-4">
+	                    <div class="single_widget_area">
+	                        <!-- Logo -->
+	                        <div class="footer-logo mr-50">
+	                            <a href="/ZIMZALABIM/mainpage/mainpage_view.jsp"><h1 style="color:#fff;">ZIMZALABIM</h1></a>
+	                        </div>
+	                        <!-- Copywrite Text -->
+	                        <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+	Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> & Re-distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a>
+	<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+	                    </div>
+	                </div>
+				</div>
+			</div>
+		</footer>	
+	</div>
+</body>
+<script>
+	function do_logout(){
+		//alert('do_logout');
+		if(false==confirm("로그아웃 하시겠습니까?"))return;
+		var frm = document.loginFrm;
+		frm.login_div.value = 'do_logout';
+		frm.action="<c:url value='/member/member.do' />"
+		frm.submit();
+	}
+	function goMain(){
+		//alert("goMain");
+		var frm = document.getElementById("loginFrm");
+		frm.action ="<c:url value='/mainpage/mainpage_view.jsp' />";
+		frm.submit();			
+	}
+	function goLogin(mypage, myname, w, h, scroll){
+		//alert("goMain");
+		var winl = (screen.width - w) / 2; // 가로좌표 가운데 구하기
+		var wint = (screen.height - h) / 2; // 세로좌표 가운데 구하기
+		winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable';
+		win = window.open(mypage, myname, winprops);
+		
+	}
+	
+</script>
+</html>

@@ -1,0 +1,110 @@
+<%--
+/**
+* @Class Name : useOutObject.jsp
+* @Description : Sample Register 화면
+* @Modification Information
+*
+*   수정일                   수정자                      수정내용
+*  -------    --------    ---------------------------
+*  2019.07.01            최초 생성
+*
+* author 실행환경 개발팀
+* since 2019.07.01
+*
+* Copyright (C) 2009 by KandJang  All right reserved.
+*/
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="/ZIMZALABIM/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<link rel="stylesheet" href="/ZIMZALABIM/js/jquery-ui.css">
+<title>Insert title here</title>
+<script src="/ZIMZALABIM/js/jquery-1.12.4.js"></script>
+<script src="/ZIMZALABIM/js/jquery-ui.js"></script>
+</head>
+<body>
+	<h3></h3>
+	<hr/>
+	<form name="writingFrm" action="/ZIMZALABIM/product/writing.do" method="post">
+	<div>
+		<label>카테고리</label>
+		<select name="category" id="category">
+			<option value="">전체</option>
+			<option value="10">의류</option>
+			<option value="20">식품</option>
+			<option value="30">문화</option>
+			<option value="40">전자기기</option>
+			<option value="50">미용</option>
+			<option value="60">장난감</option>
+			<option value="70">잡화</option>
+			<option value="80">기타</option>
+		</select>
+	</div>
+	<div>
+		<label>제목</label>
+		<input type="text" name="product_nm" id="product_nm"/>
+	</div>
+	<div>
+		<label>수량</label>
+		<input type="text" name="target_cnt" id="target_cnt"/>
+		<label>마감일자</label>
+		<input type="text" name="deadline" id="deadline"/>
+	</div>
+	<div>
+		<label>가격</label>
+		<input type="text" name="price" id="price"/>
+		<label>배송비</label>
+		<input type="text" name="delivery_price" id="delivery_price"/>
+	</div>
+	내용<textarea name="contents" id="contents" rows="10" cols="100"></textarea>
+	<div>
+		<input type="button" value="등록" id="save_btn"/>
+		<input type="button" value="취소" id="cancel_btn"/>
+	</div>
+	</form>
+	
+	
+	<script type="text/javascript">		
+		var oEditors = [];
+		
+		nhn.husky.EZCreator.createInIFrame({
+		oAppRef: oEditors,
+		elPlaceHolder: "contents",
+		sSkinURI: "/ZIMZALABIM/html/SmartEditor2Skin.html",
+		fCreator: "createSEditor2"
+		});
+	</script>
+	<script>
+		$("#save_btn").on('click',function(){
+    		alert('save_btn');
+		});
+		
+		$("#cancel_btn").on('click',function(){
+    		alert('cancel_btn');
+		});
+		
+		$("#deadline").datepicker({
+			dateFormat: 'yy.mm.dd' //Input Display Format 변경
+			,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+			,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+			,changeYear: true //콤보박스에서 년 선택 가능
+			,changeMonth: true //콤보박스에서 월 선택 가능                
+			,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+			,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+			,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+			,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+			,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+			,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+			,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+			,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+			,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+			,minDate: "M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+		});
+	</script>
+
+</body>
+</html>

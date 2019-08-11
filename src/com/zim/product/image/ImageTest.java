@@ -1,0 +1,127 @@
+ /**
+ * @Class Name : ImageTest.java
+ * @Description : 
+ * @Modification Information
+ * @
+ * @  수정일      수정자              수정내용
+ * @ ---------   ---------   -------------------------------
+ * @ 2019. 7. 17.           최초생성
+ *
+ * @author Zimzalabim
+ * @since 2019. 7. 17. 
+ * @version 1.0
+ * @see
+ *
+ *  Copyright (C) by HR. KIM All right reserved.
+ */
+package com.zim.product.image;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.zim.product.ProductVO;
+import com.zim.product.video.VideoVO;
+
+
+/**
+ * @author sist
+ *
+ */
+public class ImageTest {
+
+private final Logger LOG = Logger.getLogger(ImageTest.class);
+	
+	private ImageDao dao;
+	
+	public ImageTest() {
+		dao = new ImageDao();
+	}
+	
+
+	public void do_insert(){
+		ImageVO imageVO = new ImageVO();
+		String imageId = "i01";
+		String productNo="7";
+		
+		imageVO.setImageId(imageId);
+		imageVO.setProductNo(productNo);
+		imageVO.setOrgFileNm("basic_image");
+		imageVO.setSaveFileNm("p"+productNo+"_"+imageId);
+		imageVO.setFileSize("100");
+		imageVO.setExtNm("jpg");
+		imageVO.setThumbnail("1");
+		
+		int flag = dao.do_insert(imageVO);
+	}
+	
+	public void do_update(){
+		ImageVO imageVO = new ImageVO();
+		String imageId = "i05";
+		String productNo="28";
+		
+		imageVO.setImageId(imageId);
+		imageVO.setProductNo(productNo);
+		imageVO.setOrgFileNm("basic_image"+"_update");
+		imageVO.setSaveFileNm("p"+productNo+"_"+imageId+"_update");
+		imageVO.setFileSize("100"+"*100");
+		imageVO.setExtNm("jpg");
+		imageVO.setThumbnail("0");
+		
+		int flag = dao.do_update(imageVO);
+	}
+		
+	public void do_delete(){
+		ImageVO imageVO = new ImageVO();
+		String imageId = "i05";
+		String productNo="28";
+		
+		imageVO.setImageId(imageId);
+		imageVO.setProductNo(productNo);
+
+		int flag = dao.do_delete(imageVO);
+	}
+	
+	public void do_selectOne(){
+		ImageVO imageVO=new ImageVO();
+		imageVO.setProductNo("28");
+		imageVO.setImageId("i01");
+		
+		ImageVO outVO = new ImageVO();
+		outVO = (ImageVO) dao.do_selectOne(imageVO);
+		
+		LOG.debug("image one select : "+outVO);	
+	}
+	
+	public void do_retrieve(){
+		ImageVO imageVO=new ImageVO();
+		imageVO.setProductNo("28");
+
+		List<ImageVO> list = (List<ImageVO>) dao.do_retrieve(imageVO);
+		LOG.debug("===================");
+		for(ImageVO vo:list){
+			LOG.debug("vo"+vo);	
+		}
+		
+		LOG.debug("===================");	
+	}
+	
+	/**
+	 * @Method Name  : main
+	 * @작성일   : 2019. 7. 17.
+	 * @작성자   : sist
+	 * @변경이력  : 최초작성
+	 * @Method 설명 :
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		ImageTest imageTest = new ImageTest();
+		//imageTest.do_insert();
+		//imageTest.do_update();
+		//imageTest.do_delete();
+		//imageTest.do_retrieve();
+		imageTest.do_selectOne();
+
+	}
+
+}

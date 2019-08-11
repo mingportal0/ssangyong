@@ -1,0 +1,127 @@
+package com.zim.product.comment;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+import com.zim.cmn.DTO;
+import com.zim.cmn.StringUtil;
+
+
+
+@WebServlet(description = "댓글관리", urlPatterns = { "/mainpage/commentcontroller.do/" })
+public class CommentController extends HttpServlet {
+    
+	// View -> Controller -> Service -> Dao
+
+	private final Logger LOG=Logger.getLogger(CommentDao.class);
+	
+	private CommentService commentService;
+	
+
+    public CommentController() {
+    	commentService = new CommentService();
+    }
+
+    
+    
+    //댓글삽입
+    public void do_insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+  		
+  	}
+  	
+  	//댓글수정
+	public void do_update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+	}
+  	
+  	
+  	//댓글삭제
+	public void do_delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+	}
+  	
+  	
+  	//댓글 조회
+	public void do_retrieve(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+	}
+    
+    
+
+    
+    
+    public void doServiceHandler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	//기능 : do_retrieve, do_insert, do_update, do_selectOne, do_delete
+    	//work_div
+    	LOG.debug("02 doServiceHandler()");
+    	request.setCharacterEncoding("UTF-8"); 	//리퀘스트 설정하기
+    	
+    	
+    	//work_div : read
+    	String workDiv = StringUtil.nvl(request.getParameter("work_div"), "");
+    	LOG.debug("02.1 workDiv:"+workDiv);
+    	
+    	
+    	//Switch문으로 분기처리
+    	
+    	/*
+    	 * do_retrieve : 목록
+    	 * do_insert : 등록
+    	 * do_update : 수정
+    	 * do_selectOne : 단건조회
+    	 * do_delete
+    	 * 
+    	 */
+    	
+    	switch(workDiv){
+    		//등록화면으로 이동
+//	    	case "do_save_move":
+//	    		do_save_move(request,response);
+//			break;
+    	
+    		case "do_insert":
+    			do_insert(request,response);
+    		break;
+    	
+    		case "do_update":
+    			do_update(request,response);
+    		break;
+    		
+    		case "do_delete":
+    			do_delete(request,response);
+    		break;
+    		
+    		case "do_retrieve":
+    			do_retrieve(request,response);
+    		break;
+    		
+    	}
+    	
+    }
+    
+    
+    
+    
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LOG.debug("01 doGet()");
+		LOG.debug("01.1 CommentService:"+commentService);
+		doServiceHandler(request, response);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LOG.debug("01 doPost()");
+		LOG.debug("01.1 CommentService:"+commentService);
+		doServiceHandler(request, response);
+	}
+
+}

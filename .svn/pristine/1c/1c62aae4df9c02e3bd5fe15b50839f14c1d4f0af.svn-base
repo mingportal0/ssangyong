@@ -1,0 +1,103 @@
+<%--
+  /**
+  * @Class Name : useOutObject.jsp
+  * @Description : Sample Register 화면
+  * @Modification Information
+  *
+  *   수정일                   수정자                      수정내용
+  *  -------    --------    ---------------------------
+  *  2019.07.01            최초 생성
+  *
+  * author 실행환경 개발팀
+  * since 2019.07.01
+  *
+  * Copyright (C) 2009 by KandJang  All right reserved.
+  */
+--%>
+<%@page import="com.zim.product.ProductDao"%>
+<%@page import="java.util.List"%>
+<%@page import="org.apache.log4j.Logger"%>
+<%@page import="com.zim.product.ProductVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%
+	Logger LOG = Logger.getLogger(this.getClass());
+
+	//화면목록
+	List<ProductVO> list = (List<ProductVO>)request.getAttribute("list");
+	
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/WEB_EX01/js/jquery-ui.css" >
+<link rel="shortcut icon" href="/WEB_EX01/image/favicon.ico">
+<title>Insert title here</title>
+<script src="/WEB_EX01/js/jquery-1.12.4.js"></script>
+<script src="/WEB_EX01/js/jquery-ui.js"></script>
+</head>
+<body>
+
+	<!-- 마감임박 -->
+	<hr4>마감임박</hr4>
+	<form name="mainFrm" action="/ZIMZALABIM/mainpage/mainPagecontroller.do" method="post" >
+		<%
+			for(int i=0; i<8; i++){				
+		%>
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover" id="listTable">
+			<div>
+				<tr>
+					<td>i</td>	
+				</tr>
+				<tr>
+					<td>i</td>
+				</tr>
+				<tr>
+					<td>i</td>
+				</tr>
+				<tr>
+					<td>i</td>
+				</tr>
+			</div>
+			</table>
+		</div>	
+		<%
+			} //--for
+		%>
+	</form>
+
+	<br/>
+	<br/>
+
+		
+
+
+	
+	<script>
+  
+	//page이동
+	function doSearchPage(url,page_num){
+		//alert(url+","+page_num);
+		
+		var frm = document.searchFrm;
+		frm.work_div.value = "do_latest_select";
+		frm.action = url;
+		frm.submit();
+		
+	}
+	
+	
+	
+	
+	
+ 	$(document).ready(function(){
+  	
+	});
+  
+  
+ </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<%--
+  /**
+  * @Class Name : useOutObject.jsp
+  * @Description : Sample Register 화면
+  * @Modification Information
+  *
+  *   수정일                   수정자                      수정내용
+  *  -------    --------    ---------------------------
+  *  2019.07.01            최초 생성
+  *
+  * author 실행환경 개발팀
+  * since 2019.07.01
+  *
+  * Copyright (C) 2009 by KandJang  All right reserved.
+  */
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->    
+<link rel="stylesheet" href="/WEB_EX01/js/jquery-ui.css" >
+<!-- 부트스트랩 -->
+<link href="/WEB_EX01/css/bootstrap.min.css" rel="stylesheet">
+<title>상세보기</title>
+<script src="/WEB_EX01/js/jquery-1.12.4.js"></script>
+<script src="/WEB_EX01/js/jquery-ui.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+<script src="/WEB_EX01/js/bootstrap.min.js"></script>   
+</head>
+<body>
+	
+	<br/>
+	<br/>
+	<div class="container">
+		<table class="table table-bordered">
+			<tr align="center">
+				<td colspan="7">상품이미지</td>
+			</tr>
+			<tr align="center">
+				<td>상품이름</td>
+				<td width=30%>상품이름 들어갈 곳</td>
+				<td>남은수량</td>
+				<td>남은수량 들어갈 곳</td>
+				<td>마감시간</td>
+				<td>마감시간 들어갈 곳</td>
+			</tr>
+			<tr align="center">
+				<td rowspan="2">구매수량</td>
+				<td rowspan="2">수량 조정할 곳</td>
+				<td>▲</td>
+				<td colspan="4" rowspan="2">결제하기</td>
+			</tr>
+			<tr align="center">
+				<td>▼</td>
+			</tr>
+		</table>
+	</div>
+	
+	<br/>
+	<br/>
+	
+	<div class="container">
+		<table class="table table-bordered">
+			<tr>
+				<td width=50%>상세페이지</td>
+				<td width=50%>공지사항</td>
+			</tr>
+			
+			<%
+				//if 걸어서 상세 페이지면
+			%>
+			
+			<tr>
+				<td colspan="2">물품상세정보</td>
+			</tr>
+			<%
+				//else if 걸어서 공지사항이면
+			%>
+			
+			<tr>
+				<td colspan="2">공지내용</td>
+			</tr>
+			<tr>
+				<td colspan="2">댓글</td>
+			</tr>
+			
+			
+		</table>
+	</div>
+	
+
+	<script>
+  
+	
+	
+		//상세정보 불러오기
+		//더블클릭 이벤트
+		$("#listTable>tbody").on("dblclick","tr",function(){
+			var cTrs = $(this);
+			var cTds = cTrs.children();
+			console.log(cTds);
+			var seq = cTds.eq(5).text();
+			console.log("seq"+seq);
+			
+			var frm = document.searchFrm;
+			frm.work_div.value = "do_selectOne"; //controller에 있는 메소드 이름이랑 같이 줘야함. 그걸 동작하게 하는 것.
+			frm.action = '/WEB_EX01/board/board.do?seq='+seq;
+			frm.submit();
+			
+		});
+	
+		
+		
+		//공지랑 댓글 불러오기
+		//더블클릭 이벤트
+		$("#listTable>tbody").on("dblclick","tr",function(){
+			var cTrs = $(this);
+			var cTds = cTrs.children();
+			console.log(cTds);
+			var seq = cTds.eq(5).text();
+			console.log("seq"+seq);
+			
+			var frm = document.searchFrm;
+			frm.work_div.value = "do_selectOne"; //controller에 있는 메소드 이름이랑 같이 줘야함. 그걸 동작하게 하는 것.
+			frm.action = '/WEB_EX01/board/board.do?seq='+seq;
+			frm.submit();
+			
+		});
+	
+	
+	
+	
+	
+ 	$(document).ready(function(){
+  	
+	});
+  
+  
+ </script>
+</body>
+</html>

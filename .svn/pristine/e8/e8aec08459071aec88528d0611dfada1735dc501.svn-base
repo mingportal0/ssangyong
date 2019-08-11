@@ -1,0 +1,291 @@
+package com.zim.wishlist;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.zim.cmn.ConnectionMaker;
+import com.zim.cmn.DTO;
+import com.zim.cmn.JDBCReturnReso;
+import com.zim.cmn.SearchVO;
+import com.zim.cmn.WorkDiv;
+
+public class WishListDao implements WorkDiv {
+
+	private final Logger LOG = Logger.getLogger(WishListDao.class);
+	private ConnectionMaker connectionMaker;
+
+	public WishListDao() {
+		connectionMaker = new ConnectionMaker();
+	}
+
+	@Override
+	public int do_insert(DTO dto) {
+		WishListVO vo = (WishListVO)dto;
+		int flag = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try{
+			StringBuilder sb = new StringBuilder();
+			sb.append("INSERT INTO WishList (   \n");
+			sb.append("            USER_ID      \n");
+			sb.append("            ,PRODUCT_NO  \n");
+			sb.append("            ,REG_DT      \n");
+			sb.append("            ) VALUES(    \n");
+			sb.append("            ?,           \n");
+			sb.append("            ?,           \n");
+			sb.append("            SYSDATE      \n");
+			sb.append("            )            \n");
+			
+			LOG.debug("1.============================");
+			LOG.debug("1.query\n" + sb.toString());
+			LOG.debug("1.============================");
+			
+			conn = connectionMaker.getConnection();
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, vo.getUser_id());
+			pstmt.setString(2, vo.getProduct_no());
+			
+			LOG.debug("2.============================");
+			LOG.debug("2.param:" + vo.toString());
+			LOG.debug("2.============================");
+			
+			flag = pstmt.executeUpdate();
+			
+			LOG.debug("3.============================");
+			LOG.debug("3.flag:" + flag);
+			LOG.debug("3.============================");
+		} catch(SQLException e){
+			LOG.debug("======================");
+			LOG.debug("SQLException:" + e.toString());
+			LOG.debug("======================");
+		}finally{
+			JDBCReturnReso.close(pstmt);
+			JDBCReturnReso.close(conn);
+		}
+		return flag;
+	}
+
+	@Override
+	public int do_update(DTO dto) {
+
+		return 0;
+	}
+
+	@Override
+	public int do_delete(DTO dto) {
+		WishListVO vo = (WishListVO) dto;
+		// System.out.println("vo2312312321321======="+vo);
+		int flag = 0;
+		Connection conn = null;
+
+		PreparedStatement pstmt = null;
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("DELETE FROM WishList  \n");
+		sb.append("WHERE PRODUCT_NO = ?  \n");
+
+		try {
+			conn = connectionMaker.getConnection();
+			conn.setAutoCommit(false);
+
+			LOG.debug("1======================");
+			LOG.debug("query:\n" + sb.toString());
+			LOG.debug("1======================");
+			pstmt = conn.prepareStatement(sb.toString());
+
+			pstmt.setString(1, vo.getProduct_no());
+			LOG.debug("2======================");
+			LOG.debug("param, produNO=" + vo.getProduct_no());
+			LOG.debug("2======================");
+
+			flag = pstmt.executeUpdate();
+			if (flag > 0) {
+				LOG.debug("3======================");
+				LOG.debug("transaction=" + conn);
+				LOG.debug("3======================");
+
+			} else {
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCReturnReso.close(pstmt);
+			JDBCReturnReso.close(conn);
+		}
+		LOG.debug("3=====================");
+		LOG.debug("flag:" + flag);
+		LOG.debug("3=====================");
+
+		return flag;
+	}
+
+	@Override
+	public DTO do_selectOne(DTO dto) {
+		WishListVO vo = (WishListVO) dto;
+		WishListVO outVO = (WishListVO) dto;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			StringBuilder sb = new StringBuilder();
+			sb.append(" SELECT                   \n");
+			sb.append(" USER_ID,                 \n");
+			sb.append(" PRODUCT_NO,              \n");
+			sb.append(" REG_DT                  \n");
+			sb.append(" FROM WishList            \n");
+			sb.append(" WHERE PRODUCT_NO = ?  \n");
+
+			conn = connectionMaker.getConnection();
+			LOG.debug("1.============================");
+			LOG.debug("1.query: \n" + sb.toString());
+			LOG.debug("1.============================");
+
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, vo.getProduct_no());
+			LOG.debug("2.============================");
+			LOG.debug("2.param productNO=" + vo.getProduct_no());
+			LOG.debug("2.============================");
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				outVO = new WishListVO();
+				outVO.setUser_id(rs.getString("user_id"));
+				outVO.setProduct_no(rs.getString("product_no"));
+				outVO.setReg_dt(rs.getString("reg_dt"));
+			}
+
+		} catch (SQLException e) {
+			LOG.debug("===================");
+			LOG.debug("SQLException=" + e.getMessage());
+			LOG.debug("===================");
+		} finally {
+			JDBCReturnReso.close(rs);
+			JDBCReturnReso.close(pstmt);
+			JDBCReturnReso.close(conn);
+		}
+		return outVO;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.zim.cmn.WorkDiv#do_retrieve(com.zim.cmn.DTO)
+	 */
+	@Override
+	public List<?> do_retrieve(DTO dto) {
+		SearchVO vo = (SearchVO) dto;
+
+		List<WishListVO> list = new ArrayList<>();
+		Connection conn = null;// db 연결
+		PreparedStatement pstmt = null;// query수행
+		ResultSet rs = null;// 결과처리
+
+		StringBuilder sbWhere = new StringBuilder();
+		if (null != vo.getSearchDiv()) {
+
+			if ("10".equals(vo.getSearchDiv())) {
+				sbWhere.append("WHERE product_no like ?||'%' \n");
+			}
+		}
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT T1.*,T2.*                                \n");
+		sb.append("FROM                                            \n");
+		sb.append("(                                               \n");
+		sb.append("	SELECT B.rnum num,                             \n");
+		sb.append("		   B.user_id,                              \n");
+		sb.append("		   C.product_no,                           \n");
+		sb.append("		   B.reg_dt                                \n");
+		sb.append("	FROM(                                          \n");
+		sb.append("    SELECT ROWNUM AS rnum,A.*                   \n");
+		sb.append("    FROM(                                       \n");
+		sb.append("	SELECT *                                       \n");
+		sb.append("	FROM WishList                                  \n");
+		if (null != vo.getSearchDiv()) {// 검색구분
+			if (null != vo.getSearchWord() && vo.getSearchWord().length() > 0) {// 검색어가
+																				// 있는냐
+				sb.append(sbWhere.toString());
+			}
+		}
+		sb.append("	ORDER BY PRODUCT_NO ASC                        \n");
+		sb.append("	)A                                             \n");
+		sb.append("	WHERE ROWNUM <=(?*(?-1)+?)	)B JOIN PRODUCT C  \n");
+		sb.append("    ON B.PRODUCT_NO = C.PRODUCT_NO              \n");
+		sb.append("	WHERE  B.rnum >=(?*(?-1)+1)                    \n");
+		sb.append(")T1 CROSS JOIN                                  \n");
+		sb.append("(                                               \n");
+		sb.append("	SELECT COUNT(*) total_cnt                      \n");
+		sb.append("	FROM WishList                                  \n");
+		if (null != vo.getSearchDiv()) {// 검색구분
+			if (null != vo.getSearchWord() && vo.getSearchWord().length() > 0) {// 검색어가
+																				// 있는냐
+				sb.append(sbWhere.toString());
+			}
+		}
+		sb.append(" )T2                                                         \n");
+		LOG.debug("2 sql \n:" + sb.toString());
+		try {
+			conn = connectionMaker.getConnection();
+			pstmt = conn.prepareStatement(sb.toString());
+			// param
+			if (null != vo.getSearchDiv() && !"".equals(vo.getSearchDiv())) {
+				// 검색어
+				// PAGE_SIZE
+				// PAGE_NUM
+				// PAGE_SIZE
+				// PAGE_SIZE
+				// PAGE_NUM
+				// 검색어
+				// pstmt.setString(1, vo.getSearchWord());
+				pstmt.setInt(1, vo.getPageSize());
+				pstmt.setInt(2, vo.getPageNum());
+				pstmt.setInt(3, vo.getPageSize());
+				pstmt.setInt(4, vo.getPageSize());
+				pstmt.setInt(5, vo.getPageNum());
+				// pstmt.setString(7, vo.getSearchWord());
+			} else {// 검색이 없는 경우
+					// PAGE_SIZE
+					// PAGE_NUM
+					// PAGE_SIZE
+					// PAGE_SIZE
+					// PAGE_NUM
+				pstmt.setInt(1, vo.getPageSize());
+				pstmt.setInt(2, vo.getPageNum());
+				pstmt.setInt(3, vo.getPageSize());
+				pstmt.setInt(4, vo.getPageSize());
+				pstmt.setInt(5, vo.getPageNum());
+			}
+			LOG.debug("3 param \n:" + vo);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				WishListVO outVO = new WishListVO();
+
+				outVO.setNum(rs.getInt("num"));
+				outVO.setUser_id(rs.getString("user_id"));
+				outVO.setProduct_no(rs.getString("product_no"));
+				outVO.setReg_dt(rs.getString("reg_dt"));
+
+				list.add(outVO);
+			}
+
+		} catch (SQLException e) {
+			LOG.debug("===============================");
+			LOG.debug("SQLException=" + e.toString());
+			LOG.debug("===============================");
+		} finally {
+			JDBCReturnReso.close(rs);
+			JDBCReturnReso.close(pstmt);
+			JDBCReturnReso.close(conn);
+		}
+		return list;
+	}
+
+}

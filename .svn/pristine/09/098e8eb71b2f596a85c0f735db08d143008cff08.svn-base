@@ -1,0 +1,234 @@
+<%--
+/**
+* @Class Name : useOutObject.jsp
+* @Description : Sample Register 화면
+* @Modification Information
+*
+*   수정일                   수정자                      수정내용
+*  -------    --------    ---------------------------
+*  2019.07.01            최초 생성
+*
+* author 실행환경 개발팀
+* since 2019.07.01
+*
+* Copyright (C) 2009 by KandJang  All right reserved.
+*/
+--%>
+<%@page import="com.zim.product.ProductVO"%>
+<%@page import="com.zim.product.image.ImageVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	ProductVO vo = (ProductVO)request.getAttribute("vo");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="/ZIMZALABIM/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<link rel="stylesheet" href="/ZIMZALABIM/js/jquery-ui.css">
+<title>Insert title here</title>
+<script src="/ZIMZALABIM/js/jquery-1.12.4.js"></script>
+<script src="/ZIMZALABIM/js/jquery-ui.js"></script>
+</head>
+<body>
+	<h3></h3>
+	<hr/>
+	<form name="writingFrm" id="writingFrm" action="/ZIMZALABIM/product/writing.do" method="post" enctype="multipart/form-data">
+	<input type="hidden"  name="work_div" id="work_div"/>
+	<div>
+		<label>카테고리</label>
+		<select name="category" id="category">
+			<option value="">전체</option>
+			<option value="10" <%if( vo.getCategory().equals("10")  )out.print("selected"); %>>의류</option>
+			<option value="20" <%if( vo.getCategory().equals("20")  )out.print("selected"); %>>식품</option>
+			<option value="30" <%if( vo.getCategory().equals("30")  )out.print("selected"); %>>문화</option>
+			<option value="40" <%if( vo.getCategory().equals("40")  )out.print("selected"); %>>전자기기</option>
+			<option value="50" <%if( vo.getCategory().equals("50")  )out.print("selected"); %>>미용</option>
+			<option value="60" <%if( vo.getCategory().equals("60")  )out.print("selected"); %>>장난감</option>
+			<option value="70" <%if( vo.getCategory().equals("70")  )out.print("selected"); %>>잡화</option>
+			<option value="80" <%if( vo.getCategory().equals("80")  )out.print("selected"); %>>기타</option>
+		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<label>아이디</label>
+		<input type="text" value="<%= vo.getRegId() %>" name="reg_id" id="reg_id"/>
+	</div>
+	<div>
+		<label>제목</label>
+		<input type="text" value="<%= vo.getProductNm() %>" name="product_nm" id="product_nm"/>
+	</div>
+	<div>
+		<label>수량</label>
+		<input type="text" value="<%= vo.getTargetCnt() %>" name="target_cnt" id="target_cnt"/>
+		<label>마감일자</label>
+		<input type="text" value="<%= vo.getDeadline() %>" name="deadline" id="deadline"/>
+	</div>
+	<div>
+		<label>가격</label>
+		<input type="text" value="<%= vo.getPrice() %>" name="price" id="price"/>
+		<label>배송비</label>
+		<input type="text" value="<%= vo.getDeliveryPrice() %>" name="delivery_price" id="delivery_price"/>
+	</div>
+	사진: <input type="file" value="<%= vo.getSaveFileNm() %>" name="org_file_nm"><br>
+	내용<textarea name="contents" id="contents" rows="10" cols="100"><%= vo.getContents() %></textarea>
+	<div>
+		<input type="button" value="등록" id="save_btn"/>
+		<input type="button" value="취소" id="cancel_btn"/>
+	</div>
+	</form>
+
+	
+
+	<script>
+    //등록
+	    $("#save_btn").on('click',function(){
+	    	//alert('save_btn');
+	    	
+	    	var product_nm = $("#product_nm").val();
+			if(null == product_nm || product_nm.trim().length ==0){
+				$("#product_nm").focus();
+				alert('제목을 입력하세요.');
+				return;
+			}
+			
+			var reg_id = $("#reg_id").val();
+			if(null == reg_id || reg_id.trim().length ==0){
+				$("#reg_id").focus();
+				alert('등록자를 입력하세요.');
+				return;
+			}
+			
+			var contents = $("#contents").val();
+			if(null == contents || contents.trim().length ==0){
+				$("#contents").focus();
+				alert('내용을 입력하세요.');
+				return;
+			}
+			
+			var price = $("#price").val();
+			if(null == price || price.trim().length ==0){
+				$("#price").focus();
+				alert('가격을 입력하세요.');
+				return;
+			}
+			
+			var category = $("#category").val();
+			if(null == category || category.trim().length ==0){
+				$("#category").focus();
+				alert('카테고리를 선택하세요.');
+				return;
+			}
+			
+			var target_cnt = $("#target_cnt").val();
+			if(null == target_cnt || target_cnt.trim().length ==0){
+				$("#target_cnt").focus();
+				alert('수량을 입력하세요.');
+				return;
+			}
+			
+			var deadline = $("#deadline").val();
+			if(null == deadline || deadline.trim().length ==0){
+				$("#deadline").focus();
+				alert('마감기한을 입력하세요.');
+				return;
+			}
+			
+			var delivery_price = $("#delivery_price").val();
+			if(null == delivery_price || delivery_price.trim().length ==0){
+				$("#delivery_price").focus();
+				alert('배송비를 입력하세요.');
+				return;
+			}
+			
+// 			var delivery_price = $("#org_file_nm").val();
+// 			if(null == delivery_price || delivery_price.trim().length ==0){
+// 				$("#org_file_nm").focus();
+// 				alert('이미지를 첨부하세요.');
+// 				return;
+// 			}
+			
+			//"work_div":"do_update",
+			//$("#work_div").val("do_insert");//"do_update" set
+// 			var param = $('#writingFrm').serialize();
+			
+// 			alert('param'+param);
+			
+			if( false == confirm(product_nm+'을(를)\n등록 하시겠습니까?'))return;
+	    	
+			var frm = document.writingFrm;
+			frm.work_div.value = "do_insert";
+			alert('frm.work_div.value='+frm.work_div.value);
+			frm.action = "/ZIMZALABIM/product/writing.do";
+			frm.submit();
+			
+			//window.location.href="/ZIMZALABIM/product/writing.do?work_div=do_retrieve";
+
+
+	    	//ajax
+// 			$.ajax({
+// 					type:"post",
+// 					url:"/ZIMZALABIM/product/writing.do",
+// 					dataType:"html",
+// 					data:param,
+// 					enctype: "multipart/form-data",
+// 		            processData: false,
+// 		            contentType: false,
+// 				success: function(data){
+// 					console.log('data'+data);
+// 					//{"msgId":"1","msgContents":"삭제되었습니다.","total":0,"num":0}
+// 					var jData = JSON.parse(data);
+// 					console.log(jData.msgId+"|"+jData.msgContents);
+// 					if(null != jData && jData.msgId=="1"){
+// 						alert(jData.msgContents);
+// 						window.location.href="/ZIMZALABIM/product/writing.do?work_div=do_retrieve";
+// 					}else{
+// 						alert(jData.msgId+"|"+jData.msgContents);
+// 					}
+					
+// 					//alert("success:"+data);
+// 				},
+// 				complete:function(data){
+					
+// 				},
+// 				error:function(xhr, status, error){
+// 					alert("error:"+error);
+// 				}
+// 			});
+			//--ajax
+	    });
+		
+		$("#cancel_btn").on('click',function(){
+    		alert('cancel_btn');
+		});
+		
+		$("#deadline").datepicker({
+			dateFormat: 'yy.mm.dd' //Input Display Format 변경
+			,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+			,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+			,changeYear: true //콤보박스에서 년 선택 가능
+			,changeMonth: true //콤보박스에서 월 선택 가능                
+			,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+			,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+			,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+			,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+			,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+			,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+			,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+			,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+			,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+			,minDate: "M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+		});
+	</script>
+
+<!-- 	<script type="text/javascript">
+		
+  		var oEditors = [];
+ 		
+  		nhn.husky.EZCreator.createInIFrame({
+  		oAppRef: oEditors,
+  		elPlaceHolder: "contents",
+  		sSkinURI: "/ZIMZALABIM/html/SmartEditor2Skin.html",
+  		fCreator: "createSEditor2"
+  		});
+		</script> -->
+</body>
+</html>

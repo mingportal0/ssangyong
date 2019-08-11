@@ -1,0 +1,93 @@
+package com.zim.member.quit;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+
+import com.zim.cmn.StringUtil;
+import com.zim.member.MemberVO;
+
+/**
+ * Servlet implementation class QuitController
+ */
+@WebServlet(description = "회원탈퇴", urlPatterns = { "/quit/quit.do" })
+public class QuitController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    final Logger LOG = Logger.getLogger(this.getClass());
+    private QuitService quitService;
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public QuitController() {
+    	quitService = new QuitService();
+    }
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		LOG.debug("--------------------------");
+		LOG.debug("02.service");
+		LOG.debug("--------------------------");
+		req.setCharacterEncoding("UTF-8");
+		String passWd = StringUtil.nvl(req.getParameter("passWd"),"");
+    	LOG.debug("02.01.passWd:"+passWd);
+    	
+    	//회원 탈퇴 전 비번 체크
+    	//세션 값 불러오기
+    	HttpSession session = req.getSession();
+    	MemberVO memberVO = (MemberVO) session.getAttribute("user");
+    	if(memberVO==null){
+    		LOG.debug("02.02.session IS NULL (user :"+memberVO+")");
+    	}else{
+    		int flag = quitService.do_checkPw(memberVO,passWd);
+    		if(flag>0){
+    			LOG.debug("02.03.do_checkPw 비번일치 :"+flag);
+    			int flag_delete = quitService.do_delete(memberVO);
+    			
+    			LOG.debug("--------------------------");
+    			LOG.debug("02.04.do_delete flag : "+flag_delete);
+    			LOG.debug("--------------------------");
+    			
+    			//탈퇴 성공 후 세션 삭제
+    			session.removeAttribute("user");
+    			session.invalidate();
+    			
+    			//메인페이지로 이동
+    			RequestDispatcher dispatcher =req.getRequestDispatcher("/mainpage/mainpage_view.jsp");
+    	    	dispatcher.forward(req, resp);
+    		}else{
+    			LOG.debug("02.03.do_checkPw 비번불일치 :"+flag);
+    		}
+    	}
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		LOG.debug("--------------------------");
+		LOG.debug("doGet");
+		LOG.debug("--------------------------");
+		service(req, resp);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		LOG.debug("--------------------------");
+		LOG.debug("doPost");
+		LOG.debug("--------------------------");
+		service(req, resp);
+	}
+
+}

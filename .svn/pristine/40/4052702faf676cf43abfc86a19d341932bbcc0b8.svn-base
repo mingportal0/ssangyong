@@ -1,0 +1,163 @@
+<%@page import="org.apache.log4j.Logger"%>
+<%@page import="com.zim.cmn.SearchVO"%>
+<%@page import="com.zim.join.JoinVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+   
+<%
+	Logger LOG = Logger.getLogger(this.getClass());
+ 	List<JoinVO> list=(List<JoinVO>)request.getAttribute("list"); 
+
+	//Param
+	String pageNum    = "1";
+	String searchDiv  = "";
+	String searchWord = "";
+	String pageSize   = "100";
+
+	SearchVO paramVO = (SearchVO)request.getAttribute("paramVO");
+	out.print(paramVO);
+	if(null != paramVO){
+    	pageNum    = paramVO.getNum()+"";
+    	searchDiv  = paramVO.getSearchDiv();
+    	searchWord = paramVO.getSearchWord();
+    	pageSize   = paramVO.getPageSize()+"";		
+    	LOG.debug("===========================");
+    	LOG.debug("paramVO="+paramVO);
+    	LOG.debug("===========================");
+}
+
+%>
+<!DOCTYPE html>
+<html>
+<head>
+ <style type="text/css">
+   body {
+    font-family: Arial, Verdana, sans-serif;
+    color: #111111;}
+   table {
+    width: 90%;}
+   th, td {
+    padding: 7px 10px 10px 10px;}
+   th {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 90%;
+    border-bottom: 2px solid #111111;
+    border-top: 1px solid #999;
+    text-align: left;}
+   tr.even {
+    background-color: #efefef;}
+   tr:hover {
+    background-color: #c3e6e5;}
+   .money {
+    text-align: right;}
+  </style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/WEB_EX01/js/jquery-ui.css" >
+<title>Insert title here</title>
+<script src="/WEB_EX01/js/jquery-1.12.4.js"></script>
+<script src="/WEB_EX01/js/jquery-ui.js"></script>
+</head>
+<body>
+	<hr3>참여</hr3>
+	<hr/>
+	<!-- 버튼 -->
+	<div>
+		<input type="button" value="참여상품" onclick="javascript:do_retrieve()" />
+	</div>
+	<!-- 버튼 -->
+		<form name="searchFrm" action="/ZIMZALABIM/join/join.do" method="post">
+		<input type="hidden" name="work_div" />
+		<input type="hidden" name="pageNum"  />
+			<!-- 검색영역 -->
+		<!--// 검색영역 -->
+				<table id="listTable">
+			<thead>
+				<tr>
+					<th>참여일/상품번호</th>
+					<th>상품정보</th>
+					<th>주문수량</th>
+					<th>배송상태</th>
+					<th>취소</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					if(null != list && list.size()>0){
+						for(JoinVO vo :list){
+				%>
+						<tr>
+							<td><%=vo.getJoin_dt() +"   /"+vo.getProduct_no() %></td>
+							<td><%=vo.getProductNm() %></td>
+							<td><%=vo.getJoin_cnt() %></td>
+							<td><a href="http://localhost:8484/ZIMZALABIM/member/join_status_view.jsp" onclick="window.open(this.href, '_blank', 'width=500px,height=300px,toolbars=no,scrollbars=no'); return false;">배송상태</a></td>
+							<td><input type="text"  value="공구 취소" id="del_btn" /></td>					
+						</tr>
+				<%	
+					    }//--for 
+					}else{  
+				%>
+						<tr>
+							<td colspan="99">No data found</td>
+						</tr>
+				
+				<%	}//--else %>
+			</tbody>
+		</table>
+		<!-- //date list -->
+	</form>
+	<hr3>결과</hr3>
+	<script>
+		function do_retrieve(){
+			//alert('do_retrieve');
+			var frm=document.searchFrm;
+			frm.work_div.value='do_retrieve';
+			frm.pageNum.value='1';
+			frm.action = '/ZIMZALABIM/join/join.do';
+			
+			//alert('do_retrieve:'+frm.work_div.value);
+			frm.submit();
+		}
+		//수정화면으로 이동:servlet->member_mng.jsp
+	//	$("#listTable>tbody").on("click","tr",function(){
+	//		alert("취소 하시겠습니까?");
+	//		var cTrs = $(this);
+	//		var cTds = cTrs.children();
+	//		console.log(cTds);
+	//		var userId = cTds.eq(1).text();
+	//		console.log("Join_dt:"+Join_dt);
+			
+	//		var frm = document.searchFrm;
+	//		frm.work_div.value ="do_selectone";
+	//		frm.action = '/ZIMZALABIM/join/join.do?Join_dt='+Join_dt;
+	//		frm.submit();
+	//	});
+		
+
+
+		
+		
+	    function doDel(){
+	    	if( false == confirm('삭제 하시겠습니까?'))return;
+	    	var frm = document.frmMng;
+	    	frm.work_div.value = "do_delete";
+	    	frm.action = "/ZIMZALABIM/join/join.do";
+	    	frm.submit();
+	    }
+	
+		//삭제:buttonEvent
+		$("#del_btn").on('click',function(){
+			console.log('del_btn');
+			doDel();
+		});
+	
+		$(document).ready(function(){
+		});
+	</script>
+	
+
+
+
+</body>
+</html>

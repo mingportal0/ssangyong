@@ -1,0 +1,293 @@
+2019-08-07 19:26:47,933 DEBUG [main] product.ProductDao (ProductDao.java:139)     - 2 sql 
+ :SELECT T1.*,T2.*											   
+FROM (                                                      
+    SELECT b.rnum num, b.*                                  
+    FROM(                                                   
+        SELECT ROWNUM rnum, A.*                             
+        FROM(                                               
+            SELECT                                          
+             i.image_id,                                    
+             i.save_file_nm,                                
+				p.product_no,                                  
+				p.product_nm,                                  
+				p.price,                                       
+				p.category,                                    
+				TO_CHAR(p.deadline ,'YYYY.MM.DD')	deadline   
+            FROM product p JOIN image i                     
+            ON p.product_no = i.product_no                  
+			AND i.thumbnail = '1'                              
+			AND p.deadline >= SYSDATE -1                         
+			AND p.product_nm like 미미인형					   
+			ORDER BY p.reg_dt DESC                             
+        )A                                                  
+        WHERE ROWNUM <=(?*(?-1)+?)                          
+    )B                                                      
+    WHERE B.rnum>= (?*(?-1)+1)                              
+)T1 CROSS JOIN(                                              
+    SELECT COUNT(*) total_cnt                                
+    FROM product p JOIN image i                              
+    ON p.product_no = i.product_no                           
+	AND i.thumbnail = '1'                                       
+    AND p.deadline >= SYSDATE -1                             
+			AND p.product_nm like 미미인형					   
+)T2                                                          
+
+2019-08-07 19:26:48,006 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-08-07 19:26:48,190 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@3339ad8e
+2019-08-07 19:26:48,248 DEBUG [main] product.ProductDao (ProductDao.java:149)     - 3. param:getCategory:
+null
+2019-08-07 19:26:48,249 DEBUG [main] product.ProductDao (ProductDao.java:150)     - 3. param:getPageSize:
+10
+2019-08-07 19:26:48,250 DEBUG [main] product.ProductDao (ProductDao.java:151)     - 3. param:getPageNum:
+1
+2019-08-07 19:27:30,488 DEBUG [main] product.ProductDao (ProductDao.java:139)     - 2 sql 
+ :SELECT T1.*,T2.*											   
+FROM (                                                      
+    SELECT b.rnum num, b.*                                  
+    FROM(                                                   
+        SELECT ROWNUM rnum, A.*                             
+        FROM(                                               
+            SELECT                                          
+             i.image_id,                                    
+             i.save_file_nm,                                
+				p.product_no,                                  
+				p.product_nm,                                  
+				p.price,                                       
+				p.category,                                    
+				TO_CHAR(p.deadline ,'YYYY.MM.DD')	deadline   
+            FROM product p JOIN image i                     
+            ON p.product_no = i.product_no                  
+			AND i.thumbnail = '1'                              
+			AND p.deadline >= SYSDATE -1                         
+			AND p.product_nm like '미미인형'					   
+			ORDER BY p.reg_dt DESC                             
+        )A                                                  
+        WHERE ROWNUM <=(?*(?-1)+?)                          
+    )B                                                      
+    WHERE B.rnum>= (?*(?-1)+1)                              
+)T1 CROSS JOIN(                                              
+    SELECT COUNT(*) total_cnt                                
+    FROM product p JOIN image i                              
+    ON p.product_no = i.product_no                           
+	AND i.thumbnail = '1'                                       
+    AND p.deadline >= SYSDATE -1                             
+			AND p.product_nm like '미미인형'					   
+)T2                                                          
+
+2019-08-07 19:27:30,554 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-08-07 19:27:30,718 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@3339ad8e
+2019-08-07 19:27:30,769 DEBUG [main] product.ProductDao (ProductDao.java:149)     - 3. param:getCategory:
+null
+2019-08-07 19:27:30,771 DEBUG [main] product.ProductDao (ProductDao.java:150)     - 3. param:getPageSize:
+10
+2019-08-07 19:27:30,771 DEBUG [main] product.ProductDao (ProductDao.java:151)     - 3. param:getPageNum:
+1
+2019-08-07 19:27:48,019 DEBUG [main] product.ProductDao (ProductDao.java:139)     - 2 sql 
+ :SELECT T1.*,T2.*											   
+FROM (                                                      
+    SELECT b.rnum num, b.*                                  
+    FROM(                                                   
+        SELECT ROWNUM rnum, A.*                             
+        FROM(                                               
+            SELECT                                          
+             i.image_id,                                    
+             i.save_file_nm,                                
+				p.product_no,                                  
+				p.product_nm,                                  
+				p.price,                                       
+				p.category,                                    
+				TO_CHAR(p.deadline ,'YYYY.MM.DD')	deadline   
+            FROM product p JOIN image i                     
+            ON p.product_no = i.product_no                  
+			AND i.thumbnail = '1'                              
+			AND p.deadline >= SYSDATE -1                         
+			AND p.product_nm like '미미인형'					   
+			ORDER BY p.reg_dt DESC                             
+        )A                                                  
+        WHERE ROWNUM <=(?*(?-1)+?)                          
+    )B                                                      
+    WHERE B.rnum>= (?*(?-1)+1)                              
+)T1 CROSS JOIN(                                              
+    SELECT COUNT(*) total_cnt                                
+    FROM product p JOIN image i                              
+    ON p.product_no = i.product_no                           
+	AND i.thumbnail = '1'                                       
+    AND p.deadline >= SYSDATE -1                             
+			AND p.product_nm like '미미인형'					   
+)T2                                                          
+
+2019-08-07 19:27:48,077 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-08-07 19:27:48,294 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@3339ad8e
+2019-08-07 19:27:48,369 DEBUG [main] product.ProductDao (ProductDao.java:149)     - 3. param:getCategory:
+null
+2019-08-07 19:27:48,370 DEBUG [main] product.ProductDao (ProductDao.java:150)     - 3. param:getPageSize:
+10
+2019-08-07 19:27:48,371 DEBUG [main] product.ProductDao (ProductDao.java:151)     - 3. param:getPageNum:
+1
+2019-08-07 19:30:43,479 DEBUG [main] product.ProductTest (ProductTest.java:59)     - =================
+2019-08-07 19:30:43,480 DEBUG [main] product.ProductTest (ProductTest.java:60)     - paramListAllSearchVO [category=null, toString()=SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=미미인형, toString()=DTO [total=0, num=0]]]
+2019-08-07 19:30:43,480 DEBUG [main] product.ProductTest (ProductTest.java:61)     - =================
+2019-08-07 19:30:43,481 DEBUG [main] product.ProductDao (ProductDao.java:139)     - 2 sql 
+ :SELECT T1.*,T2.*											   
+FROM (                                                      
+    SELECT b.rnum num, b.*                                  
+    FROM(                                                   
+        SELECT ROWNUM rnum, A.*                             
+        FROM(                                               
+            SELECT                                          
+             i.image_id,                                    
+             i.save_file_nm,                                
+				p.product_no,                                  
+				p.product_nm,                                  
+				p.price,                                       
+				p.category,                                    
+				TO_CHAR(p.deadline ,'YYYY.MM.DD')	deadline   
+            FROM product p JOIN image i                     
+            ON p.product_no = i.product_no                  
+			AND i.thumbnail = '1'                              
+			AND p.deadline >= SYSDATE -1                         
+			AND p.product_nm like '미미인형'					   
+			ORDER BY p.reg_dt DESC                             
+        )A                                                  
+        WHERE ROWNUM <=(?*(?-1)+?)                          
+    )B                                                      
+    WHERE B.rnum>= (?*(?-1)+1)                              
+)T1 CROSS JOIN(                                              
+    SELECT COUNT(*) total_cnt                                
+    FROM product p JOIN image i                              
+    ON p.product_no = i.product_no                           
+	AND i.thumbnail = '1'                                       
+    AND p.deadline >= SYSDATE -1                             
+			AND p.product_nm like '미미인형'					   
+)T2                                                          
+
+2019-08-07 19:30:43,538 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-08-07 19:30:43,717 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@6d1e7682
+2019-08-07 19:30:43,776 DEBUG [main] product.ProductDao (ProductDao.java:149)     - 3. param:getCategory:
+null
+2019-08-07 19:30:43,776 DEBUG [main] product.ProductDao (ProductDao.java:150)     - 3. param:getPageSize:
+10
+2019-08-07 19:30:43,776 DEBUG [main] product.ProductDao (ProductDao.java:151)     - 3. param:getPageNum:
+1
+2019-08-07 19:34:51,937 DEBUG [main] product.ProductTest (ProductTest.java:59)     - =================
+2019-08-07 19:34:51,938 DEBUG [main] product.ProductTest (ProductTest.java:60)     - paramListAllSearchVO [category=null, toString()=SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=미미인형, toString()=DTO [total=0, num=0]]]
+2019-08-07 19:34:51,939 DEBUG [main] product.ProductTest (ProductTest.java:61)     - =================
+2019-08-07 19:34:51,939 DEBUG [main] product.ProductDao (ProductDao.java:139)     - 2 sql 
+ :SELECT T1.*,T2.*											   
+FROM (                                                      
+    SELECT b.rnum num, b.*                                  
+    FROM(                                                   
+        SELECT ROWNUM rnum, A.*                             
+        FROM(                                               
+            SELECT                                          
+             i.image_id,                                    
+             i.save_file_nm,                                
+				p.product_no,                                  
+				p.product_nm,                                  
+				p.price,                                       
+				p.category,                                    
+				TO_CHAR(p.deadline ,'YYYY.MM.DD')	deadline   
+            FROM product p JOIN image i                     
+            ON p.product_no = i.product_no                  
+			AND i.thumbnail = '1'                              
+			AND p.deadline >= SYSDATE -1                         
+			WHERE p.product_nm like '미미인형%'					   
+			ORDER BY p.reg_dt DESC                             
+        )A                                                  
+        WHERE ROWNUM <=(?*(?-1)+?)                          
+    )B                                                      
+    WHERE B.rnum>= (?*(?-1)+1)                              
+)T1 CROSS JOIN(                                              
+    SELECT COUNT(*) total_cnt                                
+    FROM product p JOIN image i                              
+    ON p.product_no = i.product_no                           
+	AND i.thumbnail = '1'                                       
+    AND p.deadline >= SYSDATE -1                             
+			WHERE p.product_nm like '미미인형%'					   
+)T2                                                          
+
+2019-08-07 19:34:51,996 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-08-07 19:34:52,171 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@6d1e7682
+2019-08-07 19:34:52,222 DEBUG [main] product.ProductDao (ProductDao.java:149)     - 3. param:getCategory:
+null
+2019-08-07 19:34:52,223 DEBUG [main] product.ProductDao (ProductDao.java:150)     - 3. param:getPageSize:
+10
+2019-08-07 19:34:52,223 DEBUG [main] product.ProductDao (ProductDao.java:151)     - 3. param:getPageNum:
+1
+2019-08-07 19:34:52,269 DEBUG [main] product.ProductDao (ProductDao.java:163)     - -----------------------------------------------------
+2019-08-07 19:34:52,270 DEBUG [main] product.ProductDao (ProductDao.java:164)     - 3. outVO:
+ProductVO [restAmount=null, imageId=1, productNo=204, productNm=미미인형 공동구매, price=29000, joinCnt=null, category=60, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.08.09, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null, saveFileNm=http://localhost:8080/ZIMZALABIM/upload/image/2019/08/category602.png]
+2019-08-07 19:34:52,270 DEBUG [main] product.ProductDao (ProductDao.java:165)     - -----------------------------------------------------
+2019-08-07 19:35:08,652 DEBUG [main] product.ProductTest (ProductTest.java:59)     - =================
+2019-08-07 19:35:08,654 DEBUG [main] product.ProductTest (ProductTest.java:60)     - paramListAllSearchVO [category=null, toString()=SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=공동구매, toString()=DTO [total=0, num=0]]]
+2019-08-07 19:35:08,654 DEBUG [main] product.ProductTest (ProductTest.java:61)     - =================
+2019-08-07 19:35:08,654 DEBUG [main] product.ProductDao (ProductDao.java:139)     - 2 sql 
+ :SELECT T1.*,T2.*											   
+FROM (                                                      
+    SELECT b.rnum num, b.*                                  
+    FROM(                                                   
+        SELECT ROWNUM rnum, A.*                             
+        FROM(                                               
+            SELECT                                          
+             i.image_id,                                    
+             i.save_file_nm,                                
+				p.product_no,                                  
+				p.product_nm,                                  
+				p.price,                                       
+				p.category,                                    
+				TO_CHAR(p.deadline ,'YYYY.MM.DD')	deadline   
+            FROM product p JOIN image i                     
+            ON p.product_no = i.product_no                  
+			AND i.thumbnail = '1'                              
+			AND p.deadline >= SYSDATE -1                         
+			WHERE p.product_nm like '공동구매%'					   
+			ORDER BY p.reg_dt DESC                             
+        )A                                                  
+        WHERE ROWNUM <=(?*(?-1)+?)                          
+    )B                                                      
+    WHERE B.rnum>= (?*(?-1)+1)                              
+)T1 CROSS JOIN(                                              
+    SELECT COUNT(*) total_cnt                                
+    FROM product p JOIN image i                              
+    ON p.product_no = i.product_no                           
+	AND i.thumbnail = '1'                                       
+    AND p.deadline >= SYSDATE -1                             
+			WHERE p.product_nm like '공동구매%'					   
+)T2                                                          
+
+2019-08-07 19:35:08,712 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-08-07 19:35:08,883 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@6d1e7682
+2019-08-07 19:35:08,946 DEBUG [main] product.ProductDao (ProductDao.java:149)     - 3. param:getCategory:
+null
+2019-08-07 19:35:08,946 DEBUG [main] product.ProductDao (ProductDao.java:150)     - 3. param:getPageSize:
+10
+2019-08-07 19:35:08,946 DEBUG [main] product.ProductDao (ProductDao.java:151)     - 3. param:getPageNum:
+1
+2019-08-07 19:35:08,976 DEBUG [main] product.ProductDao (ProductDao.java:163)     - -----------------------------------------------------
+2019-08-07 19:35:08,976 DEBUG [main] product.ProductDao (ProductDao.java:164)     - 3. outVO:
+ProductVO [restAmount=null, imageId=1, productNo=221, productNm=공동구매7, price=29000, joinCnt=null, category=10, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.08.19, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null, saveFileNm=http://211.238.142.137:8080/ZIMZALABIM/upload/image/2019/08/category1031.png]
+2019-08-07 19:35:08,976 DEBUG [main] product.ProductDao (ProductDao.java:165)     - -----------------------------------------------------
+2019-08-07 19:35:08,976 DEBUG [main] product.ProductDao (ProductDao.java:163)     - -----------------------------------------------------
+2019-08-07 19:35:08,976 DEBUG [main] product.ProductDao (ProductDao.java:164)     - 3. outVO:
+ProductVO [restAmount=null, imageId=1, productNo=220, productNm=공동구매6, price=29000, joinCnt=null, category=10, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.08.19, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null, saveFileNm=http://211.238.142.137:8080/ZIMZALABIM/upload/image/2019/08/category1031.png]
+2019-08-07 19:35:08,977 DEBUG [main] product.ProductDao (ProductDao.java:165)     - -----------------------------------------------------
+2019-08-07 19:35:08,977 DEBUG [main] product.ProductDao (ProductDao.java:163)     - -----------------------------------------------------
+2019-08-07 19:35:08,978 DEBUG [main] product.ProductDao (ProductDao.java:164)     - 3. outVO:
+ProductVO [restAmount=null, imageId=1, productNo=219, productNm=공동구매5_수정_수정, price=3333, joinCnt=null, category=30, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.08.30, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null, saveFileNm=http://211.238.142.137:8080/ZIMZALABIM/upload/image/2019/08/category1031.png]
+2019-08-07 19:35:08,978 DEBUG [main] product.ProductDao (ProductDao.java:165)     - -----------------------------------------------------
+2019-08-07 19:35:08,978 DEBUG [main] product.ProductDao (ProductDao.java:163)     - -----------------------------------------------------
+2019-08-07 19:35:08,978 DEBUG [main] product.ProductDao (ProductDao.java:164)     - 3. outVO:
+ProductVO [restAmount=null, imageId=1, productNo=218, productNm=공동구매4, price=29000, joinCnt=null, category=10, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.08.19, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null, saveFileNm=http://211.238.142.137:8080/ZIMZALABIM/upload/image/2019/08/category1031.png]
+2019-08-07 19:35:08,978 DEBUG [main] product.ProductDao (ProductDao.java:165)     - -----------------------------------------------------
+2019-08-07 19:35:08,978 DEBUG [main] product.ProductDao (ProductDao.java:163)     - -----------------------------------------------------
+2019-08-07 19:35:08,979 DEBUG [main] product.ProductDao (ProductDao.java:164)     - 3. outVO:
+ProductVO [restAmount=null, imageId=1, productNo=217, productNm=공동구매3, price=29000, joinCnt=null, category=10, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.08.19, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null, saveFileNm=http://211.238.142.137:8080/ZIMZALABIM/upload/image/2019/08/category1031.png]
+2019-08-07 19:35:08,979 DEBUG [main] product.ProductDao (ProductDao.java:165)     - -----------------------------------------------------
+2019-08-07 19:35:08,981 DEBUG [main] product.ProductDao (ProductDao.java:163)     - -----------------------------------------------------
+2019-08-07 19:35:08,982 DEBUG [main] product.ProductDao (ProductDao.java:164)     - 3. outVO:
+ProductVO [restAmount=null, imageId=1, productNo=216, productNm=공동구매2, price=29000, joinCnt=null, category=10, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.08.19, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null, saveFileNm=http://211.238.142.137:8080/ZIMZALABIM/upload/image/2019/08/category1030.png]
+2019-08-07 19:35:08,982 DEBUG [main] product.ProductDao (ProductDao.java:165)     - -----------------------------------------------------
+2019-08-07 19:35:08,982 DEBUG [main] product.ProductDao (ProductDao.java:163)     - -----------------------------------------------------
+2019-08-07 19:35:08,982 DEBUG [main] product.ProductDao (ProductDao.java:164)     - 3. outVO:
+ProductVO [restAmount=null, imageId=1, productNo=214, productNm=공동구매, price=29000, joinCnt=null, category=10, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.08.09, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null, saveFileNm=http://211.238.142.137:8080/ZIMZALABIM/upload/image/2019/08/category1028.png]
+2019-08-07 19:35:08,982 DEBUG [main] product.ProductDao (ProductDao.java:165)     - -----------------------------------------------------

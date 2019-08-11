@@ -1,0 +1,178 @@
+package com.zim.wishlist;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+import com.zim.cmn.StringUtil;
+import com.zim.cmn.WishHandler;
+import com.google.gson.Gson;
+import com.zim.cmn.MessageVO;
+import com.zim.cmn.SearchVO;
+
+@WebServlet(description = "위시", urlPatterns = { "/wishlist/wishlist.do" })
+public class WishlistController extends HttpServlet implements WishHandler {
+	private static final long serialVersionUID = 1L;
+	private Logger LOG = Logger.getLogger(WishlistController.class);
+	
+	private WishlistService service;
+
+	public WishlistController() {
+		LOG.debug("0-------------------");
+		service = new WishlistService();
+		LOG.debug("-service" + service);
+		LOG.debug("0-------------------");
+
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doServiceHandler(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doServiceHandler(request, response);
+	}
+
+	@Override
+	public void doServiceHandler(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		LOG.debug("02 doServiceHandler()");
+		request.setCharacterEncoding("UTF-8");
+
+		String workDiv = StringUtil.nvl(request.getParameter("work_div"), "");
+		LOG.debug("02.1 workDiv:" + workDiv);
+
+		switch (workDiv) {
+
+		case "do_move_to_list":
+			do_move_to_list(request, response);
+			break;
+
+		case "do_delete":
+			do_delete(request, response);
+			break;
+
+		case "do_selectone":
+			do_selectone(request, response);
+			break;
+
+		case "do_retrieve":
+			do_retrieve(request, response);
+			break;
+		}
+
+	}
+
+	private void do_move_to_list(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		LOG.debug("03 do_move_to_list");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/wishlist/wishlist.do?work_div=do_retrieve");
+		dispatcher.forward(request, response);
+	}
+
+	@Override
+	public void do_delete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		LOG.debug("03.1 do_delete");
+		WishlistVO inVO = new WishlistVO();
+
+		// System.out.println("inVO23213123213123=====" + inVO);
+		String productNo = StringUtil.nvl(request.getParameter("product_no"), "");
+		inVO.setProduct_no(productNo);
+
+		int flag = this.service.do_delete(inVO);
+		LOG.debug("03.2 flag:" + flag);
+
+		Gson gson = new Gson();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String msg = "";
+		String gsonString = "";
+
+		if (flag > 0) {
+			msg = "위시 리스트에서 삭제되었습니다.";
+		} else {
+			msg = "삭제 실패";
+		}
+
+		gsonString = gson.toJson(new MessageVO(String.valueOf(flag), msg));
+		LOG.debug("03.3 gsonString:" + gsonString);
+		out.print(gsonString);
+	}
+
+	@Override
+	public void do_selectone(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		LOG.debug("03.1 do_selectone");
+		WishlistVO inVO = new WishlistVO();
+		String productNo = StringUtil.nvl(request.getParameter("product_no"), "");
+
+		inVO.setProduct_no(productNo);
+
+		LOG.debug("03.2 inVO:" + inVO);
+		WishlistVO outVO = (WishlistVO) this.service.do_selectOne(inVO);
+		LOG.debug("03.3 outVO:" + outVO);
+		request.setAttribute("vo", outVO);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/wishlist/wish_mng.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	@Override
+	public void do_retrieve(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		LOG.debug("03.1 do_retrieve");
+		SearchVO inVO = new SearchVO();
+		String pageNum = StringUtil.nvl(request.getParameter("page_num"), "1");
+		String searchDiv = StringUtil.nvl(request.getParameter("search_div"), "20");
+		String searchWord = StringUtil.nvl(request.getParameter("user_id"), "");
+		String pageSize = StringUtil.nvl(request.getParameter("page_size"), "10");
+		inVO.setPageNum(Integer.parseInt(pageNum));
+		inVO.setSearchDiv(searchDiv);
+		inVO.setSearchWord(searchWord);
+		inVO.setPageSize(Integer.parseInt(pageSize));
+		LOG.debug("03.2 inVO:" + inVO);
+		List<WishlistVO> list = (List<WishlistVO>) this.service.do_retrieve(inVO);
+		LOG.debug("=============");
+		for (WishlistVO vo : list) {
+			LOG.debug(vo);
+		}
+		LOG.debug("------------------------");
+		request.setAttribute("list", list);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/wishlist/wish_list.jsp");
+		dispatcher.forward(request, response);
+	}
+
+
+	@Override
+	public void do_insert(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		LOG.debug("03.1 do_insert");
+		WishlistVO inVO = new WishlistVO();
+
+		String userId = StringUtil.nvl(request.getParameter("user_id"), "");
+		String productNo = StringUtil.nvl(request.getParameter("product_no"), "");
+
+		inVO.setUser_id(userId);
+		inVO.setProduct_no(productNo);
+		LOG.debug("03.2 param:" + inVO);
+
+		int flag = service.do_insert(inVO);
+		LOG.debug("03.3 flag:" + flag);
+
+		
+
+	}
+
+}

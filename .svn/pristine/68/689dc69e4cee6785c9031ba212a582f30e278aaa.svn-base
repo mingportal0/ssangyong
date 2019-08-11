@@ -1,0 +1,207 @@
+<%@page import="com.zim.member.MemberVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	MemberVO user = (MemberVO)session.getAttribute("user");
+	request.setAttribute("user", user);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+
+</style>
+<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->    
+<link rel="stylesheet" href="/ZIMZALABIM/js/jquery-ui.css" >
+<link rel="shortcut icon" href="/ZIMZALABIM/image/favicon.ico">
+<!-- 부트스트랩 -->
+<link href="/ZIMZALABIM/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="/ZIMZALABIM/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<title>ZIMZALABIM</title>
+<script src="/ZIMZALABIM/js/jquery-1.12.4.js"></script>
+<script src="/ZIMZALABIM/js/jquery-ui.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+<script src="/ZIMZALABIM/js/bootstrap.min.js"></script>	
+</head>
+<body>	
+	<div id="frame" class="row">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">		
+				<!-- header1 -->
+				<div class="row" style="text-align: right;">
+					<div class="col-md-3 col-md-offset-9">
+						<a href="/ZIMZALABIM/wishlist/wishlist.do?work_div=do_retrieve"><span class="glyphicon glyphicon-star"></span> 즐겨찾기</a>
+						<a href="/ZIMZALABIM/join/join.do?work_div=do_retrieve"><span class="glyphicon glyphicon-user"></span> 참여중</a>							
+						<a href="/ZIMZALABIM/host/host.do?work_div=do_retrieve"><span class="glyphicon glyphicon-user"></span> 주최중</a>							
+					</div>
+				</div>
+				<!-- //header1 -->	
+				<!-- header2 -->		
+				<div class="row" style="text-align: left;">
+					<a class="header-center-logo" href="/ZIMZALABIM/mainpage/mainpage_view.jsp"><h1>ZIMZALABIM</h1></a>								
+				</div>
+				<!-- //header2 -->
+				<!-- header3 -->		
+				<div class="row">
+					<div class="col-md-3 col-md-offset-9">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search for...">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button">Go!</button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<!-- //header3 -->
+				<hr/>		
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<form name="loginFrm" id="loginFrm" action="/ZIMZALABIM/member/member.do" method="post">
+					<input type="hidden" name="login_div" id="login_div"  />
+					<div class="col-md-3">
+						<!-- 로그인 -->
+						<c:choose>
+							<c:when test="${!empty user}">
+								<div class="simple-login-container">
+									<div class="row">
+										<div class="col-md-7">
+											<p><%=user.getUserId()%></p>
+										</div>
+										<div class="col-md-5">
+											<a href="javascript:do_logout();" class="label label-primary">로그아웃</a>
+										</div>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="row" style="margin: 5px 80px 5px 5px;">
+									<div class="row">
+										<div class="form-group">
+											<input type="text" id="user_id" name="user_id" class="form-control" placeholder="Username">
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<input type="password" id="passwd" name="passwd" placeholder="Enter your Password" class="form-control">
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group">
+											<button type="button" id="login_bt" class="btn btn-block btn-primary">로그인</button>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-7">
+											<a href="/ZIMZALABIM/member/searchid/search_id_view.jsp"><small>아이디</small></a>
+											<a href="/ZIMZALABIM/member/searchpw/search_pw_view.jsp"><small>비번 찾기</small></a>
+										</div>						    
+										<div class="col-md-5">
+											<a href="/ZIMZALABIM/member/resister/resister_view.jsp"><small>회원가입</small></a>
+										</div>						    
+									</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
+						<!-- 왼쪽 카테고리 선택  -->						
+						<hr/>
+						<h5><a class="header-center-logo" href="/ZIMZALABIM/mainpage/mainpage_view.jsp">공동구매 참여</a></h5>
+						<hr/>
+						<h5><a class="bg-pr-product" href="/ZIMZALABIM/join/join.do?work_div=do_retrieve">마이페이지</a></h5>
+						<ul class="nav nav-pills nav-stacked col-md-offset-3">	
+							<li><a class="bg-product" href="/ZIMZALABIM/wishlist/wishlist.do?work_div=do_retrieve">즐겨찾기</a></li>
+							<li><a class="bg-product" href="/ZIMZALABIM/join/join.do?work_div=do_retrieve">참여중인 삼품</a></li>
+							<li><a class="bg-product" href="/ZIMZALABIM/host/host.do?work_div=do_retrieve">주최중인 상품</a></li>
+							<li><a class="bg-product" href="/ZIMZALABIM/member/edit/edit_view.jsp">회원정보수정</a></li>
+							<li><a class="bg-product" href="#">회원탈퇴</a></li>
+						</ul>
+					</div>
+				</form>	
+				<div class="col-md-9">
+			    	<decorator:body />
+				</div>
+			</div>	
+		</div>
+		<div>
+			<div class="col-md-8 col-md-offset-2 text-center">
+				<hr/>
+				<p class="copyright">&copy; ZIMZALABIM Corp</p>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		function do_logout(){
+			//alert('do_logout');
+			if(false==confirm("로그아웃 하시겠습니까?"))return;
+			var frm = document.loginFrm;
+			frm.login_div.value = 'do_logout';
+			frm.action="<c:url value='/member/member.do' />"
+			frm.submit();
+		}
+		function goMain(){
+			//alert("goMain");
+			var frm = document.getElementById("loginFrm");
+			frm.action ="<c:url value='/mainpage/mainpage_view.jsp' />";
+			frm.submit();			
+		}
+		//아이디 체크 후 로그인 실험
+		function login_check(){
+			//messageVO 값 요청
+			var data = $.ajax({
+								url:"<c:url value='/member/member.json' />",
+								dataType:"html",
+								data:{
+									"login_div":"do_login",
+									"user_id":$("#user_id").val(),
+									"passwd":$("#passwd").val()
+								},
+								async:false
+							}).responseText;
+			console.log("data : "+data);
+			var jData = JSON.parse(data);
+			console.log("jData : "+jData[0]);
+			var msgId = jData[0];
+			var msgContents = jData[1];
+			
+			if("10"==msgId){
+				alert(msgContents);
+				$("#user_id").focus();
+				return;
+			}else if("20"==msgId){
+				alert(msgContents);
+				$("#passwd").focus();
+				return;
+			}else if("1"==msgId){
+				goMain();
+			}else{
+				alert(msgContents);
+			}
+		}			
+		
+		$("#login_bt").on("click",function(){
+			var user_id = $("#user_id").val();
+			if(null == user_id || user_id.trim().length ==0){
+				$("#user_id").focus();
+				alert('ID를 입력하세요.');
+				return;
+			}
+			var passwd = $("#passwd").val();
+			if(null == passwd || passwd.trim().length ==0){
+				$("#passwd").focus();
+				alert('비번을 입력하세요.');
+				return;
+			}
+			login_check();
+		});
+		
+	</script>
+</body>
+</html>

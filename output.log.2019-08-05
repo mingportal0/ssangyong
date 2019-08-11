@@ -1,0 +1,281 @@
+2019-07-31 14:12:02,974 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 14:12:03,182 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 14:12:03,182 DEBUG [main] join.JoinDao      ( JoinDao.java:211)     - 1.=============================
+2019-07-31 14:12:03,182 DEBUG [main] join.JoinDao      ( JoinDao.java:212)     - 1.query 
+ SELECT             
+	    JOIN_ID,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE JOIN_ID =  ? 
+
+2019-07-31 14:12:03,184 DEBUG [main] join.JoinDao      ( JoinDao.java:213)     - 1.=============================
+2019-07-31 14:12:03,235 DEBUG [main] join.JoinDao      ( JoinDao.java:217)     - 2.=============================
+2019-07-31 14:12:03,235 DEBUG [main] join.JoinDao      ( JoinDao.java:218)     - 2.param Join_id=JoinVO [join_id=아이디001, product_no=1, join_dt=20190503, join_cnt=30, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 14:12:03,235 DEBUG [main] join.JoinDao      ( JoinDao.java:219)     - 2.=============================
+2019-07-31 14:12:03,255 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 14:12:03,255 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:JoinVO [join_id=아이디001, product_no=21, join_dt=2019-07-22 00:00:00, join_cnt=2, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 14:12:03,255 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------
+2019-07-31 14:32:00,706 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 14:32:00,905 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 14:32:00,906 DEBUG [main] join.JoinDao      ( JoinDao.java:211)     - 1.=============================
+2019-07-31 14:32:00,906 DEBUG [main] join.JoinDao      ( JoinDao.java:212)     - 1.query 
+ SELECT             
+	    JOIN_ID,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE JOIN_ID =  ? 
+
+2019-07-31 14:32:00,907 DEBUG [main] join.JoinDao      ( JoinDao.java:213)     - 1.=============================
+2019-07-31 14:32:00,955 DEBUG [main] join.JoinDao      ( JoinDao.java:217)     - 2.=============================
+2019-07-31 14:32:00,955 DEBUG [main] join.JoinDao      ( JoinDao.java:218)     - 2.param Join_id=JoinVO [join_id=아이디001, product_no=1, join_dt=20190503, join_cnt=30, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 14:32:00,956 DEBUG [main] join.JoinDao      ( JoinDao.java:219)     - 2.=============================
+2019-07-31 14:32:00,975 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 14:32:00,975 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:JoinVO [join_id=아이디001, product_no=21, join_dt=2019-07-22 00:00:00, join_cnt=2, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 14:32:00,975 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------
+2019-07-31 14:32:39,663 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 14:32:39,847 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 14:32:39,847 DEBUG [main] join.JoinDao      ( JoinDao.java:211)     - 1.=============================
+2019-07-31 14:32:39,847 DEBUG [main] join.JoinDao      ( JoinDao.java:212)     - 1.query 
+ SELECT             
+	    JOIN_ID,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE JOIN_ID =  ? 
+
+2019-07-31 14:32:39,849 DEBUG [main] join.JoinDao      ( JoinDao.java:213)     - 1.=============================
+2019-07-31 14:32:39,899 DEBUG [main] join.JoinDao      ( JoinDao.java:217)     - 2.=============================
+2019-07-31 14:32:39,900 DEBUG [main] join.JoinDao      ( JoinDao.java:218)     - 2.param Join_id=JoinVO [join_id=아이디001, product_no=1, join_dt=20190503, join_cnt=30, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 14:32:39,900 DEBUG [main] join.JoinDao      ( JoinDao.java:219)     - 2.=============================
+2019-07-31 14:32:39,919 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 14:32:39,919 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:JoinVO [join_id=아이디001, product_no=21, join_dt=2019-07-22 00:00:00, join_cnt=2, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 14:32:39,919 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------
+2019-07-31 14:35:58,739 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 14:35:58,956 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 14:35:58,957 DEBUG [main] join.JoinDao      ( JoinDao.java:210)     - 1.=============================
+2019-07-31 14:35:58,957 DEBUG [main] join.JoinDao      ( JoinDao.java:211)     - 1.query 
+ SELECT             
+	    JOIN_ID,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE JOIN_ID =  ? 
+
+2019-07-31 14:35:58,958 DEBUG [main] join.JoinDao      ( JoinDao.java:212)     - 1.=============================
+2019-07-31 14:35:59,011 DEBUG [main] join.JoinDao      ( JoinDao.java:216)     - 2.=============================
+2019-07-31 14:35:59,011 DEBUG [main] join.JoinDao      ( JoinDao.java:217)     - 2.param Join_id=JoinVO [join_id=아이디001, product_no=1, join_dt=20190503, join_cnt=30, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 14:35:59,011 DEBUG [main] join.JoinDao      ( JoinDao.java:218)     - 2.=============================
+2019-07-31 14:35:59,031 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 14:35:59,031 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:JoinVO [join_id=아이디001, product_no=21, join_dt=2019-07-22 00:00:00, join_cnt=2, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 14:35:59,031 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------
+2019-07-31 14:48:34,325 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 14:48:34,531 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 14:48:34,531 DEBUG [main] join.JoinDao      ( JoinDao.java:198)     - 1.=============================
+2019-07-31 14:48:34,532 DEBUG [main] join.JoinDao      ( JoinDao.java:199)     - 1.query 
+ SELECT             
+	    JOIN_ID,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE JOIN_ID =  ? 
+
+2019-07-31 14:48:34,533 DEBUG [main] join.JoinDao      ( JoinDao.java:200)     - 1.=============================
+2019-07-31 14:48:34,584 DEBUG [main] join.JoinDao      ( JoinDao.java:204)     - 2.=============================
+2019-07-31 14:48:34,584 DEBUG [main] join.JoinDao      ( JoinDao.java:205)     - 2.param Join_id=아이디001
+2019-07-31 14:48:34,584 DEBUG [main] join.JoinDao      ( JoinDao.java:206)     - 2.=============================
+2019-07-31 14:48:34,602 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 14:48:34,603 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:JoinVO [join_id=아이디001, product_no=21, join_dt=2019-07-22 00:00:00, join_cnt=2, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 14:48:34,603 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------
+2019-07-31 15:14:21,925 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 15:14:22,143 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 15:14:22,143 DEBUG [main] join.JoinDao      ( JoinDao.java:198)     - 1.=============================
+2019-07-31 15:14:22,143 DEBUG [main] join.JoinDao      ( JoinDao.java:199)     - 1.query 
+ SELECT             
+	    JOIN_ID,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE JOIN_ID =  ? 
+
+2019-07-31 15:14:22,144 DEBUG [main] join.JoinDao      ( JoinDao.java:200)     - 1.=============================
+2019-07-31 15:14:22,197 DEBUG [main] join.JoinDao      ( JoinDao.java:205)     - 2.=============================
+2019-07-31 15:14:22,198 DEBUG [main] join.JoinDao      ( JoinDao.java:206)     - 2.param Join_id=아이디001
+2019-07-31 15:14:22,198 DEBUG [main] join.JoinDao      ( JoinDao.java:207)     - 2.=============================
+2019-07-31 15:14:22,230 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 15:14:22,230 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:JoinVO [join_id=아이디001, product_no=21, join_dt=2019-07-22 00:00:00, join_cnt=2, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 15:14:22,230 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------
+2019-07-31 16:34:29,808 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 16:34:29,992 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 16:34:29,992 DEBUG [main] join.JoinDao      ( JoinDao.java:199)     - 1.=============================
+2019-07-31 16:34:29,992 DEBUG [main] join.JoinDao      ( JoinDao.java:200)     - 1.query 
+ SELECT             
+	    JOIN_ID,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE product_no =  ? 
+
+2019-07-31 16:34:29,994 DEBUG [main] join.JoinDao      ( JoinDao.java:201)     - 1.=============================
+2019-07-31 16:34:30,045 DEBUG [main] join.JoinDao      ( JoinDao.java:206)     - 2.=============================
+2019-07-31 16:34:30,045 DEBUG [main] join.JoinDao      ( JoinDao.java:207)     - 2.param Product_no=1
+2019-07-31 16:34:30,045 DEBUG [main] join.JoinDao      ( JoinDao.java:208)     - 2.=============================
+2019-07-31 16:34:30,050 DEBUG [main] join.JoinDao      ( JoinDao.java:219)     - ===============
+2019-07-31 16:34:30,050 DEBUG [main] join.JoinDao      ( JoinDao.java:220)     - SQLException=ORA-01722: 수치가 부적합합니다
+
+2019-07-31 16:34:30,050 DEBUG [main] join.JoinDao      ( JoinDao.java:221)     - ===============
+2019-07-31 16:34:30,052 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 16:34:30,053 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:null
+2019-07-31 16:34:30,053 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------
+2019-07-31 16:35:14,716 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 16:35:14,925 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 16:35:14,925 DEBUG [main] join.JoinDao      ( JoinDao.java:199)     - 1.=============================
+2019-07-31 16:35:14,925 DEBUG [main] join.JoinDao      ( JoinDao.java:200)     - 1.query 
+ SELECT             
+	    JOIN_ID,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE PRODUCT_NO =  ? 
+
+2019-07-31 16:35:14,927 DEBUG [main] join.JoinDao      ( JoinDao.java:201)     - 1.=============================
+2019-07-31 16:35:14,978 DEBUG [main] join.JoinDao      ( JoinDao.java:206)     - 2.=============================
+2019-07-31 16:35:14,978 DEBUG [main] join.JoinDao      ( JoinDao.java:207)     - 2.param Product_no=1
+2019-07-31 16:35:14,978 DEBUG [main] join.JoinDao      ( JoinDao.java:208)     - 2.=============================
+2019-07-31 16:35:14,984 DEBUG [main] join.JoinDao      ( JoinDao.java:219)     - ===============
+2019-07-31 16:35:14,984 DEBUG [main] join.JoinDao      ( JoinDao.java:220)     - SQLException=ORA-01722: 수치가 부적합합니다
+
+2019-07-31 16:35:14,984 DEBUG [main] join.JoinDao      ( JoinDao.java:221)     - ===============
+2019-07-31 16:35:14,988 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 16:35:14,988 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:null
+2019-07-31 16:35:14,988 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------
+2019-07-31 16:36:20,560 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 16:36:20,766 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 16:36:20,766 DEBUG [main] join.JoinDao      ( JoinDao.java:199)     - 1.=============================
+2019-07-31 16:36:20,767 DEBUG [main] join.JoinDao      ( JoinDao.java:200)     - 1.query 
+ SELECT             
+	    JOIN_ID,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE PRODUCT_NO =  ? 
+
+2019-07-31 16:36:20,768 DEBUG [main] join.JoinDao      ( JoinDao.java:201)     - 1.=============================
+2019-07-31 16:36:20,818 DEBUG [main] join.JoinDao      ( JoinDao.java:206)     - 2.=============================
+2019-07-31 16:36:20,818 DEBUG [main] join.JoinDao      ( JoinDao.java:207)     - 2.param Product_no=1
+2019-07-31 16:36:20,819 DEBUG [main] join.JoinDao      ( JoinDao.java:208)     - 2.=============================
+2019-07-31 16:36:20,838 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 16:36:20,838 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:JoinVO [join_id=아이디017, product_no=1, join_dt=2019-06-12 00:00:00, join_cnt=4, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 16:36:20,838 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------
+2019-07-31 16:40:07,536 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 16:40:07,748 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 16:40:07,748 DEBUG [main] join.JoinDao      ( JoinDao.java:199)     - 1.=============================
+2019-07-31 16:40:07,748 DEBUG [main] join.JoinDao      ( JoinDao.java:200)     - 1.query 
+ SELECT             
+	    JOIN_ID,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE PRODUCT_NO =  ? 
+
+2019-07-31 16:40:07,749 DEBUG [main] join.JoinDao      ( JoinDao.java:201)     - 1.=============================
+2019-07-31 16:40:07,800 DEBUG [main] join.JoinDao      ( JoinDao.java:206)     - 2.=============================
+2019-07-31 16:40:07,800 DEBUG [main] join.JoinDao      ( JoinDao.java:207)     - 2.param Product_no=1
+2019-07-31 16:40:07,800 DEBUG [main] join.JoinDao      ( JoinDao.java:208)     - 2.=============================
+2019-07-31 16:40:07,820 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 16:40:07,820 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:JoinVO [join_id=아이디017, product_no=1, join_dt=2019-06-12 00:00:00, join_cnt=4, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 16:40:07,820 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------
+2019-07-31 16:43:20,929 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 16:43:21,138 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 16:43:21,138 DEBUG [main] join.JoinDao      ( JoinDao.java:199)     - 1.=============================
+2019-07-31 16:43:21,138 DEBUG [main] join.JoinDao      ( JoinDao.java:200)     - 1.query 
+ SELECT             
+	    JOIN_ID,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE JOIN_ID =  ? 
+
+2019-07-31 16:43:21,142 DEBUG [main] join.JoinDao      ( JoinDao.java:201)     - 1.=============================
+2019-07-31 16:43:21,204 DEBUG [main] join.JoinDao      ( JoinDao.java:206)     - 2.=============================
+2019-07-31 16:43:21,204 DEBUG [main] join.JoinDao      ( JoinDao.java:207)     - 2.param Join_id=아이디001
+2019-07-31 16:43:21,204 DEBUG [main] join.JoinDao      ( JoinDao.java:208)     - 2.=============================
+2019-07-31 16:43:21,221 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 16:43:21,222 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:JoinVO [join_id=아이디001, product_no=21, join_dt=2019-07-22 00:00:00, join_cnt=2, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 16:43:21,222 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------
+2019-07-31 16:50:11,003 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 16:50:11,211 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 16:50:11,211 DEBUG [main] join.JoinDao      ( JoinDao.java:199)     - 1.=============================
+2019-07-31 16:50:11,211 DEBUG [main] join.JoinDao      ( JoinDao.java:200)     - 1.query 
+ SELECT             
+	    join_id,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE join_id =  ? 
+
+2019-07-31 16:50:11,212 DEBUG [main] join.JoinDao      ( JoinDao.java:201)     - 1.=============================
+2019-07-31 16:50:11,265 DEBUG [main] join.JoinDao      ( JoinDao.java:206)     - 2.=============================
+2019-07-31 16:50:11,265 DEBUG [main] join.JoinDao      ( JoinDao.java:207)     - 2.param join_id=아이디001
+2019-07-31 16:50:11,266 DEBUG [main] join.JoinDao      ( JoinDao.java:208)     - 2.=============================
+2019-07-31 16:50:11,298 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 16:50:11,299 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:JoinVO [join_id=아이디001, product_no=21, join_dt=2019-07-22 00:00:00, join_cnt=2, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 16:50:11,299 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------
+2019-07-31 17:12:38,031 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-31 17:12:38,268 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-31 17:12:38,268 DEBUG [main] join.JoinDao      ( JoinDao.java:199)     - 1.=============================
+2019-07-31 17:12:38,268 DEBUG [main] join.JoinDao      ( JoinDao.java:200)     - 1.query 
+ SELECT             
+	    join_id,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE product_no =  ? 
+
+2019-07-31 17:12:38,272 DEBUG [main] join.JoinDao      ( JoinDao.java:201)     - 1.=============================
+2019-07-31 17:12:38,329 DEBUG [main] join.JoinDao      ( JoinDao.java:206)     - 2.=============================
+2019-07-31 17:12:38,329 DEBUG [main] join.JoinDao      ( JoinDao.java:207)     - 2.param Product_no=60
+2019-07-31 17:12:38,330 DEBUG [main] join.JoinDao      ( JoinDao.java:208)     - 2.=============================
+2019-07-31 17:12:38,397 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-31 17:12:38,397 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:JoinVO [join_id=아이디008, product_no=60, join_dt=2019-07-03 00:00:00, join_cnt=5, join_status=30, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-31 17:12:38,397 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------

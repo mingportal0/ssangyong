@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorators">
+	<!-- main -->
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/member/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/retrieve/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/product/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/mainpage/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/detail/*</pattern>
+    </decorator>
+
+    <!-- sub -->
+
+    <!-- 예외 설정 -->
+    <excludes>
+    	<pattern>*.html*</pattern>
+    	<pattern>*.download*</pattern>
+    	<pattern>*.JSON*</pattern>
+    </excludes>
+</decorators>

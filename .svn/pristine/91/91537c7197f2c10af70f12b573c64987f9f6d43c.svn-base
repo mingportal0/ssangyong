@@ -1,0 +1,70 @@
+<%--
+  /**
+  * @Class Name : main.jsp
+  * @Description : main 화면
+  * @Modification Information
+  *
+  *   수정일                   수정자                      수정내용
+  *  -------    --------    ---------------------------
+  *  2019.07.01            최초 생성
+  *
+  * author 실행환경 개발팀
+  * since 2019.07.01
+  *
+  * Copyright (C) 2009 by KandJang  All right reserved.
+  */
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
+<link rel="stylesheet" href="/ZIMZALABIM/js/jquery-ui.css">
+<link rel="shortcut icon" href="/favicon/favicon.ico">
+<!-- 부트스트랩 -->
+<link href="/ZIMZALABIM/css/bootstrap.min.css" rel="stylesheet">
+<title>게시관리</title>
+<script src="/ZIMZALABIM/js/jquery-1.12.4.js"></script>
+<script src="/ZIMZALABIM/js/jquery-ui.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+<script src="/ZIMZALABIM/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<!-- Top -->
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">즐겨찾기</a></li>
+				<li><a href="#">참여중</a></li>
+			</ul>
+		</div>
+		<div class="container-fluid" Style="text-align: center">
+			<div class="navbar-left">
+				<a class="navbar-brand" href="#">ZIMZALABIM</a>
+			</div>
+			<div class="navbar-right col-lg-3">
+				<div class="input-group" name="b">
+					<input type="text" class="form-control" placeholder="Search for...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button">Go!</button>
+					</span>
+				</div>
+				<!-- /input-group -->
+			</div>
+			<!-- /.col-lg-6 -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<!-- //Top -->
+
+	<script>		 
+		$(document).ready(function(){
+			
+		});
+	</script>
+</body>
+</html>

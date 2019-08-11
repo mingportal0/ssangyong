@@ -1,0 +1,213 @@
+<%--
+  /**
+  * @Class Name : useOutObject.jsp
+  * @Description : Sample Register 화면
+  * @Modification Information
+  *
+  *   수정일                   수정자                      수정내용
+  *  -------    --------    ---------------------------
+  *  2019.07.01            최초 생성
+  *
+  * author 실행환경 개발팀
+  * since 2019.07.01
+  *
+  * Copyright (C) 2009 by KandJang  All right reserved.
+  */
+--%>
+<%@page import="com.zim.cmn.StringUtil"%>
+<%@page import="com.zim.cmn.SearchVO"%>
+<%@page import="com.zim.product.listall.ListAllService"%>
+<%@page import="com.zim.product.listall.ListAllSearchVO"%>
+<%@page import="com.zim.product.list.ListService"%>
+<%@page import="com.zim.product.ProductVO"%>
+<%@page import="java.util.List"%>
+<%@page import="org.apache.log4j.Logger"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false" %>
+<%
+	Logger LOG = Logger.getLogger(this.getClass());
+	ListAllSearchVO paramVO = (ListAllSearchVO)request.getAttribute("paramVO");
+	
+	//check박스 유지를 위한 category
+	String category ="";	
+	if(paramVO != null){
+		category = paramVO.getCategory();
+	}
+	
+
+	//Param
+		String pageNum = "1"; //초기값
+		String searchDiv = "";
+		String searchWord = "";
+		String pageSize = "12";
+		
+		
+		List<ProductVO> categoryAllList = (List<ProductVO>)request.getAttribute("list");//전체카테고리
+		
+		//paging
+		int maxNum 	    = 0; //총 글수		:server   O
+		int currPageNo  = 1; //현재 페이지	:pageNum  O
+		int rowPerPage  = 12;//rowCnt	:pageSize O	
+		int bottomCount = 10;//bottom cnt
+		String url = "/ZIMZALABIM/listall/listall.do"; //호출URL
+		String scriptName = "doSearchPage"; //Javascript함수명		
+		
+		//out.print(paramVO); 
+		
+		if(null != paramVO){
+			pageNum = paramVO.getPageNum()+"";
+			searchDiv = paramVO.getSearchDiv();
+			searchWord = paramVO.getSearchWord();
+			pageSize = paramVO.getPageSize()+"";
+			LOG.debug("===========================");
+			LOG.debug("=paramVO="+paramVO);
+			LOG.debug("===========================");
+			
+			rowPerPage = Integer.parseInt(pageSize);
+			currPageNo = Integer.parseInt(pageNum);
+			maxNum = (Integer)request.getAttribute("totalCnt");
+		}
+		
+		//검색어 유지
+		if(paramVO != null){
+			searchWord = paramVO.getSearchWord();
+		}
+		request.setAttribute("searchWord", searchWord);
+%>   
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->    
+<link rel="stylesheet" href="/ZIMZALABIM/js/jquery-ui.css" >
+<!-- 부트스트랩 -->
+<link href="/ZIMZALABIM/css/bootstrap.min.css" rel="stylesheet">
+<title>게시관리</title>
+<script src="/ZIMZALABIM/js/jquery-1.12.4.js"></script>
+<script src="/ZIMZALABIM/js/jquery-ui.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+<script src="/ZIMZALABIM/js/bootstrap.min.js"></script>	
+</head>
+<body>
+	<form name="listallForm" id="listallForm" action="/ZIMZALABIM/list/list.do" method="post">
+		<input type="hidden"  name="work_div"   />
+		<input type="hidden"  name="page_num"   />
+    		
+		<div class="container" >
+			<!-- 체크박스 -->
+			<div class="table-responsive">
+				<table id="listTable" class="table table-striped table-bordered table-hover">
+					<thead class="bgg_primary">
+						<br>
+						<tr>
+							<th colspan="3" class="text-center col-sm-1 col-xs-1"><input type="text" id="searchWord" name="searchWord" value="${searchWord}" placeholder="검색어를 입력해주세요." class="form-control input-sm"/></th>
+							<th class="text-center col-sm-1 col-xs-1"><input type="button" value="조회" onclick="javascript:do_totalCategory_select()" class="btn btn-warning btn-hover"/></th>
+						</tr>
+						<tr>
+							<th colspan="4" class="text-center col-sm-1 col-xs-1">카테고리를 선택하세요.</th>
+						</tr>
+						<tr>
+							<th class="text-center col-sm-1 col-xs-1"><input type="checkbox" id="category" name="category" value="10" <%if(category.contains("10"))out.print("checked");%>> 의류</th>
+							<th class="text-center col-sm-1 col-xs-1"><input type="checkbox" id="category" name="category" value="20" <%if(category.contains("20"))out.print("checked");%>> 식품</th>
+							<th class="text-center col-sm-1 col-xs-1"><input type="checkbox" id="category" name="category" value="30" <%if(category.contains("30"))out.print("checked");%>> 문화</th>
+							<th class="text-center col-sm-1 col-xs-1"><input type="checkbox" id="category" name="category" value="40" <%if(category.contains("40"))out.print("checked");%>> 전자</th>
+						</tr>
+						<tr>
+							<th class="text-center col-sm-1 col-xs-1"><input type="checkbox" id="category" name="category" value="50" <%if(category.contains("50"))out.print("checked");%>> 미용</th>
+							<th class="text-center col-sm-1 col-xs-1"><input type="checkbox" id="category" name="category" value="60" <%if(category.contains("60"))out.print("checked");%>> 장난감</th>
+							<th class="text-center col-sm-1 col-xs-1"><input type="checkbox" id="category" name="category" value="70" <%if(category.contains("70"))out.print("checked");%>> 잡화</th>
+							<th class="text-center col-sm-1 col-xs-1"><input type="checkbox" id="category" name="category" value="80" <%if(category.contains("80"))out.print("checked");%>> 기타</th>
+						</tr>
+					</thead>
+				</table>
+			</div>			
+			<!--// 체크박스 -->
+
+			
+			<!-- 일반 카테고리 상품 -->
+			<h4><label>전체카테고리</label></h4>
+			  <% if(null != categoryAllList && categoryAllList.size()>0){
+					for(ProductVO vo :categoryAllList){ 
+						//String path = vo.getSaveFileNm();
+			  %>
+			  		<div class="col-lg-3">
+			  			<div class="thumbnail">
+			  				<p><br><a href="#" class="" role="button"><img src=<%=vo.getSaveFileNm()%> alt="..." style="height: 180px; width:200px;"></a></p>
+			  				<div class="caption">
+			  					<p>상품명 : <%=StringUtil.cut(vo.getProductNm()) %></p>
+			  					<p>판매액 : <%=vo.getPrice() %>(원)</p> 
+			  					<p>마감일 : <%=vo.getDeadline() %></p>
+			  					<p  style="display: none;"><%=vo.getProductNo() %></p>
+			  				</div>
+			  			</div>
+			  		</div>
+			  <% 
+			  		}				
+			  	 }else{
+			  %>
+			  	 	<div class="table-responsive">
+						<table id="noDataTable" class="table table-striped table-bordered table-hover">
+							<tr>
+								<td class="text-center" colspan="99">공동구매 진행중인 상품이 없습니다.</td>
+							</tr>
+						</table>
+					</div>
+			  <%
+			     }
+			  %>
+			<!--// 일반 카테고리 상품 -->
+			
+			
+		</div>
+		<!-- paging -->		
+			<nav class="text-center">
+				<ul class="pagination">
+					<li>
+						<%=StringUtil.renderPaing(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %>
+					</li>
+				</ul>
+			</nav>
+		<!-- //paging -->	
+	</form>
+
+	<script>
+	//page 이동
+	function doSearchPage(url,page_num){
+		//alert(url+","+page_num);
+		var frm = document.listallForm;
+		frm.work_div.value = "do_totalCategory_select";
+		frm.page_num.value = page_num;
+		frm.action = url;
+		frm.submit();
+	}
+
+	
+	//check박스 선택 조회
+	function do_totalCategory_select(){
+		//alert('do_save_move');
+		if(confirm("조회 하시겠습니까?")==false)return;
+		
+		var frm = document.listallForm;
+		frm.work_div.value = "do_totalCategory_select";
+		frm.action  = '/ZIMZALABIM/listall/listall.do';
+		frm.submit();
+	}
+	
+	//상품 상세보기 이동
+	$('.col-lg-3').click(function(event) {
+ 		var productNo = $(this).find('p').eq(4).text();
+//  		alert("productNo:"+ productNo);  	    
+ 		
+ 		var frm = document.listallForm;
+		frm.work_div.value ="do_detail_select";
+		frm.action = '/ZIMZALABIM/detail/detail.do?productNo='+productNo;
+		frm.submit();
+	});
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+ /**
+ * @Class Name : QuitService.java
+ * @Description : 
+ * @Modification Information
+ * @
+ * @  수정일      수정자              수정내용
+ * @ ---------   ---------   -------------------------------
+ * @ 2019. 7. 29.           최초생성
+ *
+ * @author Zimzalabim
+ * @since 2019. 7. 29. 
+ * @version 1.0
+ * @see
+ *
+ *  Copyright (C) by HR. KIM All right reserved.
+ */
+package com.zim.member.quit;
+
+import com.zim.cmn.DTO;
+import com.zim.member.MemberDao;
+import com.zim.member.checkpw.CheckPwService;
+
+/**
+ * @author sist
+ *
+ */
+public class QuitService {
+	MemberDao dao = new MemberDao();
+	CheckPwService checkPwService = new CheckPwService();
+	
+	public int do_delete(DTO dto) {
+		int flag = dao.do_delete(dto);
+		return flag;
+	}
+	
+	public int do_checkPw(DTO dto, String input){
+		int flag = checkPwService.do_checkPw(dto, input);
+		return flag;
+	}
+}

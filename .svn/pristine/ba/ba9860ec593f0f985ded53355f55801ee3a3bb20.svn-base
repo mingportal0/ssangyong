@@ -1,0 +1,128 @@
+package com.zim.product.writing;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+import com.google.gson.Gson;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.zim.cmn.StringUtil;
+import com.zim.product.ProductDao;
+import com.zim.product.ProductVO;
+import com.zim.product.image.ImageDao;
+import com.zim.product.image.ImageVO;
+
+import oracle.net.aso.p;
+
+/**
+ * Servlet implementation class WritingController
+ */
+@WebServlet("/product/writing.do")
+public class WritingController extends HttpServlet {
+	private final Logger LOG = Logger.getLogger(WritingController.class);
+	private WritingService writingService;
+
+    public WritingController() {
+    	writingService = new WritingService();
+    }
+
+    protected void do_insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	LOG.debug("03.1 do_insert");
+    	ProductVO inVO = new ProductVO();
+    	//param
+    	String category = StringUtil.nvl(request.getParameter("category"), "");
+    	String productNm = StringUtil.nvl(request.getParameter("product_nm"), "");
+    	String targetCnt = StringUtil.nvl(request.getParameter("target_cnt"), "");
+    	String deadline = StringUtil.nvl(request.getParameter("deadline"), "");
+    	String price = StringUtil.nvl(request.getParameter("price"), "");
+    	String deliveryPrice = StringUtil.nvl(request.getParameter("delivery_price"), "");
+    	String contents = StringUtil.nvl(request.getParameter("contents"), "");
+ 	
+    	inVO.setCategory(category);
+    	inVO.setProductNm(productNm);
+    	inVO.setTargetCnt(targetCnt);
+    	inVO.setDeadline(deadline);
+    	inVO.setPrice(deliveryPrice);
+    	inVO.setDeliveryPrice(deliveryPrice);
+    	inVO.setContents(contents);
+//    	inVO.setUserId(userId);
+//    	inVO.setName(name);
+//    	inVO.setPasswd(passwd);
+//    	inVO.setEmail(email);
+//    	inVO.setBirth(birth);
+//    	inVO.setCellPhone(cellPhone);
+//    	inVO.setGender(sex);
+//    	inVO.setLvl(lvl);
+//    	inVO.setRegId(regId);
+    	LOG.debug("03. param:"+inVO);
+    	//--param
+    	int flag = this.writingService.do_insert(inVO);
+    	LOG.debug("03.3 flag:"+flag);
+    	
+//    	Gson gson = new Gson();
+//    	response.setContentType("text/html;charset=utf-8");
+//    	PrintWriter out = response.getWriter();
+//    	
+//    	String msg = "";
+//    	String gsonString = "";
+//    	if(flag>0){
+//    		msg = inVO.getUserId()+"이(가)\n등록되었습니다.";
+//    	}else{
+//    		msg = "등록실패.";
+//    	}
+//    	gsonString = gson.toJson(new MessageVO(String.valueOf(flag),msg));
+//    	LOG.debug("03.4 gsonString:"+gsonString);
+//    	out.print(gsonString);
+    }
+    
+    protected void do_update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    }
+    
+    protected void do_delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    }
+    
+    protected void doServiceHandler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	LOG.debug("02 doServiceHandler()");
+    	request.setCharacterEncoding("UTF-8");
+    	String workDiv = StringUtil.nvl(request.getParameter("work_div"), "");
+    	LOG.debug("02.1 workDiv"+workDiv);
+    	
+    	/*
+    	 * do_insert : 등록
+    	 * do_update : 수정
+    	 * do_delete : 삭제
+    	 */
+    	switch(workDiv){
+    		case "do_insert":
+    			do_insert(request, response);
+    		break;
+    		case "do_update":
+    			do_update(request, response);
+    		break;
+    		case "do_delete":
+    			do_delete(request, response);
+    		break;
+    	}
+    }
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doServiceHandler(request, response);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doServiceHandler(request, response);
+	}
+
+}

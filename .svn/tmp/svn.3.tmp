@@ -1,0 +1,83 @@
+<%@page import="java.util.List"%>
+<%@page import="com.zim.code.CodeVO"%>
+<%@page import="com.zim.product.ProductVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	
+	List<ProductVO> list = (List<ProductVO>)request.getAttribute("lvlList");
+	ProductVO   vo1   = (ProductVO)request.getAttribute("vo");
+%>   
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->    
+<link rel="stylesheet" href="/WEB_EX01/js/jquery-ui.css" >
+<!-- 부트스트랩 -->
+<link href="/WEB_EX01/css/bootstrap.min.css" rel="stylesheet">
+<title>Insert title here</title>
+<script src="/WEB_EX01/js/jquery-1.12.4.js"></script>
+<script src="/WEB_EX01/js/jquery-ui.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+<script src="/WEB_EX01/js/bootstrap.min.js"></script>	
+</head>
+<body>
+	<div>
+			<table id="listTable">
+			<thead>
+				<tr>
+					<th class="text-center col-sm-1 col-xs-1" width="40%">주최일/상품번호</th>
+					<th class="text-center col-sm-1 col-xs-1" width="20%">상품정보</th>
+					<th class="text-center col-sm-1 col-xs-1" width="10%">주문수량</th>
+					<th class="text-center col-sm-1 col-xs-1" width="5%">배송상태</th>
+					<th class="text-center col-sm-1 col-xs-1" width="5%"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					if(null != list && list.size()>0){
+						for(ProductVO vo :list){
+				%>
+						<tr>
+							<td class="text-center col-sm-1 col-xs-1" width="40%"><%=vo.getRegDt() +"   /"+vo.getProductNo() %></td>
+							<td class="text-center col-sm-7 col-xs-7" width="20%"><%=vo.getProductNm() %></td>
+							<td class="text-center col-sm-1 col-xs-1" width="10%"><%=vo.getJoinCnt() %></td>
+							<td class="text-center col-sm-1 col-xs-2" width="5%"><%=vo.getDeliveryStatus() %></td>
+							<td class="text-center col-sm-1 col-xs-1" width="5%"></td>
+						</tr>
+				<%	
+					    }//--for 
+					}else{  
+				%>
+						<tr>
+							<td colspan="99">No data found</td>
+						</tr>
+				
+				<%	}//--else %>
+			</tbody>
+		</table>
+		<input type="button" class="btn btn-primary btn-sm" value="주최취소" id="del_btn" />	
+	</div>
+	<script>
+		    function doDel(){
+	    	if( false == confirm('삭제 하시겠습니까?'))return;
+	    	var frm = document.frmMng;
+	    	frm.work_div.value = "do_delete";
+	    	frm.action = "/ZIMZALABIM/host/host.do";
+	    	frm.submit();
+	    }
+	
+		//삭제:buttonEvent
+		$("#del_btn").on('click',function(){
+			console.log('del_btn');
+			doDel();
+		});
+	
+		$(document).ready(function(){
+		});
+	</script>
+</body>
+</html>

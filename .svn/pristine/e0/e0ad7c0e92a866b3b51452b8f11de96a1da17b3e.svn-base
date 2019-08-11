@@ -1,0 +1,65 @@
+ /**
+ * @Class Name : HostService.java
+ * @Description : 
+ * @Modification Information
+ * @
+ * @  수정일      수정자              수정내용
+ * @ ---------   ---------   -------------------------------
+ * @ 2019. 7. 22.           최초생성
+ *
+ * @author Zimzalabim
+ * @since 2019. 7. 22. 
+ * @version 1.0
+ * @see
+ *
+ *  Copyright (C) by HR. KIM All right reserved.
+ */
+package com.zim.join.host;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.zim.cmn.DTO;
+import com.zim.join.JoinDao;
+import com.zim.join.JoinVO;
+import com.zim.product.ProductDao;
+import com.zim.product.ProductVO;
+
+/**
+ * @author sist
+ *
+ */
+public class HostService {
+	private final Logger LOG=Logger.getLogger(JoinDao.class);
+	
+	private ProductDao productDao;
+	public HostService(){
+		productDao=new ProductDao();
+	}
+	
+	public int do_insert(DTO dto){
+		
+		return productDao.do_insert(dto);
+	}
+	public int do_update(DTO dto){
+		
+		return productDao.do_update(dto);
+	}
+	public int do_delete(DTO dto){
+		
+		return productDao.do_delete(dto);
+	}
+	public ProductVO do_selectOne(DTO dto){
+		
+		return (ProductVO) productDao.do_selectOne(dto);
+	}
+	public List<ProductVO>do_retrieve(DTO dto){
+		
+		return productDao.do_retrieve(dto);
+	}
+	public List<ProductVO>do_retrieve2(DTO dto){
+		return productDao.do_retrieve2(dto );
+	}
+	
+}

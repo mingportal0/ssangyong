@@ -1,0 +1,467 @@
+<%--
+  /**
+  * @Class Name : useOutObject.jsp
+  * @Description : Sample Register 화면
+  * @Modification Information
+  *
+  *   수정일                   수정자                      수정내용
+  *  -------    --------    ---------------------------
+  *  2019.07.01            최초 생성
+  *
+  * author 실행환경 개발팀
+  * since 2019.07.01
+  *
+  * Copyright (C) 2009 by KandJang  All right reserved.
+  */
+--%>
+<%@page import="com.zim.product.image.ImageVO"%>
+<%@page import="com.zim.product.image.ImageService"%>
+<%@page import="com.zim.product.detail.DetailService"%>
+<%@page import="java.util.List"%>
+<%@page import="com.zim.product.comment.CommentService"%>
+<%@page import="com.zim.product.comment.CommentVO"%>
+<%@page import="com.zim.member.MemberVO"%>
+<%@page import="com.zim.join.JoinVO"%>
+<%@page import="org.apache.log4j.Logger"%>
+<%@page import="com.zim.product.ProductVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false" %>
+<%
+	Logger LOG = Logger.getLogger(this.getClass());
+	CommentService commentService = new CommentService();	
+	DetailService detailService = new DetailService();	
+	ImageService imageService = new ImageService();
+	
+	//화면목록
+	ProductVO vo = (ProductVO) request.getAttribute("vo");
+	String productNo = vo.getProductNo();
+	
+	//vo.setProductNo("166");
+	//vo = (ProductVO)detailService.do_detail_select(vo);
+	
+	MemberVO memVO = new MemberVO();
+	//ProductVO가 값이 들어온뒤
+	CommentVO commentVO = new CommentVO();
+	commentVO.setProductNo(productNo);
+	
+	//commentVO.setProductNo(vo.getProductNo());
+	List<CommentVO> coList = (List<CommentVO>)commentService.do_retrieve(commentVO);
+	
+	//아이디 하드코딩
+	memVO.setUserId("아이디002");
+	
+	
+
+%>    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->    
+<link rel="stylesheet" href="/ZIMZALABIM/js/jquery-ui.css" >
+<!-- 부트스트랩 -->
+<link href="/ZIMZALABIM/css/bootstrap.min.css" rel="stylesheet">
+<title>상세보기</title>
+<script src="/ZIMZALABIM/js/jquery-1.12.4.js"></script>
+<script src="/ZIMZALABIM/js/jquery-ui.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+<script src="/ZIMZALABIM/js/bootstrap.min.js"></script>   
+</head>
+<body>
+	
+	<br/>
+	<br/>
+	
+	<!-- 총대 수정삭제 버튼 -->
+	<div class="container">
+	
+		<%
+			if(memVO.getUserId().equals(vo.getRegId())){
+		%>
+				<div>
+					<input type="button" class="btn btn-default btn-sm" value="수정" id="modify_btn"/>
+					<input type="button" class="btn btn-default btn-sm" value="삭제" id="delete_btn"/>
+				</div>
+		<%
+			}else{
+		%>	
+				<p></p>
+		<%
+			}
+		%>
+		
+		<br/>
+	</div>
+	<!-- //총대 수정삭제 버튼 -->
+	
+	
+	
+	<!-- 상품정보 -->
+	<div class="container" style="border:1px solid">
+		
+		<form name="frm" id="frm"  method="post">
+				<input type="hidden" name="work_div" id="work_div" />
+				<input type="hidden" name="product_no" id="product_no" value="<%= vo.getProductNo() %>" />
+				<input type="hidden" name="join_id" id="join_id" value="<%= memVO.getUserId() %>" />
+				<input type="hidden" name="category" id="category" value="<%= vo.getCategory() %>" />
+				<input type="hidden" name="deliveryPrice" id="deliveryPrice" value="<%= vo.getDeliveryPrice() %>" />
+				<input type="hidden" name="targetCnt" id="targetCnt" value="<%= vo.getTargetCnt() %>" />
+				<input type="hidden" name="join_dt" id="join_dt" value="" />
+	
+			<br/>
+				<center>
+					<p><a href="#" class="" role="button"><img src="<%= vo.getSaveFileNm() %>" alt="..."></a></p>
+					
+				</center>
+			<br/>
+				
+				<table class="table">
+					<tr>
+						<td class="text-center"><label>상품이름</label></td>
+						<td width="30%"><%= vo.getProductNm() %></td>
+						<td class="text-center"><label>가격</label></td>
+						<td ><%= vo.getPrice() %></td>
+						<td class="text-center"><label>남은수량</label></td>
+						<td ><%= vo.getRestAmount() %></td>
+						<td class="text-center"><label>마감시간</label></td>
+						<td><%= vo.getDeadline() %></td>
+					</tr>
+				</table>
+			
+				<table class="table">
+					<tr>
+						<td class="text-center"><label>배송비</label></td>
+						<td><%= vo.getDeliveryPrice() %></td>
+						<td><label>구매수량</label></td>
+						<td><input type="text" name="join_cnt" id="join_cnt" value="1"></td>
+						<td>
+							<div>
+								<input type="button" class="btn btn-default  btn-xs" value="▲" name="plus" id="plus" />
+							</div>
+							<div>
+								<input type="button" class="btn btn-default  btn-xs" value="▼" name="minus" id="minus" />
+							</div>
+						</td>
+						<td><input type="button" class="btn btn-default  btn-lg" value="관심상품" name="wish" id="wish" /></td>
+						<td><input type="button" class="btn btn-default  btn-lg" value="결제하기" name="pay" id="pay" /></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	<!-- //상품정보 -->
+	
+	
+	
+	<br/>
+	<br/>
+	
+	
+	
+	<!-- 상품상세정보 및 공지 -->
+	<div class="container">
+	
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">상세보기</a></li>
+				<li><a href="#tabs-2">공지사항</a></li>
+			</ul>
+			
+			<div id="tabs-1">
+				<%= vo.getContents() %>
+			</div> <!-- 상세보기 div -->
+			
+			<div id="tabs-2">
+				
+				<div>
+					<br/>
+						<%= vo.getNotice() %>
+					<br/>
+				</div>
+				
+				<br/>
+				<br/>
+				
+				<div>
+					<input type="text" name="comments" id="comments" placeholder="댓글을 입력하세요." />
+					<input type="button" name="comments_btn" id="comments_btn" value="입력" class="btn btn-default  btn-xs" />
+				</div>
+				
+				<br/>
+				<br/>
+				
+		<%
+				for(CommentVO coVO:coList){
+					
+					if(coVO.getHcommentNo() != null){
+		%>
+					<br/>
+					<div style="margin-left: 15px">
+						<table>
+							<tbody>
+							<tr>
+								<td style="display: none;"><%= coVO.getCommentNo() %></td>
+								<td><%= coVO.getRegId() %></td>
+								<td><%= coVO.getRegDt() %></td>
+								<td><input type="button" class="btn btn-default  btn-xs" value="답글" name="wish" id="wish" /></td>
+		<%
+								//if(memVO.getUserId().equals(coVO.getRegId())){
+		%>
+									<td><input type="button" class="btn btn-default  btn-xs" value="수정" name="wish" id="wish" /></td>
+									<td><input type="button" class="btn btn-default  btn-xs" value="삭제" name="wish" id="wish" /></td>
+		<%
+								//}//--if 댓글수정삭제
+		%>
+							</tr>
+							<tr>
+								<td><%= coVO.getContents() %></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<br/>
+					
+		
+		<%
+					}else{	
+		%>
+					<div>
+						<table>
+							<tbody>
+							<tr>
+								<td style="display: none;"><%= coVO.getCommentNo() %></td>
+								<td><%= coVO.getRegId() %></td>
+								<td><%= coVO.getRegDt() %></td>
+								<td><input type="button" class="btn btn-default  btn-xs" value="답글" name="wish" id="wish" /></td>
+		<%
+								//if(memVO.getUserId().equals(coVO.getRegId())){
+		%>
+									<td><input type="button" class="btn btn-default  btn-xs" value="수정" name="wish" id="wish" /></td>
+									<td><input type="button" class="btn btn-default  btn-xs" value="삭제" name="wish" id="wish" /></td>
+		<%
+								//}//--if 댓글수정삭제
+		%>
+							</tr>
+							<tr>
+								<td><%= coVO.getContents() %></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+						
+						<br/>
+										
+		<%
+					}//--if		
+				} //--for
+		%>
+			</div> <!-- 공지사항 div -->
+			
+		</div> <!-- 탭 div -->
+	</div> <!-- 컨테이너 div -->
+	<!-- 상품상세정보 및 공지 -->
+	
+	
+	
+	
+	
+	
+
+	<script>
+		
+		//탭 ok
+		//수량 증감 ok
+		//게시물 수정화면으로 이동
+		//관심상품 등록
+		//결제하기
+		//댓글 입력버튼
+		
+		
+		
+		
+	
+		//탭
+		$("#tabs").tabs();
+	
+		
+		//수량 증감
+		$(function(){ 
+			
+		  $("#plus").click(function(){ 
+		   	 var join_cnt = document.frm.join_cnt;
+		   	 join_cnt.value++;
+		   	 
+		  });
+		  
+		  $("#minus").click(function(){ 
+			  var join_cnt = document.frm.join_cnt;
+			  if (join_cnt.value > 1) {
+				  join_cnt.value -- ;
+			  }
+		  });
+		  
+		}); 
+		
+		
+	
+		//게시물 수정화면으로 이동
+		$("#modify_btn").click(function(){
+			var cTrs = $(this);
+			var cTds = cTrs.children();
+			console.log(cTds);
+			var product_no = cTds.eq(0).text();
+			console.log("product_no"+product_no);
+			
+			var frm = document.frm;
+			frm.work_div.value = "do_selectOne"; //controller에 있는 메소드 이름이랑 같이 줘야함. 그걸 동작하게 하는 것.
+			frm.action = '/ZIMZALABIM/product/writing.do?product_no='+product_no;
+			frm.submit();
+			
+		 });	
+	
+	
+		
+		
+		//관심상품 등록
+		$("#wish").click(function(){
+			
+			
+			$('#work_div').val('do_insert');
+			var param = $('#frm').serialize();
+			alert(param);
+			if( false == confirm('위시리스트에 추가하시겠습니까?')) return;
+			
+			
+			//ajax
+			$.ajax({
+					type: "POST",
+					url:"/ZIMZALABIM/wishlist/wishlist.do",
+					dataType:"html",
+					data:param,
+				success: function(data){
+					
+					var jData = JSON.parse(data); //스트링을 json데이터로 바꿔주는 것
+					console.log(jData.msgId+"|"+jData.msgContents);
+					if(null != jData && jData.msgId == "1"){
+						alert(jData.msgContents);	
+						window.location.href="/ZIMZALABIM/detail/detail.do?work_div=do_detail_select"; // 화면은 그대로 있고 데이터의 이동만 있음.
+					}else{
+						alert(jData.msgId+"|"+jData.msgContents);
+					}
+				},
+				complete: function(data){
+					
+				},
+				error:function(xhr,status,error){
+					alert("error"+error);
+				}
+				
+			});//--ajax
+			
+			
+		 });
+			
+			
+		
+		
+		
+		
+		//결제하기
+		$("#pay").click(function(){
+			
+			
+			$('#work_div').val('do_insert');
+			var param = $('#frm').serialize();
+			alert(param);
+			if( false == confirm('결제하시겠습니까?')) return;
+			
+			
+			//ajax
+			$.ajax({
+					type: "POST",
+					url:"/ZIMZALABIM/join/join.do",
+					dataType:"html",
+					data:param,
+				success: function(data){
+					
+					var jData = JSON.parse(data); //스트링을 json데이터로 바꿔주는 것
+					console.log(jData.msgId+"|"+jData.msgContents);
+					if(null != jData && jData.msgId == "1"){
+						alert(jData.msgContents);	
+						window.location.href="/ZIMZALABIM/detail/detail.do?work_div=do_detail_select"; // 화면은 그대로 있고 데이터의 이동만 있음.
+					}else{
+						alert(jData.msgId+"|"+jData.msgContents);
+					}
+				},
+				complete: function(data){
+					
+				},
+				error:function(xhr,status,error){
+					alert("error"+error);
+				}
+				
+			});//--ajax
+			
+			
+		 });
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//상세정보 불러오기
+		$("#listTable>tbody").on("click","tr",function(){
+			var cTrs = $(this);
+			var cTds = cTrs.children();
+			console.log(cTds);
+			var seq = cTds.eq(5).text();
+			console.log("seq"+seq);
+			
+			var frm = document.searchFrm;
+			frm.work_div.value = "do_selectOne"; //controller에 있는 메소드 이름이랑 같이 줘야함. 그걸 동작하게 하는 것.
+			frm.action = '/WEB_EX01/board/board.do?seq='+seq;
+			frm.submit();
+			
+		});
+	
+		
+		
+		//공지랑 댓글 불러오기
+		$("#listTable>tbody").on("click","tr",function(){
+			var cTrs = $(this);
+			var cTds = cTrs.children();
+			console.log(cTds);
+			var seq = cTds.eq(5).text();
+			console.log("seq"+seq);
+			
+			var frm = document.searchFrm;
+			frm.work_div.value = "do_selectOne"; //controller에 있는 메소드 이름이랑 같이 줘야함. 그걸 동작하게 하는 것.
+			frm.action = '/WEB_EX01/board/board.do?seq='+seq;
+			frm.submit();
+			
+		});
+
+		
+		
+		
+	
+		
+	
+	
+	
+ 	$(document).ready(function(){
+  	
+	});
+  
+  
+ </script>
+</body>
+</html>

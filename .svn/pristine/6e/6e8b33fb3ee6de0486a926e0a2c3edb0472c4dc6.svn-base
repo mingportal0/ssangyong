@@ -1,0 +1,125 @@
+package com.zim.join;
+
+import com.zim.product.ProductVO;
+
+public class JoinVO extends ProductVO {
+
+	private String join_id; // 참여자 id
+	private String product_no; // 상품번호
+	private String join_dt; // 참여일
+	private String join_cnt; // 수량
+	private String join_status; // 참여상태
+
+	public JoinVO() {
+	}
+
+	public JoinVO(String join_id, String product_no, String join_dt, String join_cnt, String join_status) {
+		super();
+		this.join_id = join_id;
+		this.product_no = product_no;
+		this.join_dt = join_dt;
+		this.join_cnt = join_cnt;
+		this.join_status = join_status;
+	}
+
+	public String getJoin_id() {
+		return join_id;
+	}
+
+	public void setJoin_id(String join_id) {
+		this.join_id = join_id;
+	}
+
+	public String getProduct_no() {
+		return product_no;
+	}
+
+	public void setProduct_no(String product_no) {
+		this.product_no = product_no;
+	}
+
+	public String getJoin_dt() {
+		return join_dt;
+	}
+
+	public void setJoin_dt(String join_dt) {
+		this.join_dt = join_dt;
+	}
+
+	public String getJoin_cnt() {
+		return join_cnt;
+	}
+
+	public void setJoin_cnt(String join_cnt) {
+		this.join_cnt = join_cnt;
+	}
+
+	public String getJoin_status() {
+		return join_status;
+	}
+
+	public void setJoin_status(String join_status) {
+		this.join_status = join_status;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((join_cnt == null) ? 0 : join_cnt.hashCode());
+		result = prime * result + ((join_dt == null) ? 0 : join_dt.hashCode());
+		result = prime * result + ((join_id == null) ? 0 : join_id.hashCode());
+		result = prime * result + ((join_status == null) ? 0 : join_status.hashCode());
+		result = prime * result + ((product_no == null) ? 0 : product_no.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		JoinVO other = (JoinVO) obj;
+		if (join_cnt == null) {
+			if (other.join_cnt != null)
+				return false;
+		} else if (!join_cnt.equals(other.join_cnt))
+			return false;
+		if (join_dt == null) {
+			if (other.join_dt != null)
+				return false;
+		} else if (!join_dt.equals(other.join_dt))
+			return false;
+		if (join_id == null) {
+			if (other.join_id != null)
+				return false;
+		} else if (!join_id.equals(other.join_id))
+			return false;
+		if (join_status == null) {
+			if (other.join_status != null)
+				return false;
+		} else if (!join_status.equals(other.join_status))
+			return false;
+		if (product_no == null) {
+			if (other.product_no != null)
+				return false;
+		} else if (!product_no.equals(other.product_no))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "JoinVO [join_id=" + join_id + ", product_no=" + product_no + ", join_dt=" + join_dt + ", join_cnt="
+				+ join_cnt + ", join_status=" + join_status + "]";
+	}
+
+	
+	
+	
+	
+	
+}

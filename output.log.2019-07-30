@@ -1,0 +1,111 @@
+2019-07-30 15:30:14,753 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-30 15:30:14,957 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-30 15:30:14,958 DEBUG [main] product.ProductDao (ProductDao.java:384)     - 1.===================
+2019-07-30 15:30:14,958 DEBUG [main] product.ProductDao (ProductDao.java:385)     - 1.query:
+  SELECT T1.*,T2.*											
+  FROM                                                       
+  (                                                          
+      SELECT b.rnum num,                                     
+             b.*                                             
+      FROM(                                                  
+          SELECT ROWNUM rnum                                 
+  				,A.*                                        
+          FROM(                                              
+  			SELECT                            			    
+  				i.image_id,                   			    
+  				p.product_no,                 			    
+  				p.product_nm,                 			    
+  				p.price,                      			    
+  				TO_CHAR(p.deadline ,'YYYY.MM.DD') deadline  
+  			FROM                              			    
+  				product p JOIN image i        			    
+  			ON p.product_no = i.product_no    			    
+  			AND p.reg_dt+10>=SYSDATE          			    
+  			AND p.deadline >= SYSDATE                 		
+  			AND i.thumbnail = '1'             			    
+  			ORDER BY p.read_cnt DESC                        
+          )A                                                 
+          WHERE ROWNUM <= 8                                  
+      )B                                                     
+      WHERE B.rnum>= 1                                       
+  )T1 CROSS JOIN                                             
+  (                                                          
+      SELECT COUNT(*) total_cnt                              
+      FROM                              			            
+  		product p JOIN image i        			            
+  	ON p.product_no = i.product_no    			            
+  	AND p.reg_dt+10>=SYSDATE          			            
+  	AND i.thumbnail = '1'                                   
+  )T2                                                        
+
+2019-07-30 15:30:14,960 DEBUG [main] product.ProductDao (ProductDao.java:386)     - 1.===================
+2019-07-30 15:30:15,008 DEBUG [main] product.ProductDao (ProductDao.java:391)     - 2.===================
+2019-07-30 15:30:15,008 DEBUG [main] product.ProductDao (ProductDao.java:392)     - 2.param seq:
+  SELECT T1.*,T2.*											
+  FROM                                                       
+  (                                                          
+      SELECT b.rnum num,                                     
+             b.*                                             
+      FROM(                                                  
+          SELECT ROWNUM rnum                                 
+  				,A.*                                        
+          FROM(                                              
+  			SELECT                            			    
+  				i.image_id,                   			    
+  				p.product_no,                 			    
+  				p.product_nm,                 			    
+  				p.price,                      			    
+  				TO_CHAR(p.deadline ,'YYYY.MM.DD') deadline  
+  			FROM                              			    
+  				product p JOIN image i        			    
+  			ON p.product_no = i.product_no    			    
+  			AND p.reg_dt+10>=SYSDATE          			    
+  			AND p.deadline >= SYSDATE                 		
+  			AND i.thumbnail = '1'             			    
+  			ORDER BY p.read_cnt DESC                        
+          )A                                                 
+          WHERE ROWNUM <= 8                                  
+      )B                                                     
+      WHERE B.rnum>= 1                                       
+  )T1 CROSS JOIN                                             
+  (                                                          
+      SELECT COUNT(*) total_cnt                              
+      FROM                              			            
+  		product p JOIN image i        			            
+  	ON p.product_no = i.product_no    			            
+  	AND p.reg_dt+10>=SYSDATE          			            
+  	AND i.thumbnail = '1'                                   
+  )T2                                                        
+
+2019-07-30 15:30:15,009 DEBUG [main] product.ProductDao (ProductDao.java:393)     - 2.===================
+2019-07-30 15:30:15,050 DEBUG [main] product.ProductTest (ProductTest.java:89)     - ==============
+2019-07-30 15:30:15,050 DEBUG [main] product.ProductTest (ProductTest.java:91)     - voProductVO [restAmount=null, imageId=01, productNo=150, productNm=ㅂㅈㄷㅂㅈㄷ, price=123123, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.07.31, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]
+2019-07-30 15:30:15,050 DEBUG [main] product.ProductTest (ProductTest.java:91)     - voProductVO [restAmount=null, imageId=01, productNo=153, productNm=1212321, price=213321, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.07.31, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]
+2019-07-30 15:30:15,050 DEBUG [main] product.ProductTest (ProductTest.java:91)     - voProductVO [restAmount=null, imageId=01, productNo=155, productNm=123123, price=123123, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.07.31, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]
+2019-07-30 15:30:15,051 DEBUG [main] product.ProductTest (ProductTest.java:91)     - voProductVO [restAmount=null, imageId=1, productNo=158, productNm=1111, price=111, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.07.31, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]
+2019-07-30 15:30:15,051 DEBUG [main] product.ProductTest (ProductTest.java:91)     - voProductVO [restAmount=null, imageId=1, productNo=159, productNm=55555, price=555, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.07.31, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]
+2019-07-30 15:30:15,051 DEBUG [main] product.ProductTest (ProductTest.java:91)     - voProductVO [restAmount=null, imageId=1, productNo=166, productNm=ㅇㅅㅇ, price=123, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.08.21, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]
+2019-07-30 15:30:15,051 DEBUG [main] product.ProductTest (ProductTest.java:91)     - voProductVO [restAmount=null, imageId=i01, productNo=106, productNm=444, price=444, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.07.31, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]
+2019-07-30 15:30:15,052 DEBUG [main] product.ProductTest (ProductTest.java:91)     - voProductVO [restAmount=null, imageId=1, productNo=161, productNm=카테고리10, price=10, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=2019.07.31, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]
+2019-07-30 15:30:15,052 DEBUG [main] product.ProductTest (ProductTest.java:93)     - ==============
+2019-07-30 16:06:28,196 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-30 16:06:28,382 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-30 16:06:28,382 DEBUG [main] join.JoinDao      ( JoinDao.java:211)     - 1.=============================
+2019-07-30 16:06:28,383 DEBUG [main] join.JoinDao      ( JoinDao.java:212)     - 1.query 
+ SELECT             
+	    JOIN_ID,      
+	    PRODUCT_NO,    
+	    JOIN_DT,    
+	    JOIN_CNT,    
+	    JOIN_STATUS    
+ FROM               
+     JOINLIST        
+ WHERE JOIN_ID =  ? 
+
+2019-07-30 16:06:28,386 DEBUG [main] join.JoinDao      ( JoinDao.java:213)     - 1.=============================
+2019-07-30 16:06:28,443 DEBUG [main] join.JoinDao      ( JoinDao.java:217)     - 2.=============================
+2019-07-30 16:06:28,443 DEBUG [main] join.JoinDao      ( JoinDao.java:218)     - 2.param Join_id=JoinVO [join_id=아이디001, product_no=1, join_dt=20190503, join_cnt=30, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-30 16:06:28,443 DEBUG [main] join.JoinDao      ( JoinDao.java:219)     - 2.=============================
+2019-07-30 16:06:28,487 DEBUG [main] join.JoinTest     (JoinTest.java:62)     - ----------
+2019-07-30 16:06:28,487 DEBUG [main] join.JoinTest     (JoinTest.java:63)     - outVO:JoinVO [join_id=아이디001, product_no=21, join_dt=2019-07-22 00:00:00, join_cnt=2, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=null, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=null, deadline=null, hostStatus=null, deliveryStatus=null, regId=null, regDt=null, deliveryPrice=null]]
+2019-07-30 16:06:28,488 DEBUG [main] join.JoinTest     (JoinTest.java:64)     - ----------

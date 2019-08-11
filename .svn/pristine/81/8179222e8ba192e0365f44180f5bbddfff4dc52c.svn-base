@@ -1,0 +1,118 @@
+package com.zim.chart;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.zim.cmn.ChartHandler;
+
+import com.zim.cmn.StringUtil;
+import com.zim.cmn.WishHandler;
+
+@WebServlet(description = "윤구차트", urlPatterns = { "/chart/chart.do" })
+public class ChartController extends HttpServlet implements ChartHandler {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ChartController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		LOG.debug("doGet");
+		doServiceHandler(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		LOG.debug("doPost");
+		doServiceHandler(request, response);
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.zim.cmn.ChartHandler#doServiceHandler(javax.servlet.http.
+	 * HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
+	@Override
+	public void doServiceHandler(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		LOG.debug("02 doServiceHandler()");
+		request.setCharacterEncoding("UTF-8");
+
+		String workDiv = StringUtil.nvl(request.getParameter("work_div"), "");
+		LOG.debug("02.1 workDiv:" + workDiv);
+
+		switch (workDiv) {
+
+		case "do_pro_chart":// pie
+			do_pro_chart(request, response);
+			break;
+		}
+
+	}
+
+	@Override
+	public void do_pro_chart(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		LOG.debug("03 do_pie_chart");
+
+		List<ChartVO> list = new ArrayList<ChartVO>();
+		ChartVO outVO01 = new ChartVO("여윤구1", 28);
+		ChartVO outVO02 = new ChartVO("여윤구2", 27);
+		ChartVO outVO03 = new ChartVO("여윤구3", 9);
+		ChartVO outVO04 = new ChartVO("여윤구4", 8);
+		ChartVO outVO05 = new ChartVO("여윤구5", 8);
+
+		list.add(outVO01);
+		list.add(outVO02);
+		list.add(outVO03);
+		list.add(outVO04);
+		list.add(outVO05);
+
+		System.out.println("list1232132112===" + list);
+
+		Gson gson = new Gson();
+		JsonArray jArray = new JsonArray();
+		for (int i = 0; i < list.size(); i++) {
+			JsonArray sArray = new JsonArray();
+			sArray.add(list.get(i).getLabel());
+			sArray.add(list.get(i).getData());
+
+			jArray.add(sArray);
+		}
+		LOG.debug("------------------");
+		LOG.debug("jArray.toString()=" + jArray.toString());
+		LOG.debug("------------------");
+
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.write(jArray.toString());
+
+	}
+
+}

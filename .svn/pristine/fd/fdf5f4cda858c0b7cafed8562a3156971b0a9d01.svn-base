@@ -1,0 +1,229 @@
+package com.zim.wishlist;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.zim.cmn.ConnectionMaker;
+import com.zim.cmn.DTO;
+import com.zim.cmn.JDBCReturnReso;
+import com.zim.cmn.WorkDiv;
+
+public class WishListDao implements WorkDiv {
+
+	private final Logger LOG = Logger.getLogger(WishListDao.class);
+	private ConnectionMaker connectionMaker;
+
+	public WishListDao() {
+		connectionMaker = new ConnectionMaker();
+	}
+
+	@Override
+	public int do_insert(DTO dto) {
+		WishListVO vo = (WishListVO) dto;
+		int flag = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			StringBuilder sb = new StringBuilder();
+			sb.append("INSERT INTO WISHLIST (  \n");
+			sb.append("            USER_ID     \n");
+			sb.append("           ,PRODUCT_NO  \n");
+			sb.append("           ,REG_DT      \n");
+			sb.append("           ) VALUES (   \n");
+			sb.append("            ?           \n");
+			sb.append("           ,?           \n");
+			sb.append("           ,?           \n");
+			sb.append("           )           \n");
+
+			LOG.debug("1.============================");
+			LOG.debug("1.query\n" + sb.toString());
+			LOG.debug("1.============================");
+
+			conn = connectionMaker.getConnection();
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, vo.getUser_id());
+			pstmt.setString(2, vo.getProduct_no());
+			pstmt.setString(3, vo.getReg_dt());
+
+			LOG.debug("2.============================");
+			LOG.debug("2.param:" + vo.toString());
+			LOG.debug("2.============================");
+
+			flag = pstmt.executeUpdate();
+
+			LOG.debug("3.============================");
+			LOG.debug("3.flag:" + flag);
+			LOG.debug("3.============================");
+		} catch (SQLException e) {
+			LOG.debug("======================");
+			LOG.debug("SQLException:" + e.toString());
+			LOG.debug("======================");
+		} finally {
+			JDBCReturnReso.close(pstmt);
+			JDBCReturnReso.close(conn);
+		}
+		return flag;
+	}
+
+	@Override
+	public int do_update(DTO dto) {
+		WishListVO vo = (WishListVO) dto;
+		int flag = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			StringBuilder sb = new StringBuilder();
+			sb.append("UPDATE WISHLIST   \n");
+			sb.append("SET USER_ID = ?,  \n");
+			sb.append("	PRODUCT_NO = ?,  \n");
+			sb.append("	REG_DT = sysdate \n");
+			sb.append("WHERE USER_ID = ? \n");
+
+			conn = connectionMaker.getConnection();
+			LOG.debug("1.======================");
+			LOG.debug("1.query \n" + sb.toString());
+			LOG.debug("1.======================");
+
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, vo.getUser_id());
+			pstmt.setString(2, vo.getProduct_no());
+			pstmt.setString(3, vo.getReg_dt());
+			LOG.debug("2.======================");
+			LOG.debug("2.param :" + vo);
+			LOG.debug("2.======================");
+
+			flag = pstmt.executeUpdate();
+			LOG.debug("3.======================");
+			LOG.debug("3.flag :" + flag);
+			LOG.debug("3.======================");
+
+		} catch (SQLException s) {
+			LOG.debug("================");
+			LOG.debug("SQLException=" + s.toString());
+			LOG.debug("================");
+		} finally {
+			JDBCReturnReso.close(pstmt);
+			JDBCReturnReso.close(conn);
+		}
+		return flag;
+	}
+
+	@Override
+	public int do_delete(DTO dto) {
+		WishListVO vo = (WishListVO) dto;
+		int flag = 0;
+		Connection conn = null;
+
+		PreparedStatement pstmt = null;
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("DELETE FROM WISHLIST 	\n");
+		sb.append("WHERE PRODUCT_NO = ?	 \n");
+
+		try {
+			conn = connectionMaker.getConnection();
+			// transaction개발자가 관리한다.
+			conn.setAutoCommit(false);
+
+			LOG.debug("1======================");
+			LOG.debug("query:\n" + sb.toString());
+			LOG.debug("1======================");
+
+			pstmt = conn.prepareStatement(sb.toString());
+			// query param
+			pstmt.setString(1, vo.getProduct_no());
+			LOG.debug("2======================");
+			LOG.debug("param, seq=" + vo.getProduct_no());
+			LOG.debug("2======================");
+
+			flag = pstmt.executeUpdate();
+			// -transaction
+			if (flag > 0) {
+				LOG.debug("3======================");
+				LOG.debug("transaction=" + conn);
+				LOG.debug("3======================");
+				// conn.rollback();
+				// conn.commit();
+			} else {
+				// conn.rollback();
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			JDBCReturnReso.close(pstmt);
+			JDBCReturnReso.close(conn);
+		}
+
+		LOG.debug("3=====================");
+		LOG.debug("flag:" + flag);
+		LOG.debug("3=====================");
+
+		return flag;
+	}
+
+	@Override
+	public WishListVO do_selectOne(DTO dto) {
+		WishListVO vo = (WishListVO) dto;
+		WishListVO outVO = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			StringBuilder sb = new StringBuilder();
+			sb.append("SELECT                      \n");
+			sb.append("    a.USER_ID,              \n");
+			sb.append("    b.PRODUCT_NO,           \n");
+			sb.append("    b.REG_DT                \n");
+			sb.append("FROM MEMBER a JOIN PRODUCT b\n");
+			sb.append("ON a.REG_ID = b.REG_ID      \n");
+			sb.append("WHERE USER_ID = ?     \n");
+			sb.append("AND PRODUCT_NO = ?      \n");
+
+			conn = connectionMaker.getConnection();
+			LOG.debug("1.============================");
+			LOG.debug("1.query: \n" + sb.toString());
+			LOG.debug("1.============================");
+
+			pstmt = conn.prepareStatement(sb.toString());
+			// query param
+			pstmt.setString(1, vo.getUser_id());
+			pstmt.setString(2, vo.getProduct_no());
+			LOG.debug("2.============================");
+			LOG.debug("2.getUser_id=" + vo.getUser_id());
+			LOG.debug("2.============================");
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				outVO = new WishListVO();
+				outVO.setUser_id(rs.getString("user_id"));
+				outVO.setProduct_no(rs.getString("product_no"));
+				outVO.setReg_dt(rs.getString("reg_dt"));
+			}
+
+		} catch (SQLException e) {
+			LOG.debug("===================");
+			LOG.debug("SQLException=" + e.getMessage());
+			LOG.debug("===================");
+		} finally {
+			JDBCReturnReso.close(rs);
+			JDBCReturnReso.close(pstmt);
+			JDBCReturnReso.close(conn);
+		}
+
+		return outVO;
+	}
+
+	@Override
+	public List<?> do_retrieve(DTO dto) {
+		return null;
+	}
+
+}

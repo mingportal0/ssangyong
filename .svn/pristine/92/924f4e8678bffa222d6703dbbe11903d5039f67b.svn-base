@@ -1,0 +1,238 @@
+package com.zim.product.writing;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+import com.google.gson.Gson;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.zim.cmn.MessageVO;
+import com.zim.cmn.SearchVO;
+import com.zim.cmn.StringUtil;
+import com.zim.code.CodeDao;
+import com.zim.code.CodeVO;
+import com.zim.product.ProductDao;
+import com.zim.product.ProductVO;
+import com.zim.product.image.ImageDao;
+import com.zim.product.image.ImageService;
+import com.zim.product.image.ImageVO;
+import com.zim.product.listall.ListAllSearchVO;
+
+import oracle.net.aso.p;
+
+/**
+ * Servlet implementation class WritingController
+ */
+@WebServlet("/product/writing.do")
+public class WritingController extends HttpServlet {
+	private final Logger LOG = Logger.getLogger(WritingController.class);
+    private WritingService service;
+
+    public WritingController() {
+    	LOG.debug("0-------------------");
+    	service = new WritingService();
+    	LOG.debug("-service-"+service);
+    	LOG.debug("0-------------------");
+    }
+    
+    public void do_selectone(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    }
+    
+    public void do_retrieve(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    	LOG.debug("03.1 do_retrieve");
+    	ListAllSearchVO inVO = new ListAllSearchVO();
+    	//검색조건
+    	String pageNum = StringUtil.nvl(request.getParameter("page_num"),"1");
+    	String searchDiv = StringUtil.nvl(request.getParameter("search_div"),"");
+    	String searchWord = StringUtil.nvl(request.getParameter("search_word"),"");
+    	String pageSize = StringUtil.nvl(request.getParameter("page_size"),"10");
+    	String category = StringUtil.nvl(request.getParameter("category"),"10");
+    	inVO.setPageNum(Integer.parseInt(pageNum));
+    	inVO.setSearchDiv(searchDiv);
+    	inVO.setSearchWord(searchWord);
+    	inVO.setPageSize(Integer.parseInt(pageSize));
+    	inVO.setCategory(category);
+    	
+    	LOG.debug("03.2 inVO:"+inVO);
+    	List<ProductVO> list = (List<ProductVO>) this.service.do_category_select(inVO);
+    	LOG.debug("--------------------");
+    	for(ProductVO vo:list){
+    		LOG.debug(vo);
+    	}
+    	LOG.debug("--------------------");
+    	int totalCnt = 0;
+    	//총 글수
+    	if(null != list && list.size()>0){
+    		ProductVO totalVO = list.get(0);
+    		totalCnt = totalVO.getTotal();
+    	}
+
+    	request.setAttribute("totalCnt", totalCnt);
+    	request.setAttribute("list", list);
+    	request.setAttribute("paramVO", inVO);
+    	
+    	String path = request.getRealPath("/upload/image");
+    	LOG.debug("path:"+ path);
+    	
+    	//여기의 "list"와 member_list.jsp의 <%%>부분의 get.Attribute("list")가 같아야 한다.
+    	request.setAttribute("list", list);
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("/product/writing_list.jsp");
+    	dispatcher.forward(request, response);
+    }
+    
+    public void do_save_move(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    	LOG.debug("03.1 do_save_move");
+		CodeVO codeVO=new CodeVO();
+	    CodeDao dao  =new CodeDao();
+		codeVO.setCodeTypeId("CATEGORY");
+		List<CodeVO> list =(List<CodeVO>) dao.do_retrieve(codeVO);
+		request.setAttribute("categoryList", list);
+		//user_id 화면 제어:readonly
+		request.setAttribute("mode", "insert");
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("/product/writing_mng.jsp");
+    	dispatcher.forward(request, response);
+    }
+    
+    protected void do_insert(MultipartRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	LOG.debug("03.1 do_insert");
+    	ProductVO inVO = new ProductVO();
+    	//param
+
+    	String productNm = StringUtil.nvl(request.getParameter("product_nm"), "");
+    	String price = StringUtil.nvl(request.getParameter("price"), "");
+    	String category = StringUtil.nvl(request.getParameter("category"), "");
+    	String contents = StringUtil.nvl(request.getParameter("contents"), "");
+    	String targetCnt = StringUtil.nvl(request.getParameter("target_cnt"), "");
+    	String deadline = StringUtil.nvl(request.getParameter("deadline"), "");
+    	String regId = StringUtil.nvl(request.getParameter("reg_id"), "");
+    	String deliveryPrice = StringUtil.nvl(request.getParameter("delivery_price"), "");
+
+    	inVO.setProductNm(productNm);
+    	inVO.setPrice(price);
+    	inVO.setCategory(category);
+    	inVO.setContents(contents);
+    	inVO.setTargetCnt(targetCnt);
+    	inVO.setDeadline(deadline);
+    	inVO.setRegId(regId);
+    	inVO.setDeliveryPrice(deliveryPrice);
+    	LOG.debug("03. param:"+inVO);
+    	//--param
+    	int flag = this.service.do_insert(inVO);
+    	LOG.debug("03.3 flag:"+flag);
+
+    	Gson gson = new Gson();
+    	response.setContentType("text/html;charset=utf-8");
+    	PrintWriter out = response.getWriter();
+    	
+    	String msg = "";
+    	String gsonString = "";
+    	if(flag>0){
+    		msg = inVO.getProductNm()+"이(가)\n등록되었습니다.";
+    	}else{
+    		msg = "등록실패.";
+    	}
+    	gsonString = gson.toJson(new MessageVO(String.valueOf(flag),msg));
+    	LOG.debug("03.4 gsonString:"+gsonString);
+    	out.print(gsonString);
+    }
+    
+    protected void do_update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    }
+    
+    protected void do_delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    }
+    
+    protected void doServiceHandler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	LOG.debug("02 doServiceHandler()");
+    	String savePath = "F:\\Java_20190415\\02_ORACLE\\workspace_web\\ZIMZALABIM\\WebContent\\upload";		 
+		int sizeLimit = 1024*1024*15;// 파일 크기 15MB로 제한
+		//MultipartRequest를 생성시 파일이 업로드 된다.(파일 자체의 업로드 완료)
+		//	       									    	       저장경로         파일최대크기       인코딩유형    중복 파일명 처리
+		MultipartRequest multi = new MultipartRequest(request, savePath, sizeLimit, "utf-8", new DefaultFileRenamePolicy());
+    	request.setCharacterEncoding("UTF-8");
+    	LOG.debug("request.getParameter(\"work_div\")"+multi.getParameter("work_div"));
+    	String workDiv = StringUtil.nvl(multi.getParameter("work_div"), "");
+    	LOG.debug("02.1 workDiv"+workDiv);
+    	
+    	/*
+    	 * do_retrieve : 목록
+    	 * do_insert : 등록
+    	 * do_update : 수정
+    	 * do_selectone : 단건조회
+    	 * do_delete : 삭제
+    	 */
+    	switch(workDiv){
+    		//do_save_move : 등록화면으로 이동
+    		case "do_save_move":
+    			do_save_move(request, response);
+    			break;
+    		case "do_insert":
+    			do_insert(multi, response);
+    		break;
+    		case "do_update":
+    			do_update(request, response);
+    		break;
+    		case "do_delete":
+    			do_delete(request, response);
+    		break;
+    		case "do_selectone":
+    			do_selectone(request, response);
+    		break;
+    		case "do_retrieve":
+    			do_retrieve(request, response);
+    		break;
+    	}
+    	
+    	LOG.debug("=======================================================================");
+
+		// MultipartRequest로 전송받은 데이터를 불러온다.
+		// enctype을 "multipart/form-data"로 선언하고 submit한 데이터들은 request객체가 아닌 MultipartRequest객체로 불러와야 한다.
+		String productNo = multi.getParameter("product_no");
+		String imageId = multi.getParameter("image_id");		 
+		// 전송받은 데이터가 파일일 경우 getFilesystemName()으로 파일 이름을 받아올 수 있다.
+		String fileName = multi.getFilesystemName("org_file_nm");
+		 
+		// 업로드한 파일의 전체 경로를 DB에 저장하기 위함
+		String m_fileFullPath = savePath + "/" + fileName;
+		 
+		 
+		// 데이터들을 담을 그릇인 DTO(혹은 Bean) 객체를 생성 후, 데이터들을 set해준다.
+		ImageVO imageVO = new ImageVO();
+		 
+		imageVO.setProductNo("123");
+		imageVO.setImageId("i01");
+		imageVO.setOrgFileNm(fileName);
+		imageVO.setFileSize("6");
+		imageVO.setSaveFileNm(m_fileFullPath);
+		imageVO.setThumbnail("1");
+		imageVO.setExtNm("jpg");
+
+		ImageService imageService = new ImageService();
+		int imageFlag = imageService.do_insert(imageVO);
+
+		System.out.println("===imageFlag==="+imageFlag);
+    	LOG.debug("=======================================================================");
+    }
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doServiceHandler(request, response);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doServiceHandler(request, response);
+	}
+
+}

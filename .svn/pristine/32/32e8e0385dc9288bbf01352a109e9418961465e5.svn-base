@@ -1,0 +1,42 @@
+<%--
+/**
+* @Class Name : useOutObject.jsp
+* @Description : Sample Register 화면
+* @Modification Information
+*
+*   수정일                   수정자                      수정내용
+*  -------    --------    ---------------------------
+*  2019.07.01            최초 생성
+*
+* author 실행환경 개발팀
+* since 2019.07.01
+*
+* Copyright (C) 2009 by KandJang  All right reserved.
+*/
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/ZIMZALABIM/js/jquery-ui.css" >
+<title>Insert title here</title>
+<script src="/ZIMZALABIM/js/jquery-1.12.4.js"></script>
+<script src="/ZIMZALABIM/js/jquery-ui.js"></script>
+</head>
+<body>
+	<h2>상품 등록</h2>
+	<hr>
+	<!-- action에는 jsp 나 servlet 둘중 하나가 올수 있음 -->
+	<form action="/ZIMZALABIM/image/image.do" method="post" enctype="multipart/form-data">
+ 
+    <회원가입 양식><br>
+<!--     	이미지번호: <input type="text" name="product_no"><br> -->
+<!--     	상품번호: <input type="text" name="image_id"><br> -->
+    	사진: <input type="file" name="org_file_nm"><br><br>
+     
+    <input type="submit" value="전송~">
+	</form>
+</body>
+</html>

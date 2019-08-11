@@ -1,0 +1,58 @@
+ /**
+ * @Class Name : WishListService.java
+ * @Description : 
+ * @Modification Information
+ * @
+ * @  수정일      수정자              수정내용
+ * @ ---------   ---------   -------------------------------
+ * @ 2019. 7. 16.           최초생성
+ *
+ * @author Zimzalabim
+ * @since 2019. 7. 16. 
+ * @version 1.0
+ * @see
+ *
+ *  Copyright (C) by HR. KIM All right reserved.
+ */
+package com.zim.wishlist;
+
+import org.apache.log4j.Logger;
+
+
+import com.zim.cmn.DTO;
+import java.util.List;
+
+
+/**
+ * @author sist
+ *
+ */
+public class WishListService {
+
+	private final Logger LOG=Logger.getLogger(WishListService.class);
+	
+	private WishListDao wishListDao;
+	
+	public WishListService(){
+		wishListDao = new WishListDao();
+	}
+	
+	public int do_delete(DTO dto){
+		return wishListDao.do_delete(dto);
+	}
+	
+	public int do_insert(DTO dto){
+		return wishListDao.do_insert(dto);
+	}
+	
+	public WishListVO do_selectOne(DTO dto){
+		return (WishListVO) wishListDao.do_selectOne(dto);
+		
+	}
+	public int do_update(DTO dto){
+		return wishListDao.do_delete(dto);
+	}
+	public List<WishListVO> do_retrieve(DTO dto) {
+		return (List<WishListVO>) wishListDao.do_retrieve(dto);
+	}
+}

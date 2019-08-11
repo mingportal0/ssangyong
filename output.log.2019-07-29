@@ -1,0 +1,105 @@
+2019-07-29 14:31:33,167 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:31:33,358 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:31:33,407 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=null]
+2019-07-29 14:31:33,422 DEBUG [main] join.JoinTest     (JoinTest.java:95)     - =================
+2019-07-29 14:31:33,425 DEBUG [main] join.JoinTest     (JoinTest.java:96)     - list[]
+2019-07-29 14:31:33,426 DEBUG [main] join.JoinTest     (JoinTest.java:97)     - =================
+2019-07-29 14:31:57,129 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:31:57,303 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:31:57,354 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=null]
+2019-07-29 14:31:57,369 DEBUG [main] join.JoinTest     (JoinTest.java:95)     - =================
+2019-07-29 14:31:57,370 DEBUG [main] join.JoinTest     (JoinTest.java:96)     - list[]
+2019-07-29 14:31:57,370 DEBUG [main] join.JoinTest     (JoinTest.java:97)     - =================
+2019-07-29 14:35:43,047 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:35:43,224 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:35:43,272 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=null]
+2019-07-29 14:35:43,287 DEBUG [main] join.JoinTest     (JoinTest.java:96)     - =================
+2019-07-29 14:35:43,288 DEBUG [main] join.JoinTest     (JoinTest.java:97)     - list[]
+2019-07-29 14:35:43,288 DEBUG [main] join.JoinTest     (JoinTest.java:98)     - =================
+2019-07-29 14:36:35,468 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:36:35,674 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:36:35,723 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=null]
+2019-07-29 14:36:35,738 DEBUG [main] join.JoinTest     (JoinTest.java:79)     - =================
+2019-07-29 14:36:35,740 DEBUG [main] join.JoinTest     (JoinTest.java:80)     - list[]
+2019-07-29 14:36:35,740 DEBUG [main] join.JoinTest     (JoinTest.java:81)     - =================
+2019-07-29 14:36:38,506 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:36:38,687 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:36:38,736 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=null]
+2019-07-29 14:36:38,750 DEBUG [main] join.JoinTest     (JoinTest.java:79)     - =================
+2019-07-29 14:36:38,752 DEBUG [main] join.JoinTest     (JoinTest.java:80)     - list[]
+2019-07-29 14:36:38,752 DEBUG [main] join.JoinTest     (JoinTest.java:81)     - =================
+2019-07-29 14:38:03,887 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:38:04,068 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:38:04,115 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=null]
+2019-07-29 14:38:04,132 DEBUG [main] join.JoinTest     (JoinTest.java:79)     - =================
+2019-07-29 14:38:04,133 DEBUG [main] join.JoinTest     (JoinTest.java:80)     - list[]
+2019-07-29 14:38:04,133 DEBUG [main] join.JoinTest     (JoinTest.java:81)     - =================
+2019-07-29 14:38:23,797 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:38:23,981 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:38:24,027 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=null]
+2019-07-29 14:38:24,044 DEBUG [main] join.JoinTest     (JoinTest.java:79)     - =================
+2019-07-29 14:38:24,046 DEBUG [main] join.JoinTest     (JoinTest.java:80)     - list[]
+2019-07-29 14:38:24,046 DEBUG [main] join.JoinTest     (JoinTest.java:81)     - =================
+2019-07-29 14:40:35,990 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:40:36,165 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:40:36,214 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=null]
+2019-07-29 14:40:36,230 DEBUG [main] join.JoinTest     (JoinTest.java:79)     - =================
+2019-07-29 14:40:36,231 DEBUG [main] join.JoinTest     (JoinTest.java:80)     - list[]
+2019-07-29 14:40:36,231 DEBUG [main] join.JoinTest     (JoinTest.java:81)     - =================
+2019-07-29 14:50:51,546 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:50:51,725 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:50:51,775 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=null]
+2019-07-29 14:50:51,792 DEBUG [main] join.JoinTest     (JoinTest.java:96)     - =================
+2019-07-29 14:50:51,793 DEBUG [main] join.JoinTest     (JoinTest.java:97)     - list[]
+2019-07-29 14:50:51,793 DEBUG [main] join.JoinTest     (JoinTest.java:98)     - =================
+2019-07-29 14:50:58,941 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:50:59,121 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:50:59,171 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=아이디008]
+2019-07-29 14:50:59,192 DEBUG [main] join.JoinTest     (JoinTest.java:96)     - =================
+2019-07-29 14:50:59,193 DEBUG [main] join.JoinTest     (JoinTest.java:97)     - list[JoinVO [join_id=아이디008, product_no=59, join_dt=2019-07-03 00:00:00, join_cnt=4, join_status=20, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명059, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=68, deadline=null, hostStatus=30, deliveryStatus=300, regId=null, regDt=2019-07-25 17:58:10, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=60, join_dt=2019-07-03 00:00:00, join_cnt=5, join_status=30, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명060, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=69, deadline=null, hostStatus=10, deliveryStatus=100, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=56, join_dt=2019-07-05 00:00:00, join_cnt=7, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명056, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=65, deadline=null, hostStatus=30, deliveryStatus=300, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=57, join_dt=2019-07-04 00:00:00, join_cnt=2, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명057, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=66, deadline=null, hostStatus=10, deliveryStatus=100, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=58, join_dt=2019-07-04 00:00:00, join_cnt=3, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명058, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=67, deadline=null, hostStatus=20, deliveryStatus=200, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]]]
+2019-07-29 14:50:59,193 DEBUG [main] join.JoinTest     (JoinTest.java:98)     - =================
+2019-07-29 14:53:40,899 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:53:41,078 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:53:41,126 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=30]
+2019-07-29 14:53:41,141 DEBUG [main] join.JoinTest     (JoinTest.java:94)     - =================
+2019-07-29 14:53:41,143 DEBUG [main] join.JoinTest     (JoinTest.java:95)     - list[]
+2019-07-29 14:53:41,143 DEBUG [main] join.JoinTest     (JoinTest.java:96)     - =================
+2019-07-29 14:54:18,722 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:54:18,906 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:54:18,953 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=10, searchWord=30]
+2019-07-29 14:54:18,968 DEBUG [main] join.JoinTest     (JoinTest.java:94)     - =================
+2019-07-29 14:54:18,969 DEBUG [main] join.JoinTest     (JoinTest.java:95)     - list[]
+2019-07-29 14:54:18,970 DEBUG [main] join.JoinTest     (JoinTest.java:96)     - =================
+2019-07-29 14:54:30,189 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 14:54:30,393 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 14:54:30,443 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=10, searchWord=아이디008]
+2019-07-29 14:54:30,464 DEBUG [main] join.JoinTest     (JoinTest.java:94)     - =================
+2019-07-29 14:54:30,466 DEBUG [main] join.JoinTest     (JoinTest.java:95)     - list[JoinVO [join_id=아이디008, product_no=59, join_dt=2019-07-03 00:00:00, join_cnt=4, join_status=20, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명059, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=68, deadline=null, hostStatus=30, deliveryStatus=300, regId=null, regDt=2019-07-25 17:58:10, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=60, join_dt=2019-07-03 00:00:00, join_cnt=5, join_status=30, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명060, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=69, deadline=null, hostStatus=10, deliveryStatus=100, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=56, join_dt=2019-07-05 00:00:00, join_cnt=7, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명056, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=65, deadline=null, hostStatus=30, deliveryStatus=300, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=57, join_dt=2019-07-04 00:00:00, join_cnt=2, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명057, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=66, deadline=null, hostStatus=10, deliveryStatus=100, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=58, join_dt=2019-07-04 00:00:00, join_cnt=3, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명058, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=67, deadline=null, hostStatus=20, deliveryStatus=200, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]]]
+2019-07-29 14:54:30,466 DEBUG [main] join.JoinTest     (JoinTest.java:96)     - =================
+2019-07-29 15:08:38,286 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 15:08:38,460 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 15:08:38,509 DEBUG [main] join.JoinDao      ( JoinDao.java:297)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=아이디008]
+2019-07-29 15:08:38,528 DEBUG [main] join.JoinTest     (JoinTest.java:93)     - =================
+2019-07-29 15:08:38,531 DEBUG [main] join.JoinTest     (JoinTest.java:94)     - list[JoinVO [join_id=아이디008, product_no=59, join_dt=2019-07-03 00:00:00, join_cnt=4, join_status=20, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명059, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=68, deadline=null, hostStatus=30, deliveryStatus=300, regId=null, regDt=2019-07-25 17:58:10, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=60, join_dt=2019-07-03 00:00:00, join_cnt=5, join_status=30, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명060, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=69, deadline=null, hostStatus=10, deliveryStatus=100, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=56, join_dt=2019-07-05 00:00:00, join_cnt=7, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명056, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=65, deadline=null, hostStatus=30, deliveryStatus=300, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=57, join_dt=2019-07-04 00:00:00, join_cnt=2, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명057, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=66, deadline=null, hostStatus=10, deliveryStatus=100, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=58, join_dt=2019-07-04 00:00:00, join_cnt=3, join_status=10, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명058, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=67, deadline=null, hostStatus=20, deliveryStatus=200, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]]]
+2019-07-29 15:08:38,532 DEBUG [main] join.JoinTest     (JoinTest.java:95)     - =================
+2019-07-29 15:14:16,061 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-29 15:14:16,262 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@4f47d241
+2019-07-29 15:14:16,311 DEBUG [main] join.JoinDao      ( JoinDao.java:380)     - 3 param 
+:SearchVO [pageSize=10, pageNum=1, searchDiv=null, searchWord=아이디008]
+2019-07-29 15:14:16,332 DEBUG [main] join.JoinTest     (JoinTest.java:93)     - =================
+2019-07-29 15:14:16,333 DEBUG [main] join.JoinTest     (JoinTest.java:94)     - list[JoinVO [join_id=아이디008, product_no=60, join_dt=2019-07-03 00:00:00, join_cnt=5, join_status=30, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명060, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=69, deadline=null, hostStatus=10, deliveryStatus=100, regId=null, regDt=2019-07-20 00:00:00, deliveryPrice=null]], JoinVO [join_id=아이디008, product_no=59, join_dt=2019-07-03 00:00:00, join_cnt=4, join_status=20, toString()=ProductVO [restAmount=null, imageId=null, productNo=null, productNm=상품명059, price=null, joinCnt=null, category=null, readCnt=null, contents=null, notice=null, targetCnt=68, deadline=null, hostStatus=30, deliveryStatus=300, regId=null, regDt=2019-07-25 17:58:10, deliveryPrice=null]]]
+2019-07-29 15:14:16,333 DEBUG [main] join.JoinTest     (JoinTest.java:95)     - =================

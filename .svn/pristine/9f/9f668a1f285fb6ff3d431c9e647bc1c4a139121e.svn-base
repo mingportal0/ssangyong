@@ -1,0 +1,26 @@
+2019-07-25 16:31:19,980 DEBUG [main] code.CodeDao      ( CodeDao.java:98)     - 1===========================================
+2019-07-25 16:31:19,983 DEBUG [main] code.CodeDao      ( CodeDao.java:99)     - query :  SELECT b.code_id,                  
+        b.code_nm                   
+ FROM code_type a JOIN code b       
+ ON a.code_type_id = b.code_type_id 
+ WHERE b.code_type_id = ?           
+ AND b.use_yn = 1                   
+ ORDER BY b.num                     
+
+2019-07-25 16:31:19,983 DEBUG [main] code.CodeDao      ( CodeDao.java:100)     - 1===========================================
+2019-07-25 16:31:20,044 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:21)     - 1.jdbc 드라이버 로딩
+2019-07-25 16:31:20,234 DEBUG [main] cmn.ConnectionMaker (ConnectionMaker.java:30)     - 2.데이터베이스 커넥션 생성:oracle.jdbc.driver.T4CConnection@38cccef
+2019-07-25 16:31:20,298 DEBUG [main] code.CodeDao      ( CodeDao.java:106)     - 2===========================================
+2019-07-25 16:31:20,299 DEBUG [main] code.CodeDao      ( CodeDao.java:107)     - param : CodeVO [codeTypeId=LVL, codeId=null, codeNm=null, useYn=null, num=0, regId=null, regDt=null, modId=null, modDt=null]
+2019-07-25 16:31:20,299 DEBUG [main] code.CodeDao      ( CodeDao.java:108)     - 2===========================================
+2019-07-25 16:31:20,313 DEBUG [main] code.CodeTest     (CodeTest.java:41)     - CodeVO [codeTypeId=null, codeId=1, codeNm=일반, useYn=null, num=0, regId=null, regDt=null, modId=null, modDt=null]
+2019-07-25 16:31:20,313 DEBUG [main] code.CodeTest     (CodeTest.java:41)     - CodeVO [codeTypeId=null, codeId=2, codeNm=블랙리스트, useYn=null, num=0, regId=null, regDt=null, modId=null, modDt=null]
+2019-07-25 16:31:20,313 DEBUG [main] code.CodeTest     (CodeTest.java:41)     - CodeVO [codeTypeId=null, codeId=9, codeNm=관리자, useYn=null, num=0, regId=null, regDt=null, modId=null, modDt=null]
+2019-07-25 16:31:20,313 DEBUG [main] cmn.StringUtil    (StringUtil.java:152)     - ------------------------
+2019-07-25 16:31:20,313 DEBUG [main] cmn.StringUtil    (StringUtil.java:153)     - <select name='lvl' id='lvl' > 
+	<option value='1' >일반</option>
+	<option value='2' >블랙리스트</option>
+	<option value='9' selected='selected' >관리자</option>
+</select> 
+
+2019-07-25 16:31:20,313 DEBUG [main] cmn.StringUtil    (StringUtil.java:154)     - ------------------------

@@ -1,0 +1,199 @@
+package com.zim.wishlist;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.zim.wishlist.WishListDao;
+import com.zim.wishlist.WishListTest;
+import com.zim.wishlist.WishListVO;
+
+public class WishListTest {
+
+	private final Logger LOG = Logger.getLogger(WishListTest.class);
+
+	private WishListVO vo01;
+	private WishListVO vo02;
+	private WishListVO vo03;
+
+	private WishListDao dao;
+
+	/**
+	 * <PRE>
+	 * 1. MethodName : WishListTest
+	 * 2. ClassName  : WishListTest
+	 * 3. Comment   : 
+	 * 4. 작성자    : SIST
+	 * 5. 작성일    : 2019. 6. 27. 오후 3:02:13
+	 * </PRE>
+	 */
+	public WishListTest() {
+		vo01 = new WishListVO("TEST32", "91", "19/07/31");
+		vo02 = new WishListVO("TEST9", "10", "19/07/31");
+		vo03 = new WishListVO("TEST3", "94", "19/07/31");
+
+		// vo01 = new BoardVO("1", "제목1", "0", "내용1", "admin", "");
+		// vo02 = new BoardVO("2", "제목2", "0", "내용2", "admin", "");
+		// vo03 = new BoardVO("3", "제목3", "0", "내용3", "admin", "");
+
+		dao = new WishListDao();
+	}
+
+	public void do_selectOne() {
+		vo01.setUser_id("아이디2");
+		vo01.setProduct_no("25");
+		WishListVO outVO = (WishListVO) dao.do_selectOne(vo01);
+		LOG.debug("======================");
+		LOG.debug("outVO=" + outVO);
+		LOG.debug("======================");
+	}
+
+	public void do_delete() {
+		vo01.setProduct_no("1000");
+		int flag = dao.do_delete(vo01);
+		LOG.debug("======================");
+		LOG.debug("flag=" + flag);
+		LOG.debug("======================");
+	}
+
+	public void do_insert() {
+		int flag = dao.do_insert(vo01);
+	}
+
+	public void do_update() {
+		vo01.setUser_id("yoon");
+		vo01.setProduct_no("331");
+		vo01.setReg_dt("19/06/30");
+		int flag = dao.do_update(vo01);
+	}
+
+	// public void do_upsert() {
+	// // 33
+	// vo02.setSeq("11");
+	// vo02.setTitle("samcdd");
+	// vo02.setContents("내용2_U");
+	// vo02.setRegId("admin_U");
+	//
+	// dao.do_upsert(vo02);
+	// }
+
+	/*
+	 * DML 테스트 코드 : addAndGet():DIS 테스트 코드 : addAndUpdate():DIU paging :
+	 * selectList 코드테이블 설계
+	 */
+
+	// public void addAndGet() {
+	//
+	// // ----------------------
+	// // 삭제 : sequence이므로 사용할수 없음
+	// // ----------------------
+	// // dao.do_delete(vo01);
+	//
+	// // ----------------------
+	// // 등록 -> 시퀸스 조회
+	// // ----------------------
+	// dao.do_insert(vo01);
+	// String seq = dao.getSeq();
+	//
+	// // ----------------------
+	// // 단건조회
+	// // ----------------------
+	// vo01.setSeq(seq);
+	// WishListVO outVO = (WishListVO) dao.do_selectOne(vo01);
+	//
+	// // ----------------------
+	// // 비교 :
+	// // ----------------------
+	// if (outVO.equals(vo01)) {
+	// LOG.debug("======================");
+	// LOG.debug("단건등록 성공:\n" + outVO);
+	// LOG.debug("======================");
+	// } else {
+	// LOG.debug("======================");
+	// LOG.debug("단건등록 실패");
+	// LOG.debug("======================");
+	// }
+	// }
+
+	// 마지막에 등록된 : 순번 출력
+	// public void getSeq() {
+	// dao.getSeq();
+	// }
+
+	// public void addAndUpdate() {
+	// // ------------------
+	// // 등록 - > 시퀸스 조회
+	// // ------------------
+	// dao.do_insert(vo01);
+	// String seq = dao.getSeq();
+	// // ------------------
+	// // 단건조회
+	// // ------------------
+	// vo01.setSeq(seq);
+	// WishListVO outVO = (WishListVO) dao.do_selectOne(vo01);
+	//
+	// // ------------------
+	// // 수정 : 1
+	// // ------------------
+	// outVO.setTitle("제목_U");
+	// outVO.setContents("내용_U");
+	// outVO.setRegId("admin_U");
+	// dao.do_update(outVO);
+	//
+	// // ------------------
+	// // 단건조회 : 2
+	// // ------------------
+	// WishListVO updateVO = (WishListVO) dao.do_selectOne(outVO);
+	//
+	// // ------------------
+	// // 비교(1,2)
+	// // ------------------
+	// if(outVO.equals(updateVO)){
+	// LOG.debug("======================");
+	// LOG.debug("단건수정 성공:\n" + outVO);
+	// LOG.debug("======================");
+	// }else{
+	// LOG.debug("======================");
+	// LOG.debug("단건수정 실패");
+	// LOG.debug("======================");
+	//
+	// }
+	// }
+
+	// public void do_retrieve() {
+	// SearchVO searchVO=new SearchVO();
+	// searchVO.setPageSize(10);
+	// searchVO.setPageNum(1);
+	// //searchVO.setSearchDiv("10");
+	// //searchVO.setSearchWord("제목1");
+	//
+	// List<WishListVO> list = (List<WishListVO>) dao.do_retrieve(searchVO);
+	// LOG.debug("===================");
+	// for(WishListVO vo:list){
+	// LOG.debug("vo"+vo);
+	// }
+	//
+	// LOG.debug("===================");
+	// }
+
+	// public static void main(String[] args) {
+	// WishListTest WishListTest = new WishListTest();
+	// WishListTest.do_selectOne();
+	// WishListTest.do_delete();
+	// WishListTest.do_insert();
+	// WishListTest.do_update();
+	// WishListTest.do_upsert();
+	// WishListTest.getSeq();
+	// WishListTest.addAndGet();
+	// WishListTest.addAndUpdate();
+	// WishListTest.do_retrieve();
+	// }
+	public static void main(String[] args) {
+
+		WishListTest wishList = new WishListTest();
+		wishList.do_selectOne();
+		// wishList.do_delete();
+		// wishList.do_insert();
+		// wishList.do_update();
+	}
+}

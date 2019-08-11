@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorators">
+	<!-- main -->
+    <decorator name="basic-theme" page="basic-theme.jsp">
+        <pattern>/board/*</pattern>
+    </decorator>
+    <!-- sub -->
+<!--     <decorator name="sub-theme" page="sub-theme.jsp">
+        <pattern>/board/*</pattern>
+    </decorator> -->
+    <!-- 예외 설정 -->
+    <excludes>
+    	<pattern>*.html*</pattern>
+    	<pattern>*.download*</pattern>
+    </excludes>
+</decorators>

@@ -1,0 +1,62 @@
+<%@page import="com.zim.member.MemberVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	MemberVO user = (MemberVO)session.getAttribute("user");
+	request.setAttribute("user", user);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+
+</style>
+<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->    
+<link rel="stylesheet" href="/ZIMZALABIM/js/jquery-ui.css" >
+<link rel="shortcut icon" href="/ZIMZALABIM/image/favicon.ico">
+<!-- 부트스트랩 -->
+<link href="/ZIMZALABIM/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="/ZIMZALABIM/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<title>ZIMZALABIM</title>
+<script src="/ZIMZALABIM/js/jquery-1.12.4.js"></script>
+<script src="/ZIMZALABIM/js/jquery-ui.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+<script src="/ZIMZALABIM/js/bootstrap.min.js"></script>	
+</head>
+<body>
+	<h2>회원탈퇴</h2>
+	<p>비밀번호를 한번 더 입력해주세요.</p>
+	<form id="quit_frm" name="quit_frm" method="post" >
+		<table>
+			<tr>
+				<td><label>비밀번호</label><br/><input type="password" id="passWd" name="passWd"></td>
+			</tr>
+		</table>
+		<br/>
+		<button class="btn btn-warning" id="quit_btn" name="quit_btn" >탈퇴</button>
+		<button class="btn btn-warning" id="cancel_btn">취소</button>			
+	</form>
+	
+	<script>
+		$("#quit_btn").on("click",function(){
+			//alert('quit_btn');
+			var frm = document.quit_frm;
+			frm.action = "/ZIMZALABIM/quit/quit.do";
+			frm.submit();
+		});
+		
+		$("#cancel_btn").on("click",function(){
+			//alert('cancel_btn');
+		});
+	
+		$(document).ready(function(){
+			
+		});
+	</script>
+</body>
+</html>

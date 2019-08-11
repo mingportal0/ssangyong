@@ -1,0 +1,174 @@
+<%--
+  /**
+  * @Class Name : useOutObject.jsp
+  * @Description : Sample Register 화면
+  * @Modification Information
+  *
+  *   수정일                   수정자                      수정내용
+  *  -------    --------    ---------------------------
+  *  2019.07.01            최초 생성
+  *
+  * author 실행환경 개발팀
+  * since 2019.07.01
+  *
+  * Copyright (C) 2009 by KandJang  All right reserved.
+  */
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/ZIMZALABIM/js/jquery-ui.css" >
+<title>Insert title here</title>
+<script src="/ZIMZALABIM/js/jquery-1.12.4.js"></script>
+<script src="/ZIMZALABIM/js/jquery-ui.js"></script>
+<!-- jquery valdation -->
+<script src="/ZIMZALABIM/js/jquery.validate.js"></script>
+<script src="/ZIMZALABIM/js/messages_ko.js"></script>
+<script src="/ZIMZALABIM/js/additional-methods.js"></script>
+<!-- //jquery valdation -->
+</head>
+<body>
+	<h2>회원 정보 수정</h2>
+	<form id="form_resister" name="form_resister">
+		<input type="hidden"  name="work_div" id="work_div"  />
+		<table>
+			<tr>
+				<td><label>*아이디</label></td>
+				<td><input type="text" id="user_id" name="user_id" placeholder="영문 및 숫자만 입력해주세요." maxlength="20" ></td>
+			</tr>
+			<tr>
+				<td><label>*비밀번호 변경</label></td>
+				<td><input type="password" id="passwd" name="passwd" placeholder="영문 및 숫자만 입력해주세요." maxlength="20" ></td>
+			</tr>
+			<tr>
+				<td><label>*비밀번호 확인</label></td>
+				<td><input type="password" id="repasswd" name="repasswd" maxlength="20" ></td>
+			</tr>
+			<tr>
+				<td><label>*이름</label></td>
+				<td><input type="text" id="name" name="name" maxlength="30" ></td>
+			</tr>
+			<tr>
+				<td><label>*이메일</label></td>
+				<td><input type="text" id="email" name="email" maxlength="320" ></td>
+			</tr>
+			<tr>
+				<td><label>주민등록번호</label><br/>공구게시판 글 작성을 위해 필요합니다.</td>
+				<td><input type="text" id="resident_no" name="resident_no" placeholder="000000-0000000" maxlength="13" ></td>
+			</tr>
+			<tr>
+				<td><label>핸드폰 번호</label><br/>공구게시판 글 작성을 위해 필요합니다.</td>
+				<td><input type="tel" id="cell_phone" name="cell_phone" placeholder="000-0000-0000" maxlength="13" ></td>
+			</tr>
+		</table>
+		<br/>
+		<input type="submit" value="회원 정보 수정" >
+		<button>취소</button>
+	</form>
+	
+	<script>	
+		function do_update(){
+			console.log("do_update");
+			/*
+			$("#work_div").val("do_resister");//do_update Set
+			var param = $("#form_resister").serialize();
+			//ajax
+            $.ajax({
+               type:"POST",
+               url:"/ZIMZALABIM/resister/resister.do",
+               dataType:"html",
+               data:param, 
+            success: function(data){
+              var jData = JSON.parse(data);
+              if(null != jData && jData.msgId=="1"){
+                alert(jData.msgContents);
+                window.location.href="/ZIMZALABIM/resister/resister.do?work_div=do_retrieve";
+              }else{
+                alert(jData.msgId+"|"+jData.msgContents);
+              }
+            },
+            complete:function(data){
+             
+            },
+            error:function(xhr,status,error){
+                alert("error:"+error);
+            }
+           }); 
+           //--ajax
+           */
+		}
+		$(document).ready(function(){
+			$("form").validate({
+				//validation 종료 후 submit 직전에 할 작업 ex)메세지 표시
+				submitHandler:function(){
+					var f = confirm('회원가입하시겠습니까?');
+					if(f){
+						return do_update();
+					}else{
+						return false;
+					}
+				},
+				//규칙
+				rules:{
+					user_id:{
+						required:true
+					},
+					passwd:{
+						required:true
+					},
+					repasswd:{
+						required:true,
+						equalTo:passwd
+					},
+					name:{
+						required:true						
+					},
+					email:{
+						required:true,						
+						email:true
+					},
+					resident_no:{
+						minlength: 13
+					},
+					cell_phone:{
+						minlength: 13
+					}
+				},
+				//출력 메세지
+				messages:{
+					user_id:{
+						required:"필수 입력값입니다."
+					},
+					passwd:{
+						required:"필수 입력값입니다."
+					},
+					repasswd:{
+						required:"필수 입력값입니다.",
+						equalTo:"비밀번호가 일치하지 않습니다."
+					},
+					name:{
+						required:"필수 입력값입니다."
+						
+					},
+					email:{
+						required:"필수 입력값입니다.",
+						email:"유효하지 않은 이메일주소입니다."
+					},
+					resident_no:{
+						minlength: "유효하지 않은 주민등록번호입니다."
+					},
+					cell_phone:{
+						minlength:"유효하지 않은 핸드폰번호입니다."
+					}
+				}
+			});
+		});
+	</script>
+</body>
+</html>

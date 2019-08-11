@@ -1,0 +1,90 @@
+package com.zim.cmn;
+
+import java.util.List;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+
+import com.zim.code.CodeVO;
+import com.zim.cmn.StringUtil;
+
+
+public class StringUtil {
+
+	
+    private static Logger LOG = Logger.getLogger(StringUtil.class);
+	
+    /**
+     * 
+     * @Method Name  : makeSelectBox
+     * @작성일   : 2019. 7. 22.
+     * @작성자   : SIST
+     * @변경이력  : 최초작성
+     * @Method 설명 :
+     * @param list: select에 필용한 코드정보
+     * @param selectBoxNm : <select name="lvl" id="lvl">
+     * @param selectedNm  : <option selected
+     * @param allYN       : 전체 표시 
+     * @return            : <select name="lvl" id="lvl">
+     * 						  <option value="">전체</option>
+    			              <option value="1" selected>일반사용자</option>
+    			              <option value="9">관리자</option>
+    		                </select>
+     */
+	public static String makeSelectBox(List<CodeVO> list,
+			                           String selectBoxNm,
+			                           String selectedNm,
+			                           boolean allYN){
+		StringBuilder sb=new StringBuilder();
+		//<select name="lvl" id="lvl">
+		sb.append("<select name='"+selectBoxNm+"' id='"+selectBoxNm+"' > \n");
+		//전체
+		if(allYN==true){
+			sb.append("<option value=''>전체</option> \n");
+		}
+		
+		//<option value="1" selected>일반사용자</option>
+		for(CodeVO dto  :list){
+			CodeVO vo =  dto;
+			sb.append("\t<option value='"+vo.getCodeId()+"' ");
+			if(selectedNm.equals(vo.getCodeId())){
+				sb.append("selected='selected' ");
+			}
+			
+			sb.append(">");
+			sb.append(vo.getCodeNm());
+			sb.append("</option>\n");
+		}
+		sb.append("</select> \n");
+		LOG.debug("------------------------");
+		LOG.debug(sb.toString());
+		LOG.debug("------------------------");
+		return sb.toString();
+	}
+	
+	
+	
+	
+	public static String nvl(String str, String defVal){
+		
+		String retStr = "";
+		if(StringUtils.isEmpty(str)){//apache.commons null
+			retStr = defVal.trim();
+		}else{
+			retStr = str.toString().trim();
+		}
+		
+//		if(null == str || str.equals("")){
+//			retStr = defVal;
+//		}else{
+//			retStr = str.toString().trim();
+//		}
+		
+		return retStr;
+	}
+	
+	public static String escapeHtml(String html){
+		return StringEscapeUtils.escapeHtml4(html);
+	}
+}

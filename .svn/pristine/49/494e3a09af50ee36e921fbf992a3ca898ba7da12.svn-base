@@ -1,0 +1,59 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+ <style type="text/css">
+   body {
+    font-family: Arial, Verdana, sans-serif;
+    color: #111111;}
+   table {
+    width: 90%;}
+   th, td {
+    padding: 7px 10px 10px 10px;}
+   th {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 90%;
+    border-bottom: 2px solid #111111;
+    border-top: 1px solid #999;
+    text-align: left;}
+   tr.even {
+    background-color: #efefef;}
+   tr:hover {
+    background-color: #c3e6e5;}
+   .money {
+    text-align: right;}
+  </style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/WEB_EX01/js/jquery-ui.css" >
+<title>Insert title here</title>
+<script src="/WEB_EX01/js/jquery-1.12.4.js"></script>
+<script src="/WEB_EX01/js/jquery-ui.js"></script>
+</head>
+<body>
+	    	<div class="form-group">
+	    		<label class="col-sm-2 control-label">배송진행상태</label>
+	    		<div class="col-sm-8">
+	    			<label class="radio-inline">
+	    				<input type="radio" name="paymentcomplete" id="paymentcomplete" value="100">결제완료
+	    			</label>	    		
+	    			<label class="radio-inline">
+	    				<input type="radio" name="progress" id="progress" value="200">공구진행
+	    			</label>
+	    			<label class="radio-inline">
+	    				<input type="radio" name="shippingpreparation" id="shippingpreparation" value="300">배송준비
+	    			</label>
+	    			<label class="radio-inline">
+	    				<input type="radio" name="deliverycompleted" id="deliverycompleted" value="400">배송완료
+	    			</label>	    				    			
+	    		</div>
+	    	</div>	    					
+			<form name="searchFrm" action="/ZIMZALABIM/join/joinstatus.do" method="post">
+			<input type="hidden" name="work_div" />
+			<input type="hidden" name="pageNum"  />
+
+</body>
+</html>
+
+		

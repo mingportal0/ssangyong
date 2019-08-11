@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+ <style type="text/css">
+   body {
+    font-family: Arial, Verdana, sans-serif;
+    color: #111111;}
+   table {
+    width: 90%;}
+   th, td {
+    padding: 7px 10px 10px 10px;}
+   th {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 90%;
+    border-bottom: 2px solid #111111;
+    border-top: 1px solid #999;
+    text-align: left;}
+   tr.even {
+    background-color: #efefef;}
+   tr:hover {
+    background-color: #c3e6e5;}
+   .money {
+    text-align: right;}
+  </style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/WEB_EX01/js/jquery-ui.css" >
+<title>Insert title here</title>
+<script src="/WEB_EX01/js/jquery-1.12.4.js"></script>
+<script src="/WEB_EX01/js/jquery-ui.js"></script>
+</head>
+<body>
+	<hr3>배송진행상태</hr3>
+		<div>
+			<input type="button" value="결제완료" id="paymentcomplete" />
+			<input type="button" value="공구진행" id="progress" />
+			<input type="button" value="배송준비" id="shippingpreparation" />
+			<input type="button" value="배송완료" id="deliverycompleted" />
+		</div>
+			<form name="searchFrm" action="/ZIMZALABIM/join/joinstatus.do" method="post">
+			<input type="hidden" name="work_div" />
+			<input type="hidden" name="pageNum"  />
+
+</body>
+</html>
+
+		

@@ -1,0 +1,158 @@
+<%@page import="java.util.List"%>
+<%@page import="com.zim.code.CodeVO"%>
+<%@page import="com.zim.product.ProductVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	
+	List<ProductVO> list = (List<ProductVO>)request.getAttribute("lvlList");
+	ProductVO   vo1   = (ProductVO)request.getAttribute("vo");
+%>   
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->    
+<link rel="stylesheet" href="/WEB_EX01/js/jquery-ui.css" >
+<!-- 부트스트랩 -->
+<link href="/WEB_EX01/css/bootstrap.min.css" rel="stylesheet">
+<title>Insert title here</title>
+<script src="/WEB_EX01/js/jquery-1.12.4.js"></script>
+<script src="/WEB_EX01/js/jquery-ui.js"></script>
+<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+<script src="/WEB_EX01/js/bootstrap.min.js"></script>	
+</head>
+<body>
+			<input type="button" class="btn btn-primary btn-sm" value="주최취소" id="update_btn" />
+			<input type="button" class="btn btn-primary btn-sm" value="조회" id="listTo_btn" />
+			<input type="button" value="배송정보수정" id="update_btn2" />
+	<div>
+			<form name="frmMng" id="frmMng" 
+              action="/ZIMZALABIM/host/host.do" method="post" >
+		        <input type="hidden"  name="work_div" id="work_div" />
+		        <label>상품번호</label>
+		    	<div><input type="text" readonly="readonly" value="${vo.getProductNo()}"  name="name" id="name" size="30" maxlength="30"  /></div>      
+		    	<label>주최일</label>
+		    	<div><input type="text" readonly="readonly" value="${vo.getRegDt()}"  name="RegDt" id="RegDt" size="20"  maxlength="20" /></div>
+				<label>상품이름</label>
+		    	<div><input type="text" readonly="readonly" value="${vo.getProductNm()}"  name="name" id="name" size="30" maxlength="30"  /></div>
+				<label>주문수량</label>
+		    	<div><input type="text" readonly="readonly" value="${vo.getTargetCnt() }" name="Join_cnt" id="Join_cnt" size="20" maxlength="20"  />
+		    	</div>
+		    	<label>배송진행상태</label>
+		    	<div><input type="text"  value="${vo.getDeliveryStatus() }" name="DeliveryStatus" id="DeliveryStatus" size="20" maxlength="20"  />
+		    			
+	</div>
+	<script>
+	
+
+
+
+		    function doDel(){
+	    	if( false == confirm('변경 하시겠습니까?'))return;
+	    	var frm = document.frmMng;
+	    	frm.work_div.value = "do_delete";
+	    	frm.action = "/ZIMZALABIM/host/host.do";
+	    	frm.submit();
+	    }
+	
+
+   $("#update_btn").on('click',function(){
+    	//alert('update_btn');
+    	//validation:필수 check
+       var title = $("#DeliveryStatus").val();
+       if(null == title || title.trim().length == 0){
+          $("#DeliveryStatus").focus();
+          alert('배송상태를 입력하시오.');
+          return ;
+       }
+    	
+		$("#work_div").val("do_update");//"do_update" set
+		var param = $("#frmMng").serialize();
+		//alert(param);
+		
+    	if( false==confirm(DeliveryStatus+'를(를)\n변경 하시겠습니까?'))return;
+    	
+    	//ajax
+        $.ajax({
+           type:"POST",
+           url:"/ZIMZALABIM/join/join.do",
+           dataType:"html",
+           data:param, 
+        success: function(data){
+          var jData = JSON.parse(data);
+          if(null != jData && jData.msgId=="1"){
+            alert(jData.msgContents);
+            window.location.href="/ZIMZALABIM/join/join.do?work_div=do_retrieve";
+          }else{
+            alert(jData.msgId+"|"+jData.msgContents);
+          }
+        },
+        complete:function(data){
+         
+        },
+        error:function(xhr,status,error){
+            alert("error:"+error);
+        }
+       });
+    }); 
+   
+   
+   
+		$("#update_btn2").on('click',function(){
+			console.log('del_btn');
+			doDel();
+			var RegId = $("#RegId").val();
+
+			
+			if( false == confirm(RegId+'을(를)\n변경 하시겠습니까?'))return;
+			
+			//ajax
+ 			$.ajax({
+					type:"POST",
+					url:"/ZIMZALABIM/host/host.do",
+					dataType:"html",
+					data:{
+						"work_div":"do_update",
+						"RegId":$("#RegId").val()
+				    }, 
+				success: function(data){
+					//{"msgId":"1","msgContents":"삭제되었습니다.","total":0,"num":0}
+					var jData = JSON.parse(data);
+					console.log(jData.msgId+"|"+jData.msgContents);
+					if(null != jData && jData.msgId=="1"){
+						alert(jData.msgContents);
+						window.location.href="/ZIMZALABIM/host/host.do?work_div=do_retrieve";
+					}else{
+						alert(jData.msgId+"|"+jData.msgContents);
+					}
+				},
+				complete:function(data){
+					
+				},
+				error:function(xhr,status,error){
+					alert("error:"+error);
+				}
+		    }); 
+			//--ajax
+		});
+        function do_move_to_list(){
+            if(confirm('공구목록으로 이동 하시겠습니까?')==false)return;
+            
+            var frm = document.frmMng;
+            frm.work_div.value = "do_move_to_list";
+            frm.action = "/ZIMZALABIM/host/host.do"
+            frm.submit();
+         }
+         //조회로 이동
+       $("#listTo_btn").on("click",function(){
+    	   do_move_to_list();
+   		 });
+	    
+		$(document).ready(function(){
+		});
+	</script>
+</body>
+</html>

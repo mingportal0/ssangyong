@@ -1,0 +1,205 @@
+<%--
+  /**
+  * @Class Name : useOutObject.jsp
+  * @Description : Sample Register 화면
+  * @Modification Information
+  *
+  *   수정일                   수정자                      수정내용
+  *  -------    --------    ---------------------------
+  *  2019.07.01            최초 생성
+  *
+  * author 실행환경 개발팀
+  * since 2019.07.01
+  *
+  * Copyright (C) 2009 by KandJang  All right reserved.
+  */
+--%>
+<%@page import="com.zim.member.MemberVO"%>
+<%@page import="com.zim.code.CodeVO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.zim.cmn.StringUtil"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%	
+	List<CodeVO> list = (List<CodeVO>)request.getAttribute("lvlList");
+	MemberVO vo = (MemberVO)request.getAttribute("vo");
+	String level = "1";
+	if(null != vo){
+		level = vo.getLvl();		
+	}
+	//out.print(vo);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/WEB_EX01/js/jquery-ui.css" >
+<link rel="shortcut icon" href="/WEB_EX01/image/favicon.ico">
+<title>Insert title here</title>
+<script src="/WEB_EX01/js/jquery-1.12.4.js"></script>
+<script src="/WEB_EX01/js/jquery-ui.js"></script>
+<!-- jquery validation -->
+<script src="/WEB_EX01/js/jquery.validate.js"></script>
+<script src="/WEB_EX01/js/additional-methods.js"></script>
+<script src="/WEB_EX01/js/messages_ko.js"></script>
+<!--// jquery validation -->
+</head>
+<body>
+	<h3>회원정보 수정	</h3>
+	<hr/>
+	<!-- button -->
+	<input type="button" value="회원삭제" id="delete_btn" />
+	<input type="button" value="초기화" id="reset_btn" />
+	<!-- //button -->
+	<hr/>	
+	<!-- 회원관리 Form -->
+	<form name="frmMng" id="frmMng" action="/ZIMZALABIM/retrieve/retrieve.do" method="post" >
+		<input type="hidden"  name="work_div" id="work_div"  />
+		<br/>
+		<label>아이디</label>
+		<div><input type="text" value="${vo.getUserId() }" readonly="readonly" name="user_id" id="user_id" size="20" maxlength="20" placeholder="영문숫자_입력"/></div>
+		<br/>
+		<label>이름</label>
+		<div><input type="text" value="${vo.getName() }" name="name" id="name" size="20" maxlength="30" /></div>
+		<br/>
+		<label>등급</label>
+		<div>
+			<%= StringUtil.makeSelectBox(list, "lvl", level, false) %>
+		</div>
+		<br/>
+		<label>이메일</label>
+		<div><input type="text" value="${vo.getEmail() }" name="email" id="email" size="30" maxlength="320" /></div>
+		<br/>
+		<label>전화번호</label>
+		<div><input type="text" value="${vo.getCellPhone() }" name="cell_phone" id="cell_phone" size="13" maxlength="13" placeholder="000-0000-0000"/></div>
+		<input type="hidden"  name="passwd" id="passwd" value="${vo.getPasswd() }" /> 
+		<input type="hidden"  name="resident_no" id="resident_no" value="${vo.getResidentNo() }" /> 
+		<input type="hidden"  name="reg_id" id="reg_id" value="${vo.getRegId() }" /> 
+		<input type="hidden"  name="reg_dt" id="reg_dt" value="${vo.getRegDt() }" /> 
+		<input type="hidden"  name="mod_id" id="mod_id" value="${vo.getModId() }" /> 
+	</form>		
+	<!-- //회원관리 Form -->
+	<br/>
+	<hr/>
+	<!-- button -->
+	<input type="button" value="수정" id="update_btn" />
+	<input type="button" value="취소" id="cancel_btn" />
+	<!-- //button -->
+	<script>
+		
+		//reset_btn
+		$("#reset_btn").on("click",function(){
+			//alert('reset_btn');
+			$("#name").val("");
+			$("#lvl").val("1");
+			$("#email").val("");
+			$("#cell_phone").val("");
+		});
+	
+		$("#delete_btn").on("click",function(){
+			console.log('del_btn');
+			console.log($("#user_id").val());
+			//validation
+			var userId = $("#user_id").val();
+						
+			if( false == confirm($("#user_id").val()+'을(를)\n삭제 하시겠습니까?'))return;
+			
+			//ajax
+ 			$.ajax({
+					type:"POST",
+					url:"/ZIMZALABIM/retrieve/retrieve.do",
+					dataType:"html",
+					data:{
+						"work_div":"do_delete",
+						"userId":userId
+				    }, 
+				success: function(data){
+					//{"msgId":"1","msgContents":"삭제되었습니다.","total":0,"num":0}
+					var jData = JSON.parse(data);
+					console.log(jData.msgId+"|"+jData.msgContents);
+					if(null != jData && jData.msgId=="1"){
+						alert(jData.msgContents);
+						window.location.href="/ZIMZALABIM/retrieve/retrieve.do?work_div=do_retrieve";
+					}else{
+						alert(jData.msgId+"|"+jData.msgContents);
+					}
+				},
+				complete:function(data){
+					
+				},
+				error:function(xhr,status,error){
+					alert("error:"+error);
+				}
+		    }); 
+			//--ajax
+		});
+		function movelistTo(){
+	    	if(confirm('취소하시겠습니까?')==false)return;
+	    	
+	    	var frm = document.frmMng;
+	    	frm.work_div.value = "do_move_to_list";
+	    	frm.action = "/ZIMZALABIM/retrieve/retrieve.do"
+	    	frm.submit();
+	    }
+		$("#cancel_btn").on("click",function(){
+			movelistTo();
+		});
+		
+		$("#update_btn").on("click",function(){
+			//alert("update_btn");
+			//Validation:필수값 체크
+			var userId = $("#user_id").val();
+			var name = $("#name").val();
+			if(null == name || name.trim().length == 0){
+				$("#name").focus();
+				alert('이름을 입력하세요.');
+				return;
+			}
+			var email = $("#email").val();
+			if(null == email || email.trim().length == 0){
+				$("#email").focus();
+				alert('이메일을 입력하세요.');
+				return;
+			}
+			var cell_phone = $("#cell_phone").val();
+			if(null == cell_phone || cell_phone.trim().length == 0){
+				$("#cell_phone").focus();
+				alert('전화번호를 입력하세요.');
+				return;
+			}
+			//"work_div":"do_update",
+			$("#work_div").val("do_update");//do_update Set
+			var param = $("#frmMng").serialize();
+			//alert(param);
+			if(false==confirm(userId+'을(를)\n수정하시겠습니까?'))return;
+			
+			//ajax
+            $.ajax({
+               type:"POST",
+               url:"/ZIMZALABIM/retrieve/retrieve.do",
+               dataType:"html",
+               data:param, 
+            success: function(data){
+              var jData = JSON.parse(data);
+              if(null != jData && jData.msgId=="1"){
+                alert(jData.msgContents);
+                window.location.href="/ZIMZALABIM/retrieve/retrieve.do?work_div=do_retrieve";
+              }else{
+                alert(jData.msgId+"|"+jData.msgContents);
+              }
+            },
+            complete:function(data){
+             
+            },
+            error:function(xhr,status,error){
+                alert("error:"+error);
+            }
+           }); 
+           //--ajax  
+		});
+		$(document).ready(function(){
+			
+		});
+	</script>
+</body>
+</html>

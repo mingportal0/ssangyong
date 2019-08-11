@@ -1,0 +1,102 @@
+ /**
+ * @Class Name : WritingTest.java
+ * @Description : 
+ * @Modification Information
+ * @
+ * @  수정일      수정자              수정내용
+ * @ ---------   ---------   -------------------------------
+ * @ 2019. 7. 16.           최초생성
+ *
+ * @author Zimzalabim
+ * @since 2019. 7. 16. 
+ * @version 1.0
+ * @see
+ *
+ *  Copyright (C) by HR. KIM All right reserved.
+ */
+package com.zim.product.writing;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.apache.log4j.Logger;
+
+import com.zim.cmn.ConnectionMaker;
+import com.zim.cmn.JDBCReturnReso;
+import com.zim.product.ProductDao;
+import com.zim.product.ProductVO;
+
+/**
+ * @author sist
+ *
+ */
+public class WritingTest {
+
+	private final Logger LOG = Logger.getLogger(WritingTest.class);
+	
+	private ProductDao dao;
+	
+	public WritingTest() {
+		dao = new ProductDao();
+	}
+	
+	public void do_insert(){
+		ProductVO productVO = new ProductVO();
+		String categoryNum = Integer.toString(((int)(Math.random()*8)+1)*10);
+		String ranNum = Integer.toString((int)(Math.random()*12)+1);
+		
+		productVO.setProductNm("상품명"+ranNum);
+		productVO.setPrice("5000");
+		productVO.setCategory(categoryNum);
+		productVO.setContents("내용"+ranNum);
+		productVO.setTargetCnt("100");
+		productVO.setDeadline("2019.07.23");
+		productVO.setRegId("아이디"+ranNum);
+		productVO.setDeliveryPrice("2500");
+		
+		int flag = dao.do_insert(productVO);
+	}
+	
+	public void do_delete(){
+		ProductVO productVO = new ProductVO();
+		productVO.setProductNo("8");
+		int flag = dao.do_delete(productVO);
+		LOG.debug("======================");
+		LOG.debug("flag="+flag);
+		LOG.debug("======================");
+	}
+	
+	public void do_update(){
+		ProductVO productVO = new ProductVO();
+		productVO.setProductNm("제목수정555");
+		productVO.setPrice("25000");
+		productVO.setCategory("30");
+		productVO.setContents("내용수정555");
+		productVO.setTargetCnt("555");
+		productVO.setDeadline("2019-10-10");
+		productVO.setProductNo("28");
+		productVO.setDeliveryPrice("3000");
+		int flag = dao.do_update(productVO);
+	}
+	
+	/**
+	 * @Method Name  : main
+	 * @작성일   : 2019. 7. 16.
+	 * @작성자   : sist
+	 * @변경이력  : 최초작성
+	 * @Method 설명 :
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		WritingTest writingTest = new WritingTest();
+		//writingTest.do_insert();
+		//writingTest.do_delete();
+		//writingTest.do_update();
+		
+	
+		
+	}
+
+}

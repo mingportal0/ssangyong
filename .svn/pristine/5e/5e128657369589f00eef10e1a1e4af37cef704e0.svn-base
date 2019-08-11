@@ -1,0 +1,40 @@
+ /**
+ * @Class Name : SearchPwService.java
+ * @Description : 
+ * @Modification Information
+ * @
+ * @  수정일      수정자              수정내용
+ * @ ---------   ---------   -------------------------------
+ * @ 2019. 7. 19.           최초생성
+ *
+ * @author Zimzalabim
+ * @since 2019. 7. 19. 
+ * @version 1.0
+ * @see
+ *
+ *  Copyright (C) by HR. KIM All right reserved.
+ */
+package com.zim.member.searchpw;
+
+import com.zim.member.MemberDao;
+import com.zim.member.MemberVO;
+
+/**
+ * @author sist
+ *
+ */
+public class SearchPwService {
+	MemberDao memberDao = new MemberDao();
+	
+	public String do_searchPw(String userId,String email, String residentNo){
+		String outStr = "";
+		//db==아이디,이메일,주민등록번호 체크
+		MemberVO tmpVO = new MemberVO();
+		tmpVO.setUserId(userId);
+		tmpVO.setEmail(email);
+		tmpVO.setResidentNo(residentNo);
+		tmpVO = (MemberVO) memberDao.do_selectOne_ckPw(tmpVO);
+		outStr = tmpVO.getPasswd();
+		return outStr;
+	}
+}

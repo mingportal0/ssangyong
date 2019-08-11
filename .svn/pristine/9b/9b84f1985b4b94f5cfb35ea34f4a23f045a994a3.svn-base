@@ -1,0 +1,256 @@
+<%--=
+/**
+* @Class Name : useOutObject.jsp
+* @Description : Sample Register 화면
+* @Modification Information
+*
+*   수정일                   수정자                      수정내용
+*  -------    --------    ---------------------------
+*  2019.07.01            최초 생성
+*
+* author 실행환경 개발팀
+* since 2019.07.01
+*
+* Copyright (C) 2009 by KandJang  All right reserved.
+*/
+--%>
+<%@page import="com.zim.cmn.StringUtil"%>
+<%@page import="com.zim.cmn.SearchVO"%>
+<%@page import="com.zim.product.ProductVO"%>
+
+<%@page import="org.apache.log4j.Logger"%>
+
+<%@page import="java.util.List"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	Logger LOG = Logger.getLogger(this.getClass());
+	//화면목록
+	List<ProductVO> list = (List<ProductVO>)request.getAttribute("list");
+	//out.print(list);
+	//Param
+	String pageNum = "1"; //초기값
+	String searchDiv = "";
+	String searchWord = "";
+	String pageSize = "10";
+
+	//paging
+	int maxNum 	    = 0; //총 글수		:server   O
+	int currPageNo  = 1; //현재 페이지	:pageNum  O
+	int rowPerPage  = 10;//rowCnt	:pageSize O	
+	int bottomCount = 10;//bottom cnt
+	String url = "/ZIMZALABIM/product/writing.do"; //호출URL
+	String scriptName = "doSearchPage"; //Javascript함수명
+	
+	SearchVO paramVO = (SearchVO)request.getAttribute("paramVO");
+	out.print(paramVO); 
+	
+	if(null != paramVO){
+		pageNum = paramVO.getPageNum()+"";
+		searchDiv = paramVO.getSearchDiv();
+		searchWord = paramVO.getSearchWord();
+		pageSize = paramVO.getPageSize()+"";
+		LOG.debug("===========================");
+		LOG.debug("=paramVO="+paramVO);
+		LOG.debug("===========================");
+		
+		rowPerPage = Integer.parseInt(pageSize);
+		currPageNo = Integer.parseInt(pageNum);
+		maxNum = (Integer)request.getAttribute("totalCnt");
+	}
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+	body {
+		font-family: Arial, Verdana, sans-serif;
+		color: #111111;    }   
+    table { 
+    	width: 1000px;   }
+    th, td {
+        padding: 7px 10px 10px 10px;   }
+    th {
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		font-size: 90%;
+		border-bottom: 2px solid #111111;
+		border-top: 1px solid #999;
+		text-align: left;	}
+	tr.even {
+		background-color: #efefef;}
+	tr:hover {
+		background-color: #c3e6e5;}
+   .money {
+		text-align: right;}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/ZIMZALABIM/js/jquery-ui.css" >
+<title>게시글관리</title>
+<script src="/ZIMZALABIM/js/jquery-1.12.4.js"></script>
+<script src="/ZIMZALABIM/js/jquery-ui.js"></script>
+</head>
+<body>
+	<h3>게시관리</h3>
+	<hr/>
+	<!--버튼 -->
+	<div>
+		<input type="button" value="조회" onclick="javascript:do_retrieve()"/>
+		<input type="button" value="등록" onclick="javascript:do_save_move()"/>
+	</div>
+	<!--//버튼 -->
+	<form name="searchFrm" action="/ZIMZALABIM/product/writing.do" method="post">
+		<input type="hidden"  name="work_div" />
+		<input type="hidden"  name="page_num" />
+		<!-- 검색영역 -->
+		<table>
+			<tr>
+				<td>
+					<div>구분
+						<select name="search_div" id="search_div">
+							<option value="">전체</option>
+							<!-- if~ 검색한걸 유지하게 함. (선택박스 바꾸면 바꾼내용으로 유지되어있음) -->
+							<option value="10" <%if(searchDiv.equals("10"))out.print("selected"); %>>제목</option>
+							<option value="20"<%if(searchDiv.equals("20"))out.print("selected"); %>>내용</option>
+							<option value="30"<%if(searchDiv.equals("30"))out.print("selected"); %>>등록자ID</option>						
+						</select>
+						<input type="text" name="search_word" id="search_word" value='<%=searchWord%>' />
+						<select name="page_size" id="page_size">
+							<option value="">전체</option>
+							<option value="10"  <% if(pageSize.equals("10"))out.print("selected"); %> >10</option>
+							<option value="50"  <% if(pageSize.equals("50"))out.print("selected"); %>>50</option>
+							<option value="100" <% if(pageSize.equals("100"))out.print("selected"); %>>100</option>						
+							<option value="200" <% if(pageSize.equals("2000"))out.print("selected"); %>>200</option>						
+						</select>
+					</div>
+				</td>
+			</tr>			
+		</table>
+		<!-- //검색영역 -->
+		
+		<!-- //data list  -->
+		<table id="listTable">
+			<thead>
+				<tr>
+					<th width="60%">제목</th>
+					<th width="20%">가격</th>
+					<th width="20%">마감일</th>
+					<!-- style="visibility: hidden;" 공간차지 -->
+					<!-- style="display: none;" 공간도 사라짐 -->
+					<th width="0%" style="display: none;">SEQ</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					if(null != list && list.size()>0){
+						for(ProductVO vo:list){
+				%>
+						<tr>
+							<td><%=vo.getProductNm() %></td>
+							<td><%=vo.getPrice() %></td>
+							<td><%=vo.getDeadline() %></td>
+							<td style="display: none;"><%=vo.getProductNo()%></td>							
+						</tr>				
+				<%
+						}//--for
+					}else{
+				%>
+						<tr>
+							<td colspan="99">No data found</td>
+						</tr>
+				<%
+					}//--else
+				%>
+			</tbody>
+		</table>
+		<!-- //data list  -->
+		
+		<!-- paging -->
+		<div>
+			<%=StringUtil.renderPaing(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %>
+		</div>
+		<!-- //paging -->
+	</form>
+	
+	<h3>결과</h3>
+	<script>  
+	//page 이동
+		function doSearchPage(url,page_num){
+			//alert(url+","+page_num);
+			var frm = document.searchFrm;
+			frm.work_div.value = "do_retrieve";
+			frm.page_num.value = page_num;
+			frm.action = url;
+			frm.submit();
+		}
+		//등록화면으로 이동
+		function do_save_move(){
+			//alert('do_save_move');
+			if(confirm("등록 하시겠습니까?")==false)return;
+			
+			var frm = document.searchFrm;
+			frm.work_div.value = "do_save_move";
+			frm.action  = '/ZIMZALABIM/product/writing.do';
+			frm.submit();
+		}
+	
+		function do_retrieve(){
+			//alert('do_retrieve');
+			var frm = document.searchFrm;
+			frm.work_div.value = 'do_retrieve';
+			frm.pase_num = '1';
+			frm.action = '/ZIMZALABIM/product/writing.do';
+			
+			//alert('frm.work_div.value:'+frm.work_div.value);
+			frm.submit();
+		}
+		
+		//수정화면으로 이동
+		$("#listTable>tbody").on("dblclick","tr",function(){
+			var cTrs = $(this);
+			var cTds = cTrs.children();
+			console.log(cTds);
+			var seq = cTds.eq(5).text();
+			console.log("seq:"+seq);
+			
+			var frm = document.searchFrm;
+			frm.work_div.value ="do_selectone";
+			frm.action = '/ZIMZALABIM/product/writing.do?seq='+seq;
+			frm.submit();
+			
+		});
+		
+		$(function() {
+// 			$("#searchFrm").validate();
+		});
+		
+		$("#search_word").keypress(function(e){
+			//console.log("search_word:"+e);
+			if(e.which == 13){//enter
+				do_retrieve();				
+			}
+		});
+		
+		$(document).ready(function(){
+			//jquery
+			
+		});
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

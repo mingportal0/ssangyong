@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorators">
+	<!-- main -->
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/product/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/mainpage/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/detail/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/writing/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/listall/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/list/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/member/member.do*</pattern>
+    </decorator>   
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/member/searchid/*</pattern>
+    </decorator>    
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/member/searchpw/*</pattern>
+    </decorator>    
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/member/edit/*</pattern>
+    </decorator>    
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/member/retrieve/*</pattern>
+    </decorator>    
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/wishlist/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/join/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+        <pattern>/host/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+    	<pattern>/member/resister/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+    	<pattern>/quit/*</pattern>
+    </decorator>
+    <decorator name="main_view" page="main_view.jsp">
+    	<pattern>/member/quit/*</pattern>
+    </decorator>
+
+    <!-- sub -->
+
+    <!-- 예외 설정 -->
+    <excludes>
+    	<pattern>*.html*</pattern>
+    	<pattern>*.download*</pattern>
+    	<pattern>*.json*</pattern>
+    </excludes>
+</decorators>

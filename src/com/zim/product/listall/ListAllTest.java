@@ -1,0 +1,63 @@
+ /**
+ * @Class Name : ListTest.java
+ * @Description : 
+ * @Modification Information
+ * @
+ * @  수정일      수정자              수정내용
+ * @ ---------   ---------   -------------------------------
+ * @ 2019. 7. 19.           최초생성
+ *
+ * @author Zimzalabim
+ * @since 2019. 7. 19. 
+ * @version 1.0
+ * @see
+ *
+ *  Copyright (C) by HR. KIM All right reserved.
+ */
+package com.zim.product.listall;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.zim.cmn.SearchVO;
+import com.zim.product.ProductDao;
+import com.zim.product.ProductVO;
+import com.zim.product.video.VideoVO;
+
+
+
+/**
+ * @author sist
+ *
+ */
+public class ListAllTest {
+private final Logger LOG = Logger.getLogger(ListAllTest.class);
+	
+	private ProductDao dao;
+	
+	public ListAllTest() {
+		dao = new ProductDao();
+	}
+
+	public void do_totalCategory_select(){
+		ListAllSearchVO listAllSearchVO=new ListAllSearchVO();
+		listAllSearchVO.setCategory("10,20,30");
+		listAllSearchVO.setPageNum(1);
+		listAllSearchVO.setPageSize(10);
+
+		List<ProductVO> list = (List<ProductVO>) dao.do_totalCategory_select(listAllSearchVO);
+		LOG.debug("===================");
+		for(ProductVO vo:list){
+			LOG.debug("vo"+vo);	
+		}
+		
+		LOG.debug("===================");	
+	}
+	
+	public static void main(String[] args) {
+		ListAllTest listAllTest = new ListAllTest();
+		listAllTest.do_totalCategory_select();
+	}
+
+}

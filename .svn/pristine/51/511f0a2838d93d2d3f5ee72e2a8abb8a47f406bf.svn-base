@@ -1,0 +1,16 @@
+package com.zim.cmn;
+
+public class StringUtil {
+
+	
+	public static String nvl(Object str,String defVal){
+		
+		String retStr = "";
+		if(null==str||str.equals("")){
+			retStr=defVal;
+		}else{
+			retStr=str.toString().trim();
+		}
+		return retStr;
+	}
+}
